@@ -14,21 +14,24 @@ export class UsersResolver {
 
   @Query('users')
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findUsers();
   }
 
   @Query('user')
   findOne(@Args('id') id: number) {
-    return this.usersService.findOne(id);
+    return this.usersService.findUser(id);
   }
 
   @Mutation('updateUser')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput.id, updateUserInput);
+    return this.usersService.updateUser({
+      where: { id: updateUserInput.id },
+      data: { ...updateUserInput },
+    });
   }
 
-  @Mutation('removeUser')
-  remove(@Args('id') id: number) {
-    return this.usersService.remove(id);
-  }
+  // @Mutation('removeUser')
+  // remove(@Args('id') id: number) {
+  //   return this.usersService.remove(id);
+  // }
 }

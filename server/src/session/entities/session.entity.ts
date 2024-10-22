@@ -1,28 +1,34 @@
-import { DataTypes } from 'sequelize';
 import {
   Table,
   Column,
   Model,
   PrimaryKey,
-  Default,
   CreatedAt,
   UpdatedAt,
   BeforeCreate,
   BeforeUpdate,
+  Default,
 } from 'sequelize-typescript';
 
 @Table
-export class User extends Model {
+export class Session extends Model {
   @PrimaryKey
   @Column
   id: string;
 
   @Column
-  username: string;
+  userId: string;
 
   @Column
-  first_name: string;
+  userAgent: string;
 
   @Column
-  hashed_password: string;
+  @Default(true)
+  valid: boolean;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
 }

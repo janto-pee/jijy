@@ -1,11 +1,13 @@
 type Session {
-  # Example field (placeholder)
-  exampleField: Int
+    id: String
+    userId: String
+    userAgent: String
+    valid: Boolean
 }
 
 input CreateSessionInput {
-  # Example field (placeholder)
-  exampleField: Int
+    username: String
+    email: String
 }
 
 input UpdateSessionInput {
@@ -13,7 +15,7 @@ input UpdateSessionInput {
 }
 
 type Query {
-  session: [Session]!
+  sessions: [Session]!
   session(id: Int!): Session
 }
 
