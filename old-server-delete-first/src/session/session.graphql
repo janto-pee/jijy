@@ -1,0 +1,24 @@
+type Session {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreateSessionInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateSessionInput {
+  id: Int!
+}
+
+type Query {
+  session: [Session]!
+  session(id: Int!): Session
+}
+
+type Mutation {
+  createSession(createSessionInput: CreateSessionInput!): Session!
+  updateSession(updateSessionInput: UpdateSessionInput!): Session!
+  removeSession(id: Int!): Session
+}
