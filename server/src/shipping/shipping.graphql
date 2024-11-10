@@ -1,0 +1,25 @@
+type Shipping {
+  id: Int
+  name: String
+  TrackingCode: String
+}
+
+input CreateShippingInput {
+  name: String
+  TrackingCode: String
+}
+
+input UpdateShippingInput {
+  id: Int!
+}
+
+type Query {
+  shippings: [Shipping]!
+  shipping(id: Int!): Shipping
+}
+
+type Mutation {
+  createShipping(createShippingInput: CreateShippingInput!): Shipping!
+  updateShipping(updateShippingInput: UpdateShippingInput!): Shipping!
+  removeShipping(id: Int!): Shipping
+}

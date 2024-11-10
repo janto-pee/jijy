@@ -4,11 +4,15 @@ type Session {
     userAgent: String
     valid: Boolean
 }
-
-input CreateSessionInput {
-    username: String
+input ValidateUserInput {
     email: String
+    password: String
 }
+
+# input CreateSessionInput {
+#     userId: String
+#     valid: Boolean
+# }
 
 input UpdateSessionInput {
   id: Int!
@@ -20,7 +24,7 @@ type Query {
 }
 
 type Mutation {
-  createSession(createSessionInput: CreateSessionInput!): Session!
+  createSession(validateUserInput: ValidateUserInput!): Session!
   updateSession(updateSessionInput: UpdateSessionInput!): Session!
   removeSession(id: Int!): Session
 }

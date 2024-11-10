@@ -1,0 +1,31 @@
+type Staff {
+  id: Int
+  photoURL: String
+  username: String
+  title: String
+  department: String
+  created_at: String
+  updated_at: String
+}
+
+input CreateStaffInput {
+  photoURL: String
+  username: String
+  title: String
+  department: String
+}
+
+input UpdateStaffInput {
+  id: Int!
+}
+
+type Query {
+  staffs: [Staff]!
+  staff(id: Int!): Staff
+}
+
+type Mutation {
+  createStaff(createStaffInput: CreateStaffInput!): Staff!
+  updateStaff(updateStaffInput: UpdateStaffInput!): Staff!
+  removeStaff(id: Int!): Staff
+}

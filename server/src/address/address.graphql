@@ -1,0 +1,40 @@
+type Address {
+  id: Int
+  username: String
+  street: String
+  street2: String
+  city: String
+  state_province_code: String
+  state_province_name: String
+  postal_code: String
+  country_code: String
+  location: String
+  country: String
+  }
+
+input CreateAddressInput {
+  street: String
+  street2: String
+  city: String
+  state_province_code: String
+  state_province_name: String
+  postal_code: String
+  country_code: String
+  location: String
+  country: String
+}
+
+input UpdateAddressInput {
+  id: Int!
+}
+
+type Query {
+  addresses: [Address]!
+  address(id: Int!): Address
+}
+
+type Mutation {
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  removeAddress(id: Int!): Address
+}

@@ -1,0 +1,33 @@
+type Review {
+  id: Int
+  reviewer: String
+  course: String
+  enrollmmentId: Int
+  ratings: Int
+  reviewText: String
+  createdAt: String
+}
+
+input CreateReviewInput {
+  reviewer: String
+  course: String
+  enrollmmentId: Int
+  ratings: Int
+  reviewText: String
+  createdAt: String
+}
+
+input UpdateReviewInput {
+  id: Int!
+}
+
+type Query {
+  reviews: [Review]!
+  review(id: Int!): Review
+}
+
+type Mutation {
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  updateReview(updateReviewInput: UpdateReviewInput!): Review!
+  removeReview(id: Int!): Review
+}

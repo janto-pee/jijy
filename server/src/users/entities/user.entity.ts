@@ -4,33 +4,51 @@ import {
   Model,
   CreatedAt,
   UpdatedAt,
-  DeletedAt,
   PrimaryKey,
   AutoIncrement,
+  Default,
+  Unique,
 } from 'sequelize-typescript';
-
+import { customAlphabet } from 'nanoid';
+const nanoid = customAlphabet('0123456789abcdefghi', 6);
 @Table
 export class User extends Model {
+  @PrimaryKey
+  @AutoIncrement
   @Column
-  userName: string;
+  id: number;
 
+  @Unique
+  @Column
+  username: string;
+
+  @Unique
   @Column
   email: string;
 
   @Column
   password: string;
 
-  @PrimaryKey
-  @AutoIncrement
   @Column
-  id: number;
+  first_name: string;
+
+  @Column
+  last_name: string;
+
+  @Default(nanoid())
+  @Column
+  verificationCode: string;
+
+  @Column
+  passwordResetCode: string;
+
+  @Default(false)
+  @Column
+  is_email_verified: boolean;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
-
-  @DeletedAt
-  deletionDate: Date;
+  updatedAt: Date;
 }

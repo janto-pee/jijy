@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
+import { Session } from './entities/session.entity';
 
 @Injectable()
 export class SessionService {
-  create(createSessionInput: CreateSessionInput) {
-    return 'This action adds a new session';
+  constructor(
+    @Inject('SESSION_REPOSITORY')
+    private sessionRepository: typeof Session,
+  ) {}
+
+  async create(createSessionInput: CreateSessionInput): Promise<Session> {
+    return await this.sessionRepository.create({
+      ...createSessionInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all session`;
+  async findSession(id: number): Promise<Session> {
+    return await this.sessionRepository.findOne<Session>({
+      where: { id: id, valid: true },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} session`;
+  async updateSession(id: number): Promise<Session> {
+    const session = await this.sessionRepository.findOne({
+      where: { id: id, valid: true },
+    });
+    await session.update({ valid: false });
+    await session.save();
+    return session;
   }
 
-  update(id: number, updateSessionInput: UpdateSessionInput) {
-    return `This action updates a #${id} session`;
-  }
+  // async validateUser(email: string, password: string) {
+  //   const user = await this.sessionRepository.findOne<Session>({
+  //     where: { email: email },
+  //   });
 
-  remove(id: number) {
-    return `This action removes a #${id} session`;
-  }
+  //   if (!user || user.password === null) return false;
+
+  //   const match = await comparePassword(password, user.password);
+
+  //   if (match) {
+  //     return user;
+  //   }
+
+  //   return false;
+  // }move(id: number) {
+  //   return `This action removes a #${id} session`;
+  // }
 }

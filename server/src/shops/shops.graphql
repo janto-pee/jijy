@@ -1,0 +1,25 @@
+type Shop {
+  id: String
+  name: String
+  email: String
+}
+
+input CreateShopInput {
+  name: String
+  email: String
+}
+
+input UpdateShopInput {
+  id: Int!
+}
+
+type Query {
+  shops: [Shop]!
+  shop(id: Int!): Shop
+}
+
+type Mutation {
+  createShop(createShopInput: CreateShopInput!): Shop!
+  updateShop(updateShopInput: UpdateShopInput!): Shop!
+  removeShop(id: Int!): Shop
+}

@@ -1,0 +1,25 @@
+type Brand {
+  id: Int
+  code: Int
+  name: String
+}
+
+input CreateBrandInput {
+  code: Int
+  name: String
+}
+
+input UpdateBrandInput {
+  id: Int!
+}
+
+type Query {
+  brands: [Brand]!
+  brand(id: Int!): Brand
+}
+
+type Mutation {
+  createBrand(createBrandInput: CreateBrandInput!): Brand!
+  updateBrand(updateBrandInput: UpdateBrandInput!): Brand!
+  removeBrand(id: Int!): Brand
+}

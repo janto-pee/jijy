@@ -1,0 +1,22 @@
+type Variant {
+  id: Int
+
+}
+
+input CreateVariantInput {
+}
+
+input UpdateVariantInput {
+  id: Int!
+}
+
+type Query {
+  variants: [Variant]!
+  variant(id: Int!): Variant
+}
+
+type Mutation {
+  createVariant(createVariantInput: CreateVariantInput!): Variant!
+  updateVariant(updateVariantInput: UpdateVariantInput!): Variant!
+  removeVariant(id: Int!): Variant
+}

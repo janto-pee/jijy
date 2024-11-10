@@ -1,0 +1,24 @@
+type VariantsOption {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreateVariantsOptionInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateVariantsOptionInput {
+  id: Int!
+}
+
+type Query {
+  variantsOptions: [VariantsOption]!
+  variantsOption(id: Int!): VariantsOption
+}
+
+type Mutation {
+  createVariantsOption(createVariantsOptionInput: CreateVariantsOptionInput!): VariantsOption!
+  updateVariantsOption(updateVariantsOptionInput: UpdateVariantsOptionInput!): VariantsOption!
+  removeVariantsOption(id: Int!): VariantsOption
+}

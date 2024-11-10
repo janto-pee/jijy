@@ -11,7 +11,9 @@ export class UsersService {
     private usersRepository: typeof User,
   ) {}
   async create(createUserInput: CreateUserInput): Promise<User> {
-    return await this.usersRepository.create({ ...createUserInput });
+    return await this.usersRepository.create({
+      ...createUserInput,
+    });
   }
 
   async findUsers(): Promise<User[]> {
@@ -21,7 +23,8 @@ export class UsersService {
   async findUser(id: number): Promise<User> {
     return await this.usersRepository.findOne<User>({ where: { id: id } });
   }
-  async findEmail(email: string): Promise<User> {
+
+  async findEmail(email: String): Promise<User> {
     return await this.usersRepository.findOne<User>({
       where: { email: email },
     });
@@ -40,12 +43,12 @@ export class UsersService {
     return user;
   }
 
-  async validateUser(email: string, password: string) {
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.usersRepository.findOne<User>({
       where: { email: email },
     });
 
-    if (!user || user.password === null) return false;
+    if (!user || user.password === null) return;
 
     const match = await comparePassword(password, user.password);
 
@@ -53,6 +56,6 @@ export class UsersService {
       return user;
     }
 
-    return false;
+    return;
   }
 }

@@ -22,8 +22,8 @@ export class Session extends Model {
   @Column
   userAgent: string;
 
-  @Column
   @Default(true)
+  @Column
   valid: boolean;
 
   @CreatedAt

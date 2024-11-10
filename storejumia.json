@@ -1,0 +1,1133 @@
+retrieve stro{
+    "shops": [
+        {
+            "id": "b16aac6d-4b08-45ab-b8be-baf11615f400",
+            "name": "Shop Name 1 Test",
+            "email": "shop1.test@shop.com",
+            "businessClients": [
+                {
+                    "name": "Jumia",
+                    "code": "jumia-ng",
+                    "countryCode": "NG",
+                    "countryName": "Nigeria",
+                    "status": "ACTIVE",
+                    "shortCode": "NG100S9"
+                }
+            ]
+        },
+        {
+            "id": "136c3781-33e0-4e31-96cd-d51a55868c1b",
+            "name": "Shop Name 2 Test",
+            "email": "shop2.test@shop.com",
+            "businessClients": [
+                {
+                    "name": "Jumia",
+                    "code": "jumia-ng",
+                    "countryCode": "NG",
+                    "countryName": "Nigeria",
+                    "status": "ACTIVE",
+                    "shortCode": "NG100S7"
+                }
+            ]
+        }
+    ]
+}
+
+retrieve shops of master shop
+{
+    "shops": [
+        {
+            "id": "b16aac6d-4b08-45ab-b8be-baf11615f400",
+            "name": "Shop Name 1 Test",
+            "email": "shop1.test@shop.com",
+            "businessClients": [
+                {
+                    "name": "Jumia",
+                    "code": "jumia-ng",
+                    "countryCode": "NG",
+                    "countryName": "Nigeria",
+                    "status": "ACTIVE",
+                    "shortCode": "NG100S9"
+                }
+            ]
+        },
+        {
+            "id": "136c3781-33e0-4e31-96cd-d51a55868c1b",
+            "name": "Shop Name 2 Test",
+            "email": "shop2.test@shop.com",
+            "businessClients": [
+                {
+                    "name": "Jumia",
+                    "code": "jumia-ng",
+                    "countryCode": "NG",
+                    "countryName": "Nigeria",
+                    "status": "ACTIVE",
+                    "shortCode": "NG100S7"
+                }
+            ]
+        }
+    ]
+}
+
+products
+retrieve product details
+{
+    "feedSid": "fb53ce1d-6268-4f4f-948e-e880bcdeacea",
+    "status": "COMPLETED",
+    "feedType": "PRODUCT_UPDATE",
+    "feedSource": "CSV",
+    "total": 1,
+    "completed": 1,
+    "failed": 0,
+    "createdBy": {
+        "sid": "cef73249-0ee0-3c6e-943e-d896554e6242",
+        "name": "Giane Fernandes",
+        "email": "giane.fernandes@jumia.com"
+    },
+    "feedItems": [
+        {
+            "status": "COMPLETED",
+            "productSid": "13192a6d-cd11-4a75-b944-ee7bbb530d86",
+            "sellerSKU": "Firebolt-sku-10",
+            "createdAt": "2020-11-03T11:23:13.406412Z",
+            "updatedAt": "2020-11-03T11:23:15.723854Z"
+        }
+    ]
+}
+
+update 
+payload: {
+    "products": [
+        {
+            "sellerSku": "8682447314708",
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "stock": 100
+        },
+        {
+            "sellerSku": "8682447314709",
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca19cab",
+            "stock": 50
+        }
+    ]
+}
+
+update price: {
+    "products": [
+        {
+            "sellerSku": "8682447314708",
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "stock": 100
+        },
+        {
+            "sellerSku": "8682447314709",
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca19cab",
+            "stock": 50
+        }
+    ]
+}
+
+update product status
+{
+    "products": [
+        {
+            "sellerSku": "8682447314708",
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "createdAt": "2021-08-11",
+            "businessClients": [
+                {
+                    "businessClientCode": "jumia-ma",
+                    "status": "ACTIVE"
+                },
+                {
+                    "businessClientCode": "jumia-dz",
+                    "status": "INACTIVE"
+                }
+            ]
+        }
+    ]
+}
+
+create product 
+{
+    "shopId": "a8b5534b-277b-449c-97b7-c00979dd9c3a",
+    "products": [
+        {
+            "name": {
+                "value": "Name should be between 15 and 60 characters",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du nom du produit"
+                    }
+                ]
+            },
+            "description": {
+                "value": "Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial).",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du description du produit"
+                    }
+                ]
+            },
+            "parentSku": "new_product_sku_60077999",
+            "sellerSku": "new_product_sku_60077999",
+            "barcodeEan": "1234567000001239999",
+            "variation": "1",
+            "brand": {
+                "code": 1126253,
+                "name": "123 updated"
+            },
+            "category": {
+                "code": 1004141,
+                "name": "Gaming / PC Gaming / Accessories / Controllers"
+            },
+            "images": [
+                {
+                    "url": "https://ng.jumia.is/LgDWyaUAUqlaDlr6gmf0ui43GGk=/fit-in/500x500/filters:fill(white)/product/90/278208/1.jpg?4790",
+                    "primary": true
+                },
+                {
+                    "url": "https://ng.jumia.is/W-t47t1CIN1cl_y6KcnaM5Z-PjM=/fit-in/500x500/filters:fill(white)/product/90/278208/2.jpg?4790",
+                    "primary": false
+                }
+            ],
+            "price": {
+                "currency": "USD",
+                "value": 200,
+                "salePrice": {
+                    "value": 150,
+                    "startAt": "2022-08-11",
+                    "endAt": "2022-08-22"
+                }
+            },
+            "stock": 500,
+            "attributes": [
+                {
+                    "name": "isbn",
+                    "value": "0-6280-1750-2"
+                },
+                {
+                    "name": "note",
+                    "value": "note about the product"
+                },
+                {
+                    "name": "plug_type",
+                    "value": "EU"
+                },
+                {
+                    "name": "voltage",
+                    "value": "100"
+                },
+                {
+                    "name": "connection_gender",
+                    "value": "gender of the connection"
+                },
+                {
+                    "name": "battery_capacity",
+                    "value": "100 mAh"
+                },
+                {
+                    "name": "model",
+                    "value": "product model",
+                    "translations": [
+                        {
+                            "language": "AR",
+                            "value": "محتوى العبوة عربي"
+                        },
+                        {
+                            "language": "FR",
+                            "value": "Produit model"
+                        }
+                    ]
+                },
+                {
+                    "name": "short_description",
+                    "value": "<ul><li>short description should have at least 4 bullets</li><li>short description </li><li>short description </li><li>short description </li></ul>"
+                },
+                {
+                    "name": "color_family",
+                    "value": "Black"
+                },
+                {
+                    "name": "color",
+                    "value": "Black"
+                },
+                {
+                    "name": "warranty_duration",
+                    "value": "10"
+                }
+            ]
+        }
+    ]
+}
+
+update product
+{
+    "shopId": "a8b5534b-277b-449c-97b7-c00979dd9c3a",
+    "products": [
+        {
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "name": {
+                "value": "Name of one variation of the product between 15 and 60 characters",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du nom du produit"
+                    }
+                ]
+            },
+            "description": {
+                "value": "Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial).",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du description du produit"
+                    }
+                ]
+            },
+            "parentSku": "new_product_sku_60077999",
+            "sellerSku": "new_product_sku_60077999",
+            "barcodeEan": "1234567000001239999",
+            "variation": "1",
+            "brand": {
+                "code": 1126253,
+                "name": "123 updated"
+            },
+            "category": {
+                "code": 1004141,
+                "name": "Gaming / PC Gaming / Accessories / Controllers"
+            },
+            "additionalCategories": [],
+            "images": [
+                {
+                    "url": "https://ng.jumia.is/LgDWyaUAUqlaDlr6gmf0ui43GGk=/fit-in/500x500/filters:fill(white)/product/90/278208/1.jpg?4790",
+                    "primary": true
+                },
+                {
+                    "url": "https://ng.jumia.is/W-t47t1CIN1cl_y6KcnaM5Z-PjM=/fit-in/500x500/filters:fill(white)/product/90/278208/2.jpg?4790",
+                    "primary": false
+                }
+            ],
+            "price": {
+                "value": 200,
+                "salePrice": {
+                    "value": 150,
+                    "startAt": "2022-08-11 15:00",
+                    "endAt": "2022-08-22 17:00"
+                }
+            },
+            "stock": 500,
+            "attributes": [
+                {
+                    "name": "isbn",
+                    "value": "0-6280-1750-2"
+                },
+                {
+                    "name": "note",
+                    "value": "note about the product"
+                },
+                {
+                    "name": "plug_type",
+                    "value": "EU"
+                },
+                {
+                    "name": "voltage",
+                    "value": "100"
+                },
+                {
+                    "name": "connection_gender",
+                    "value": "gender of the connection"
+                },
+                {
+                    "name": "battery_capacity",
+                    "value": "100 mAh"
+                },
+                {
+                    "name": "model",
+                    "value": "product model",
+                    "translations": [
+                        {
+                            "language": "AR",
+                            "value": "محتوى العبوة عربي"
+                        },
+                        {
+                            "language": "FR",
+                            "value": "Produit model"
+                        }
+                    ]
+                },
+                {
+                    "name": "short_description",
+                    "value": "<ul><li>short description should have at least 4 bullets</li><li>short description </li><li>short description </li><li>short description </li></ul>"
+                },
+                {
+                    "name": "color_family",
+                    "value": "Black"
+                },
+                {
+                    "name": "color",
+                    "value": "Black"
+                },
+                {
+                    "name": "warranty_duration",
+                    "value": "10"
+                }
+            ]
+        },
+        {
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "name": {
+                "value": "Name of another variation of the product between 15 and 60 characters",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du nom du produit"
+                    }
+                ]
+            },
+            "description": {
+                "value": "Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial).",
+                "translations": [
+                    {
+                        "language": "AR",
+                        "value": "اختبار اسم المنتج"
+                    },
+                    {
+                        "language": "FR",
+                        "value": "Test du description du produit"
+                    }
+                ]
+            },
+            "parentSku": "new_product_sku_60077999",
+            "sellerSku": "new_product_sku_60078000",
+            "barcodeEan": "1234567000003459999",
+            "variation": "2",
+            "brand": {
+                "code": 1126253,
+                "name": "123 updated"
+            },
+            "category": {
+                "code": 1004141,
+                "name": "Gaming / PC Gaming / Accessories / Controllers"
+            },
+            "additionalCategories": [],
+            "images": [
+                {
+                    "url": "https://ng.jumia.is/LgDWyaUAUqlaDlr6gmf0ui43GGk=/fit-in/500x500/filters:fill(white)/product/90/278208/1.jpg?4790",
+                    "primary": true
+                },
+                {
+                    "url": "https://ng.jumia.is/W-t47t1CIN1cl_y6KcnaM5Z-PjM=/fit-in/500x500/filters:fill(white)/product/90/278208/2.jpg?4790",
+                    "primary": false
+                }
+            ],
+            "price": {
+                "value": 200,
+                "salePrice": {
+                    "value": 150,
+                    "startAt": "2022-08-11 15:00",
+                    "endAt": "2022-08-22 17:00"
+                }
+            },
+            "stock": 500,
+            "attributes": [
+                {
+                    "name": "isbn",
+                    "value": "0-6280-1750-2"
+                },
+                {
+                    "name": "note",
+                    "value": "note about the product"
+                },
+                {
+                    "name": "plug_type",
+                    "value": "EU"
+                },
+                {
+                    "name": "voltage",
+                    "value": "100"
+                },
+                {
+                    "name": "connection_gender",
+                    "value": "gender of the connection"
+                },
+                {
+                    "name": "battery_capacity",
+                    "value": "100 mAh"
+                },
+                {
+                    "name": "model",
+                    "value": "product model",
+                    "translations": [
+                        {
+                            "language": "AR",
+                            "value": "محتوى العبوة عربي"
+                        },
+                        {
+                            "language": "FR",
+                            "value": "Produit model"
+                        }
+                    ]
+                },
+                {
+                    "name": "short_description",
+                    "value": "<ul><li>short description should have at least 4 bullets</li><li>short description </li><li>short description </li><li>short description </li></ul>"
+                },
+                {
+                    "name": "color_family",
+                    "value": "Brown"
+                },
+                {
+                    "name": "color",
+                    "value": "Brown"
+                },
+                {
+                    "name": "warranty_duration",
+                    "value": "10"
+                }
+            ]
+        }
+    ]
+}
+
+retrieve all active brands
+{
+    "brands": [
+        {
+            "code": 1127718,
+            "name": "Samsung"
+        },
+        {
+            "code": 1128070,
+            "name": "AIC APPLICATION"
+        }
+    ],
+    "page": {
+        "current": 1,
+        "totalOfPages": 3100
+    }
+}
+
+retrieve categories
+{
+    "categories": [
+        {
+            "code": 1000052,
+            "name": "Foreign Language Study",
+            "completePath": "Books, Movies and Music / Art & Humanities / Foreign Language Study",
+            "attributeSet": {
+                "id": "9b66c50c-562a-4a98-9eae-0cf133a50f9d",
+                "name": "Books & Magazines"
+            }
+        },
+        {
+            "code": 1020202,
+            "name": "Tire & Wheel Tools",
+            "completePath": "Automobile / Tools & Equipment / Tire & Wheel Tools",
+            "attributeSet": {
+                "id": "ba808961-18be-4b5b-bf10-076f398f2ed2",
+                "name": "Vehicle & Parts"
+            }
+        }
+    ]
+}
+
+retrieve products
+{
+    "products": [
+        {
+            "id": "d335de79-79c4-4403-b6eb-0ea6a0efe43e",
+            "name": "seller-sku-v2 api updated",
+            "description": "Updated Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial).",
+            "parentSku": "seller-parent-sku-v2",
+            "shop": {
+                "id": "a8b5534b-277b-449c-97b7-c00979dd9c3a"
+            },
+            "brand": {
+                "code": 1126253,
+                "name": "123 updated"
+            },
+            "category": {
+                "code": 1004141,
+                "name": "Controllers"
+            },
+            "additionalCategories": [],
+            "images": [
+                {
+                    "url": "https://vendorcenter-staging.jumia.com/product-set-images/2022/05/16/gvc.product.image.1652719867712.8cb06674-305a-4309-be97-b6bec5b1334d.jpeg",
+                    "originalUrl": "https://ng.jumia.is/LgDWyaUAUqlaDlr6gmf0ui43GGk=/fit-in/500x500/filters:fill(white)/product/90/278208/1.jpg?4790",
+                    "primary": true
+                },
+                {
+                    "url": "https://vendorcenter-staging.jumia.com/product-set-images/2022/05/16/gvc.product.image.1652719867864.850c3674-6624-4963-9500-b14a22d0aebd.jpeg",
+                    "originalUrl": "https://ng.jumia.is/W-t47t1CIN1cl_y6KcnaM5Z-PjM=/fit-in/500x500/filters:fill(white)/product/90/278208/2.jpg?4790",
+                    "primary": false
+                }
+            ],
+            "attributeSetId": "b2aa5656-3171-4451-a13c-220bbe6dafcd",
+            "attributes": [
+                {
+                    "id": "f14c4944-fb9f-4ec5-a057-51259cbb6a0b",
+                    "name": "note",
+                    "value": "note about the product",
+                    "translations": []
+                },
+                {
+                    "id": "dec13656-659a-43c0-870c-1f1eab63e8fc",
+                    "name": "short_description",
+                    "value": "<ul><li>short description should have at least 4 bullets</li><li>short description </li><li>short description </li><li>short description </li></ul>",
+                    "translations": [
+                        {
+                            "language": "FR",
+                            "value": "mise à jour de l'API seller-sku-v2"
+                        }
+                    ]
+                },
+                {
+                    "id": "6e8783e2-dfa4-4bba-bb4a-daa296d35a09",
+                    "name": "color_family",
+                    "value": "Black",
+                    "translations": []
+                },
+                {
+                    "id": "c92cc4e1-8f2c-4810-a009-f4470f53fcf9",
+                    "name": "plug_type",
+                    "value": "EU",
+                    "translations": []
+                },
+                {
+                    "id": "55a4e35a-6470-4b35-bcb8-240a25729f8d",
+                    "name": "name",
+                    "value": "seller-sku-v2 api updated",
+                    "translations": [
+                        {
+                            "language": "EN",
+                            "value": "seller-sku-v2 api updated"
+                        }
+                    ]
+                },
+                {
+                    "id": "f8000bd6-d7d9-464d-8fb1-7f79943441b2",
+                    "name": "warranty_duration",
+                    "value": "10",
+                    "translations": []
+                },
+                {
+                    "id": "6eeef2b8-7b2b-4460-8002-676eb999614a",
+                    "name": "description",
+                    "value": "Updated Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial).",
+                    "translations": [
+                        {
+                            "language": "EN",
+                            "value": "Updated Description should have more than 150 words. Product number35G41EAProduct nameHP Spectre x360 Convertible 14-ea0047naMicroprocessorIntel® Core™ i5-1135G7 (up to 4.2 GHz with Intel® Turbo Boost Technology, 8 MB L3 cache, 4 cores)ChipsetIntel® Integrated SoCMemory, standard8 GB LPDDR4x-3733 MHz RAM (onboard)Video graphicsIntel® Iris® Xᵉ GraphicsHard drive512 GB PCIe® NVMe™ TLC M.2 SSDOptical driveOptical drive not includedDisplay34.3 cm (13.5) diagonal, WUXGA+ (1920 x 1280), multitouch-enabled, IPS, edge-to-edge glass, micro-edge, Corning® Gorilla® Glass NBT™, 1000 nits, 100% sRGB, HP Sure View Reflect integrated privacy screenWireless connectivityIntel® Wi-Fi 6 AX201 (2x2) and Bluetooth® 5 combo (Supporting Gigabit file transfer speeds)Expansion slots1 microSD media card readerExternal ports2 Thunderbolt™ 4 with USB4™ Type-C® 40Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge); 1 SuperSpeed USB Type-A 10Gbps signaling rate (HP Sleep and Charge); 1 headphone/microphone comboMinimum dimensions (W x D x H)29.83 x 22.01 x 1.69 cmWeight1.34 kgPower supply type65 W USB Type-C® power adapterBattery type4-cell, 66 Wh Li-ion polymerBattery life mixed usageUp to 15 hours and 45 minutesVideo Playback Battery lifeUp to 16 hours and 30 minutesWebcamHP True Vision 720p HD IR camera with camera shutter and integrated dual array digital microphonesAudio featuresAudio by Bang & Olufsen; Quad speakers; HP Audio BoostSoftwareOperating systemWindows 10 Home 64HP appsHP 3D DriveGuard; HP Audio Switch; HP JumpStart; HP Support AssistantSoftware includedMcAfee LiveSafe™Pre-installed softwareExpressVPN (30 day free trial); LastPass Premium (30 day free trial)."
+                        }
+                    ]
+                },
+                {
+                    "id": "50febf45-cf9e-42d7-8c99-f9568b4459ee",
+                    "name": "model",
+                    "value": "product model",
+                    "translations": []
+                },
+                {
+                    "id": "0e46e554-9903-4d35-83dd-4608d0e6697c",
+                    "name": "tag",
+                    "value": "Best Seller",
+                    "translations": []
+                },
+                {
+                    "id": "3f768c3d-c2ef-406c-9ac5-6e86bc43c857",
+                    "name": "voltage",
+                    "value": "100",
+                    "translations": []
+                }
+            ],
+            "createdAt": "2022-05-16T16:51:08.011663Z",
+            "updatedAt": "2022-05-16T16:58:50.820Z",
+            "variations": [
+                {
+                    "id": "56243159-15b9-4b59-baba-e416b3c6c113",
+                    "sellerSku": "seller-sku-v2",
+                    "barcodeEan": null,
+                    "variation": "1",
+                    "globalPrice": {
+                        "value": 200,
+                        "salePrice": {
+                            "value": 150,
+                            "startAt": "2022-08-11T00:00:00Z",
+                            "endAt": "2022-08-22T00:00:00Z"
+                        },
+                        "updateAt": "2022-05-16T16:58:50.820Z"
+                    },
+                    "attributes": [
+                        {
+                            "id": "5653eb32-af01-4438-9531-4abd7f14a52e",
+                            "name": "battery_capacity",
+                            "value": "100 mAh",
+                            "translations": []
+                        },
+                        {
+                            "id": "2ae5a2d6-f5a9-4304-bb80-c66b0f6d6079",
+                            "name": "connection_gender",
+                            "value": "gender of the connection",
+                            "translations": []
+                        },
+                        {
+                            "id": "bfd761da-57e8-499a-a6d2-6923a4cf268b",
+                            "name": "variation",
+                            "value": "1",
+                            "translations": []
+                        }
+                    ],
+                    "businessClients": [
+                        {
+                            "code": "jumia-dz",
+                            "name": "Jumia",
+                            "countryName": "Algeria",
+                            "countryCode": "DZ",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "DELETED",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:57:52.732856Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": null,
+                                "salePrice": null,
+                                "updatedAt": "2022-08-16T18:34:17.245137Z"
+                            }
+                        },
+                        {
+                            "code": "jumia-za",
+                            "name": "Jumia",
+                            "countryName": "South-Africa",
+                            "countryCode": "ZA",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "DELETED",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:57:52.732856Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": null,
+                                "salePrice": null,
+                                "updatedAt": null
+                            }
+                        },
+                        {
+                            "code": "jumia-ma",
+                            "name": "Jumia",
+                            "countryName": "Morocco",
+                            "countryCode": "MA",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "DELETED",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:57:52.732856Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": null,
+                                "salePrice": null,
+                                "updatedAt": null
+                            }
+                        },
+                        {
+                            "code": "jumia-gh",
+                            "name": "Jumia",
+                            "countryName": "Ghana",
+                            "countryCode": "GH",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "ACTIVE",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T17:26:40Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": 200,
+                                "salePrice": {
+                                    "value": 150,
+                                    "startAt": "2022-08-11T00:00:00Z",
+                                    "endAt": "2022-08-22T00:00:00Z"
+                                },
+                                "updatedAt": "2022-08-16T18:34:17.245137Z"
+                            }
+                        },
+                        {
+                            "code": "jumia-eg",
+                            "name": "Jumia",
+                            "countryName": "Egypt",
+                            "countryCode": "EG",
+                            "sku": "12532EA0Q55AZNAFAMZ-32074553",
+                            "visible": true,
+                            "visibleUpdatedAt": "2022-05-16T17:14:08.487Z",
+                            "status": "ACTIVE",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:58:05Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": 200,
+                                "salePrice": {
+                                    "value": 150,
+                                    "startAt": "2022-08-11T00:00:00Z",
+                                    "endAt": "2022-08-22T00:00:00Z"
+                                },
+                                "updatedAt": "2022-08-16T18:34:17.245137Z"
+                            }
+                        },
+                        {
+                            "code": "jumia-ng",
+                            "name": "Jumia",
+                            "countryName": "Nigeria",
+                            "countryCode": "NG",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "DELETED",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:57:52.732856Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": null,
+                                "salePrice": null,
+                                "updatedAt": null
+                            }
+                        },
+                        {
+                            "code": "zando-za",
+                            "name": "Zando",
+                            "countryName": "South-Africa",
+                            "countryCode": "ZA",
+                            "sku": null,
+                            "visible": false,
+                            "visibleUpdatedAt": null,
+                            "status": "DELETED",
+                            "statusUpdatedAt": "2022-08-16T18:34:17.245137Z",
+                            "qc": {
+                                "status": "REJECTED",
+                                "updatedAt": "2022-08-16T18:34:17.245137Z",
+                                "lastApprovedAt": "2022-05-16T16:57:52.732856Z",
+                                "rejectionReason": "Restricted Brand",
+                                "rejectionComment": "i am testing the comment"
+                            },
+                            "price": {
+                                "value": null,
+                                "salePrice": null,
+                                "updatedAt": null
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "nextToken": null,
+    "isLastPage": true
+}
+
+retrieve attributes
+{
+    "attributes": [
+        {
+            "sid": "bac3047c-f2a3-46bc-864a-efce8d7cfb1b",
+            "code": 1000082,
+            "name": "package_content",
+            "description": "Whats in the box?",
+            "type": "4",
+            "mandatory": true,
+            "variation": false,
+            "translatable": true,
+            "translations": [
+                {
+                    "languageId": 1,
+                    "languageCode": "EN",
+                    "translation": "Whats in the box?"
+                },
+                {
+                    "languageId": 2,
+                    "languageCode": "AR",
+                    "translation": "Whats in the box?"
+                },
+                {
+                    "languageId": 3,
+                    "languageCode": "FR",
+                    "translation": "Whats in the box?"
+                }
+            ]
+        },
+        {
+            "code": 1000256,
+            "name": "age_range",
+            "description": "Age Range",
+            "type": "0",
+            "mandatory": true,
+            "variation": false,
+            "translatable": false,
+            "translations": [],
+            "options": [
+                {
+                    "id": "01d04b74-73d5-460c-a884-0fdeb66f6094",
+                    "name": "Digital",
+                    "position": 1,
+                    "isDefault": false
+                },
+                {
+                    "id": "01d10986-2a29-4b63-8310-c2f33ba1e14b",
+                    "name": "Hard back",
+                    "position": 2,
+                    "isDefault": false
+                },
+                {
+                    "id": "01d28647-99ee-46ec-9812-70e2b0e821e3",
+                    "name": "Paperback",
+                    "position": 3,
+                    "isDefault": false
+                }
+            ]
+        }
+    ]
+}
+
+retrieve stocks 
+{
+    "products": [
+        {
+            "id": "07c390ae-d58a-42a2-8ec6-5051bca18cab",
+            "sellerSku": "8682447314708",
+            "globalStock": 100,
+            "lastStockUpdatedAt": "2020-05-28T19:37:03Z"
+        }
+    ],
+    "nextToken": "n1b6an-TQiCuu1V-9MYPJNpW_qKq_GM0a2r8KLlbw5cVkJDZ9O_nsf_E6IrvCI5C",
+    "isLastPage": false
+}
+
+create consignmnt order
+{
+    "shopId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "businessClientCode": "jumia-ma",
+    "shippingDate": "2022-03-25T10:09:00",
+    "comment": "small comment",
+    "products": [
+        {
+            "sku": "143354654",
+            "quantity": 1,
+            "labelCode": "product-a"
+        }
+    ]
+}
+
+retrieve and update consignment order 
+{
+    "simpleSku": "string",
+    "received": 0,
+    "quarantined": 0,
+    "defective": 0,
+    "canceled": 0,
+    "returned": 0,
+    "failed": 0
+}
+
+getall orders of multiple countries paginated
+{
+    "orders": [
+        {
+            "id": "41ea7c3b-20f0-466d-a095-e6e909298180",
+            "shopIds": [
+                "51ea8c3b-20f0-466d-a095-e6e909298547",
+                "204eb6ea-56b9-11ed-9b6a-0242ac120002"
+            ],
+            "totalItems": 1,
+            "packedItems": 1,
+            "isPrepayment": true,
+            "hasMultipleStatus": true,
+            "hasItemsFulfilledByJumia": true,
+            "pendingSince": "3 days",
+            "status": "PENDING",
+            "deliveryOption": "Universal Shipping Matrix",
+            "number": 338997922,
+            "totalAmount": {
+                "currency": "USD",
+                "value": 123.45
+            },
+            "totalAmountLocal": {
+                "currency": "EGP",
+                "value": 60
+            },
+            "country": {
+                "code": "EG",
+                "name": "EGYPT",
+                "currencyCode": "EGP"
+            },
+            "shippingAddress": {
+                "firstName": "string",
+                "lastName": "string",
+                "address": "string",
+                "city": "string",
+                "postalCode": "string",
+                "ward": "string",
+                "region": "string",
+                "countryName": "string"
+            },
+            "createdAt": "2019-08-24T14:15:22Z",
+            "updatedAt": "2019-08-24T14:15:22Z"
+        }
+    ],
+    "nextToken": "string",
+    "isLastPage": true
+}
+
+pack order - role based
+{
+    "success": {
+        "packages": [
+            {
+                "orderItems": [
+                    "41ea7c3b-20f0-466d-a095-e6e909298180",
+                    "c0aa1673-fd99-4f9e-a511-6cefdbdde266"
+                ],
+                "trackingNumber": "JG-00D-393842527-9589"
+            }
+        ],
+        "total": 0
+    },
+    "error": {
+        "orderItems": [
+            {
+                "id": "41ea7c3b-20f0-466d-a095-e6e909298180",
+                "response": {
+                    "code": "not_allowed_status",
+                    "message": "Only order items in pending and ready to ship status can be cancelled"
+                }
+            }
+        ],
+        "total": 0
+    }
+}
+
+print labels - role based 
+{
+    "success": {
+        "labels": [
+            {
+                "orderItems": [
+                    "41ea7c3b-20f0-466d-a095-e6e909298180",
+                    "c0aa1673-fd99-4f9e-a511-6cefdbdde266"
+                ],
+                "trackingNumber": "JG-00D-393842527-9589",
+                "label": "bGFiZWxfY29udGVudF9pbl9wZGZfYmFzZTY0"
+            }
+        ],
+        "total": 0
+    },
+    "error": {
+        "orderItems": [
+            {
+                "id": "41ea7c3b-20f0-466d-a095-e6e909298180",
+                "response": {
+                    "code": "not_allowed_status",
+                    "message": "Only order items in pending and ready to ship status can be cancelled"
+                }
+            }
+        ],
+        "total": 0
+    }
+}
+
+mark as ready to ship
+{
+    "success": {
+        "packages": [
+            {
+                "orderItems": [
+                    "41ea7c3b-20f0-466d-a095-e6e909298180",
+                    "c0aa1673-fd99-4f9e-a511-6cefdbdde266"
+                ],
+                "trackingNumber": "JG-00D-393842527-9589"
+            }
+        ],
+        "total": 0
+    },
+    "error": {
+        "orderItems": [
+            {
+                "id": "41ea7c3b-20f0-466d-a095-e6e909298180",
+                "response": {
+                    "code": "not_allowed_status",
+                    "message": "Only order items in pending and ready to ship status can be cancelled"
+                }
+            }
+        ],
+        "total": 0
+    }
+}
+
+retrieve shipment providers
+{
+    "orderItems": [
+        {
+            "id": "41ea7c3b-20f0-466d-a095-e6e909298180",
+            "shipmentProviders": [
+                {
+                    "id": "bcadee72-28a1-4280-903a-e56a0cc0acc3",
+                    "name": "Shipment Provider 1",
+                    "requireTrackingCode": true
+                }
+            ]
+        }
+    ]
+}

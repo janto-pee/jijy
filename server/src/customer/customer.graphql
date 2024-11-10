@@ -1,0 +1,31 @@
+type Customer {
+  id: Int
+  photoURL: String
+  username: String
+  title: String
+  department: String
+  created_at: String
+  updated_at: String
+}
+
+input CreateCustomerInput {
+  photoURL: String
+  username: String
+  title: String
+  department: String
+}
+
+input UpdateCustomerInput {
+  id: Int!
+}
+
+type Query {
+  customers: [Customer]!
+  customer(id: Int!): Customer
+}
+
+type Mutation {
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(id: Int!): Customer
+}

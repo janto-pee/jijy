@@ -1,0 +1,24 @@
+type Card {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreateCardInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateCardInput {
+  id: Int!
+}
+
+type Query {
+  cards: [Card]!
+  card(id: Int!): Card
+}
+
+type Mutation {
+  createCard(createCardInput: CreateCardInput!): Card!
+  updateCard(updateCardInput: UpdateCardInput!): Card!
+  removeCard(id: Int!): Card
+}

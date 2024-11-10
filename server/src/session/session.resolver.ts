@@ -1,34 +1,51 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { SessionService } from './session.service';
-import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
+import { ValidateUserInput } from './dto/validate-user.input';
 
 @Resolver('Session')
 export class SessionResolver {
-  constructor(private readonly sessionService: SessionService) {}
+  constructor(
+    private readonly sessionService: SessionService,
+    // private readonly usersService: UsersService,
+  ) {}
 
   @Mutation('createSession')
-  create(@Args('createSessionInput') createSessionInput: CreateSessionInput) {
-    return this.sessionService.create(createSessionInput);
-  }
+  async create(
+    @Args('validateUserInput') validateUserInput: ValidateUserInput,
+  ) {
+    console.log(
+      'create session....',
+      validateUserInput.email,
+      validateUserInput.password,
+    );
+    const user = { id: 1 };
+    // await this.usersService.validateUser(
+    //   validateUserInput.email,
+    //   validateUserInput.password,
+    // );
+    if (!user) {
+      return {
+        id: `id not found`,
+        email: `email or password does not exist`,
+        message: `unable to create session`,
+      };
+    }
 
-  @Query('session')
-  findAll() {
-    return this.sessionService.findAll();
+    return await this.sessionService.create({
+      userId: user.id,
+      userAgent: '',
+      valid: true,
+    });
   }
 
   @Query('session')
   findOne(@Args('id') id: number) {
-    return this.sessionService.findOne(id);
+    return this.sessionService.findSession(id);
   }
 
   @Mutation('updateSession')
   update(@Args('updateSessionInput') updateSessionInput: UpdateSessionInput) {
-    return this.sessionService.update(updateSessionInput.id, updateSessionInput);
-  }
-
-  @Mutation('removeSession')
-  remove(@Args('id') id: number) {
-    return this.sessionService.remove(id);
+    return this.sessionService.updateSession(updateSessionInput.id);
   }
 }

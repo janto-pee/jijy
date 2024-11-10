@@ -1,0 +1,37 @@
+type Attribute {
+  id: Int
+  name: String
+  value: String  
+  description: String
+  type: String
+  mandatory: String
+  variation: String
+  translatable: String
+}
+
+
+input CreateAttributeInput {
+  id: Int
+  name: String
+  value: String
+  description: String
+  type: String
+  mandatory: String
+  variation: String
+  translatable: String
+}
+
+input UpdateAttributeInput {
+  id: Int!
+}
+
+type Query {
+  attributes: [Attribute]!
+  attribute(id: Int!): Attribute
+}
+
+type Mutation {
+  createAttribute(createAttributeInput: CreateAttributeInput!): Attribute!
+  updateAttribute(updateAttributeInput: UpdateAttributeInput!): Attribute!
+  removeAttribute(id: Int!): Attribute
+}
