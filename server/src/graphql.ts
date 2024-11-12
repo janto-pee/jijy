@@ -480,7 +480,7 @@ export interface Sale {
 }
 
 export interface Session {
-    id?: Nullable<string>;
+    id?: Nullable<number>;
     userAgent?: Nullable<string>;
     userId?: Nullable<string>;
     valid?: Nullable<boolean>;

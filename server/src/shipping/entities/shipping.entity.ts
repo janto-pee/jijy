@@ -6,9 +6,24 @@ import {
   UpdatedAt,
   PrimaryKey,
   AutoIncrement,
-  Default,
-  Unique,
 } from 'sequelize-typescript';
 
 @Table
-export class Shipping extends Model {}
+export class Shipping extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @Column
+  name: string;
+
+  @Column
+  TrackingCode: string;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

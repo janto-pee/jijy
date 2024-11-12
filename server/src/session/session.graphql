@@ -1,5 +1,5 @@
 type Session {
-    id: String
+    id: Int
     userId: String
     userAgent: String
     valid: Boolean

@@ -5,16 +5,16 @@ import {
   PrimaryKey,
   CreatedAt,
   UpdatedAt,
-  BeforeCreate,
-  BeforeUpdate,
   Default,
+  AutoIncrement,
 } from 'sequelize-typescript';
 
 @Table
 export class Session extends Model {
   @PrimaryKey
+  @AutoIncrement
   @Column
-  id: string;
+  id: number;
 
   @Column
   userId: string;
