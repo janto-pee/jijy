@@ -1,12 +1,12 @@
 type Tag {
   id: Int
   name: String
-  icon: string
+  icon: String
 }
 
 input CreateTagInput {
   name: String
-  icon: string
+  icon: String
 }
 
 input UpdateTagInput {

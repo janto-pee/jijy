@@ -1,11 +1,11 @@
 type Image {
   url: String
-  primary: true
+  primary: Boolean
 }
 
 input CreateImageInput {
   url: String
-  primary: true
+  primary: Boolean
 }
 
 input UpdateImageInput {

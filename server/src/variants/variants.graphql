@@ -1,9 +1,12 @@
 type Variant {
   id: Int
-
+  name: String
+  icon: String
 }
 
 input CreateVariantInput {
+  name: String
+  icon: String
 }
 
 input UpdateVariantInput {
