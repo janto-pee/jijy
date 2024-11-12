@@ -9,7 +9,6 @@ import { AttributesModule } from './attributes/attributes.module';
 import { BrandsModule } from './brands/brands.module';
 import { CardModule } from './card/card.module';
 import { CartModule } from './cart/cart.module';
-import { CatgeoriesModule } from './catgeories/catgeories.module';
 import { CouponModule } from './coupon/coupon.module';
 import { CustomerModule } from './customer/customer.module';
 import { ImagesModule } from './images/images.module';
@@ -26,6 +25,7 @@ import { TagsModule } from './tags/tags.module';
 import { VariantsModule } from './variants/variants.module';
 import { UsersModule } from './users/users.module';
 import { VariantsOptionModule } from './variants-option/variants-option.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -42,7 +42,6 @@ import { VariantsOptionModule } from './variants-option/variants-option.module';
     BrandsModule,
     CardModule,
     CartModule,
-    CatgeoriesModule,
     CouponModule,
     CustomerModule,
     ImagesModule,
@@ -59,6 +58,7 @@ import { VariantsOptionModule } from './variants-option/variants-option.module';
     TagsModule,
     VariantsModule,
     VariantsOptionModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

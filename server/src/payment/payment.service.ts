@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
-import { CreatePaymentInput } from './dto/create-payment.input';
-import { UpdatePaymentInput } from './dto/update-payment.input';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreatePaymentInput } from './dto/create-Payment.input';
+import { UpdatePaymentInput } from './dto/update-Payment.input';
+import { Payment } from './entities/Payment.entity';
 
 @Injectable()
 export class PaymentService {
-  create(createPaymentInput: CreatePaymentInput) {
-    return 'This action adds a new payment';
+  constructor(
+    @Inject('PAYMENT_REPOSITORY')
+    private PaymentsRepository: typeof Payment,
+  ) {}
+  async create(createPaymentInput: CreatePaymentInput): Promise<Payment> {
+    return await this.PaymentsRepository.create({
+      ...createPaymentInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all payment`;
+  async findAll(): Promise<Payment[]> {
+    return await this.PaymentsRepository.findAll<Payment>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} payment`;
+  async findOne(id: number): Promise<Payment> {
+    return await this.PaymentsRepository.findOne<Payment>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updatePaymentInput: UpdatePaymentInput) {
-    return `This action updates a #${id} payment`;
+  async findEmail(email: String): Promise<Payment> {
+    return await this.PaymentsRepository.findOne<Payment>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} payment`;
+  async update(where: any, data: UpdatePaymentInput): Promise<Payment> {
+    const Payment = await this.PaymentsRepository.findOne({
+      where: { ...where },
+    });
+    await Payment.update({ ...data });
+    await Payment.save();
+    return Payment;
+  }
+
+  async remove(id: number): Promise<Payment> {
+    return await this.PaymentsRepository.findOne<Payment>({
+      where: { id: id },
+    });
   }
 }

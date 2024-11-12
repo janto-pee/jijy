@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateCardInput } from './dto/create-card.input';
 import { UpdateCardInput } from './dto/update-card.input';
+import { Card } from './entities/card.entity';
 
 @Injectable()
 export class CardService {
-  create(createCardInput: CreateCardInput) {
-    return 'This action adds a new card';
+  constructor(
+    @Inject('CARDS_REPOSITORY')
+    private CardsRepository: typeof Card,
+  ) {}
+  async create(createCardInput: CreateCardInput): Promise<Card> {
+    return await this.CardsRepository.create({
+      ...createCardInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all card`;
+  async findAll(): Promise<Card[]> {
+    return await this.CardsRepository.findAll<Card>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} card`;
+  async findOne(id: number): Promise<Card> {
+    return await this.CardsRepository.findOne<Card>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateCardInput: UpdateCardInput) {
-    return `This action updates a #${id} card`;
+  async findEmail(email: String): Promise<Card> {
+    return await this.CardsRepository.findOne<Card>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} card`;
+  async update(where: any, data: UpdateCardInput): Promise<Card> {
+    const Card = await this.CardsRepository.findOne({
+      where: { ...where },
+    });
+    await Card.update({ ...data });
+    await Card.save();
+    return Card;
+  }
+
+  async remove(id: number): Promise<Card> {
+    return await this.CardsRepository.findOne<Card>({
+      where: { id: id },
+    });
   }
 }

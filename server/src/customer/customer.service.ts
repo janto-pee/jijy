@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateCustomerInput } from './dto/create-customer.input';
-import { UpdateCustomerInput } from './dto/update-customer.input';
+import { UpdateCustomerInput } from './dto/update-Customer.input';
+import { Customer } from './entities/Customer.entity';
 
 @Injectable()
 export class CustomerService {
-  create(createCustomerInput: CreateCustomerInput) {
-    return 'This action adds a new customer';
+  constructor(
+    @Inject('CUSTOMERS_REPOSITORY')
+    private CustomersRepository: typeof Customer,
+  ) {}
+  async create(createCustomerInput: CreateCustomerInput): Promise<Customer> {
+    return await this.CustomersRepository.create({
+      ...createCustomerInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all customer`;
+  async findAll(): Promise<Customer[]> {
+    return await this.CustomersRepository.findAll<Customer>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async findOne(id: number): Promise<Customer> {
+    return await this.CustomersRepository.findOne<Customer>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateCustomerInput: UpdateCustomerInput) {
-    return `This action updates a #${id} customer`;
+  async findEmail(email: String): Promise<Customer> {
+    return await this.CustomersRepository.findOne<Customer>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async update(where: any, data: UpdateCustomerInput): Promise<Customer> {
+    const Customer = await this.CustomersRepository.findOne({
+      where: { ...where },
+    });
+    await Customer.update({ ...data });
+    await Customer.save();
+    return Customer;
+  }
+
+  async remove(id: number): Promise<Customer> {
+    return await this.CustomersRepository.findOne<Customer>({
+      where: { id: id },
+    });
   }
 }

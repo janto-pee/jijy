@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateAddressInput } from './dto/create-address.input';
 import { UpdateAddressInput } from './dto/update-address.input';
+import { Address } from './entities/address.entity';
 
 @Injectable()
 export class AddressService {
-  create(createAddressInput: CreateAddressInput) {
-    return 'This action adds a new address';
+  constructor(
+    @Inject('ADDRESS_REPOSITORY')
+    private AddresssRepository: typeof Address,
+  ) {}
+  async create(createAddressInput: CreateAddressInput): Promise<Address> {
+    return await this.AddresssRepository.create({
+      ...createAddressInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all address`;
+  async findAll(): Promise<Address[]> {
+    return await this.AddresssRepository.findAll<Address>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  async findOne(id: number): Promise<Address> {
+    return await this.AddresssRepository.findOne<Address>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateAddressInput: UpdateAddressInput) {
-    return `This action updates a #${id} address`;
+  async findEmail(email: String): Promise<Address> {
+    return await this.AddresssRepository.findOne<Address>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} address`;
+  async update(where: any, data: UpdateAddressInput): Promise<Address> {
+    const Address = await this.AddresssRepository.findOne({
+      where: { ...where },
+    });
+    await Address.update({ ...data });
+    await Address.save();
+    return Address;
+  }
+
+  async remove(id: number): Promise<Address> {
+    return await this.AddresssRepository.findOne<Address>({
+      where: { id: id },
+    });
   }
 }

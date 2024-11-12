@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateStaffInput } from './dto/create-staff.input';
 import { UpdateStaffInput } from './dto/update-staff.input';
+import { Staff } from './entities/staff.entity';
 
 @Injectable()
 export class StaffService {
-  create(createStaffInput: CreateStaffInput) {
-    return 'This action adds a new staff';
+  constructor(
+    @Inject('STAFF_REPOSITORY')
+    private StaffsRepository: typeof Staff,
+  ) {}
+  async create(createStaffInput: CreateStaffInput): Promise<Staff> {
+    return await this.StaffsRepository.create({
+      ...createStaffInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all staff`;
+  async findAll(): Promise<Staff[]> {
+    return await this.StaffsRepository.findAll<Staff>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} staff`;
+  async findOne(id: number): Promise<Staff> {
+    return await this.StaffsRepository.findOne<Staff>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateStaffInput: UpdateStaffInput) {
-    return `This action updates a #${id} staff`;
+  async findEmail(email: String): Promise<Staff> {
+    return await this.StaffsRepository.findOne<Staff>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} staff`;
+  async update(where: any, data: UpdateStaffInput): Promise<Staff> {
+    const Staff = await this.StaffsRepository.findOne({
+      where: { ...where },
+    });
+    await Staff.update({ ...data });
+    await Staff.save();
+    return Staff;
+  }
+
+  async remove(id: number): Promise<Staff> {
+    return await this.StaffsRepository.findOne<Staff>({
+      where: { id: id },
+    });
   }
 }

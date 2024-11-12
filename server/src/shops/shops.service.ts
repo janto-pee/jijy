@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateShopInput } from './dto/create-shop.input';
 import { UpdateShopInput } from './dto/update-shop.input';
+import { Shop } from './entities/shop.entity';
 
 @Injectable()
 export class ShopsService {
-  create(createShopInput: CreateShopInput) {
-    return 'This action adds a new shop';
+  constructor(
+    @Inject('SHOP_REPOSITORY')
+    private ShopsRepository: typeof Shop,
+  ) {}
+  async create(createShopInput: CreateShopInput): Promise<Shop> {
+    return await this.ShopsRepository.create({
+      ...createShopInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all shops`;
+  async findAll(): Promise<Shop[]> {
+    return await this.ShopsRepository.findAll<Shop>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shop`;
+  async findOne(id: number): Promise<Shop> {
+    return await this.ShopsRepository.findOne<Shop>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateShopInput: UpdateShopInput) {
-    return `This action updates a #${id} shop`;
+  async findEmail(email: String): Promise<Shop> {
+    return await this.ShopsRepository.findOne<Shop>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} shop`;
+  async update(where: any, data: UpdateShopInput): Promise<Shop> {
+    const Shop = await this.ShopsRepository.findOne({
+      where: { ...where },
+    });
+    await Shop.update({ ...data });
+    await Shop.save();
+    return Shop;
+  }
+
+  async remove(id: number): Promise<Shop> {
+    return await this.ShopsRepository.findOne<Shop>({
+      where: { id: id },
+    });
   }
 }

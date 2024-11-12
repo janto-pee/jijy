@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateAttributeInput } from './dto/create-attribute.input';
 import { UpdateAttributeInput } from './dto/update-attribute.input';
+import { Attribute } from './entities/attribute.entity';
 
 @Injectable()
 export class AttributesService {
-  create(createAttributeInput: CreateAttributeInput) {
-    return 'This action adds a new attribute';
+  constructor(
+    @Inject('ATTRIBUTES_REPOSITORY')
+    private AttributesRepository: typeof Attribute,
+  ) {}
+  async create(createAttributeInput: CreateAttributeInput): Promise<Attribute> {
+    return await this.AttributesRepository.create({
+      ...createAttributeInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all attributes`;
+  async findAll(): Promise<Attribute[]> {
+    return await this.AttributesRepository.findAll<Attribute>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} attribute`;
+  async findOne(id: number): Promise<Attribute> {
+    return await this.AttributesRepository.findOne<Attribute>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateAttributeInput: UpdateAttributeInput) {
-    return `This action updates a #${id} attribute`;
+  async findEmail(email: String): Promise<Attribute> {
+    return await this.AttributesRepository.findOne<Attribute>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} attribute`;
+  async update(where: any, data: UpdateAttributeInput): Promise<Attribute> {
+    const Attribute = await this.AttributesRepository.findOne({
+      where: { ...where },
+    });
+    await Attribute.update({ ...data });
+    await Attribute.save();
+    return Attribute;
+  }
+
+  async remove(id: number): Promise<Attribute> {
+    return await this.AttributesRepository.findOne<Attribute>({
+      where: { id: id },
+    });
   }
 }

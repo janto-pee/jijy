@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateShippingInput } from './dto/create-shipping.input';
 import { UpdateShippingInput } from './dto/update-shipping.input';
+import { Shipping } from './entities/shipping.entity';
 
 @Injectable()
 export class ShippingService {
-  create(createShippingInput: CreateShippingInput) {
-    return 'This action adds a new shipping';
+  constructor(
+    @Inject('SHIPPING_REPOSITORY')
+    private ShippingsRepository: typeof Shipping,
+  ) {}
+  async create(createShippingInput: CreateShippingInput): Promise<Shipping> {
+    return await this.ShippingsRepository.create({
+      ...createShippingInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all shipping`;
+  async findAll(): Promise<Shipping[]> {
+    return await this.ShippingsRepository.findAll<Shipping>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shipping`;
+  async findOne(id: number): Promise<Shipping> {
+    return await this.ShippingsRepository.findOne<Shipping>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateShippingInput: UpdateShippingInput) {
-    return `This action updates a #${id} shipping`;
+  async findEmail(email: String): Promise<Shipping> {
+    return await this.ShippingsRepository.findOne<Shipping>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} shipping`;
+  async update(where: any, data: UpdateShippingInput): Promise<Shipping> {
+    const Shipping = await this.ShippingsRepository.findOne({
+      where: { ...where },
+    });
+    await Shipping.update({ ...data });
+    await Shipping.save();
+    return Shipping;
+  }
+
+  async remove(id: number): Promise<Shipping> {
+    return await this.ShippingsRepository.findOne<Shipping>({
+      where: { id: id },
+    });
   }
 }

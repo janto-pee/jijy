@@ -22,7 +22,6 @@ export interface CreateAddressInput {
 
 export interface CreateAttributeInput {
     description?: Nullable<string>;
-    id?: Nullable<number>;
     mandatory?: Nullable<string>;
     name?: Nullable<string>;
     translatable?: Nullable<string>;
@@ -44,7 +43,7 @@ export interface CreateCartInput {
     exampleField?: Nullable<number>;
 }
 
-export interface CreateCatgeoryInput {
+export interface CreateCategoryInput {
     code?: Nullable<number>;
     description?: Nullable<string>;
     name?: Nullable<string>;
@@ -169,7 +168,7 @@ export interface UpdateCartInput {
     id: number;
 }
 
-export interface UpdateCatgeoryInput {
+export interface UpdateCategoryInput {
     id: number;
 }
 
@@ -281,7 +280,7 @@ export interface Cart {
     exampleField?: Nullable<number>;
 }
 
-export interface Catgeory {
+export interface Category {
     code?: Nullable<number>;
     description?: Nullable<string>;
     id?: Nullable<number>;
@@ -318,7 +317,7 @@ export interface IMutation {
     createBrand(createBrandInput: CreateBrandInput): Brand | Promise<Brand>;
     createCard(createCardInput: CreateCardInput): Card | Promise<Card>;
     createCart(createCartInput: CreateCartInput): Cart | Promise<Cart>;
-    createCatgeory(createCatgeoryInput: CreateCatgeoryInput): Catgeory | Promise<Catgeory>;
+    createCategory(createCategoryInput: CreateCategoryInput): Category | Promise<Category>;
     createCoupon(createCouponInput: CreateCouponInput): Coupon | Promise<Coupon>;
     createCustomer(createCustomerInput: CreateCustomerInput): Customer | Promise<Customer>;
     createImage(createImageInput: CreateImageInput): Image | Promise<Image>;
@@ -341,7 +340,7 @@ export interface IMutation {
     removeBrand(id: number): Nullable<Brand> | Promise<Nullable<Brand>>;
     removeCard(id: number): Nullable<Card> | Promise<Nullable<Card>>;
     removeCart(id: number): Nullable<Cart> | Promise<Nullable<Cart>>;
-    removeCatgeory(id: number): Nullable<Catgeory> | Promise<Nullable<Catgeory>>;
+    removeCategory(id: number): Nullable<Category> | Promise<Nullable<Category>>;
     removeCoupon(id: number): Nullable<Coupon> | Promise<Nullable<Coupon>>;
     removeCustomer(id: number): Nullable<Customer> | Promise<Nullable<Customer>>;
     removeImage(id: number): Nullable<Image> | Promise<Nullable<Image>>;
@@ -364,7 +363,7 @@ export interface IMutation {
     updateBrand(updateBrandInput: UpdateBrandInput): Brand | Promise<Brand>;
     updateCard(updateCardInput: UpdateCardInput): Card | Promise<Card>;
     updateCart(updateCartInput: UpdateCartInput): Cart | Promise<Cart>;
-    updateCatgeory(updateCatgeoryInput: UpdateCatgeoryInput): Catgeory | Promise<Catgeory>;
+    updateCategory(updateCategoryInput: UpdateCategoryInput): Category | Promise<Category>;
     updateCoupon(updateCouponInput: UpdateCouponInput): Coupon | Promise<Coupon>;
     updateCustomer(updateCustomerInput: UpdateCustomerInput): Customer | Promise<Customer>;
     updateImage(updateImageInput: UpdateImageInput): Image | Promise<Image>;
@@ -424,8 +423,8 @@ export interface IQuery {
     cards(): Nullable<Card>[] | Promise<Nullable<Card>[]>;
     cart(id: number): Nullable<Cart> | Promise<Nullable<Cart>>;
     carts(): Nullable<Cart>[] | Promise<Nullable<Cart>[]>;
-    catgeories(): Nullable<Catgeory>[] | Promise<Nullable<Catgeory>[]>;
-    catgeory(id: number): Nullable<Catgeory> | Promise<Nullable<Catgeory>>;
+    category(id: number): Nullable<Category> | Promise<Nullable<Category>>;
+    categorys(): Nullable<Category>[] | Promise<Nullable<Category>[]>;
     coupon(id: number): Nullable<Coupon> | Promise<Nullable<Coupon>>;
     coupons(): Nullable<Coupon>[] | Promise<Nullable<Coupon>[]>;
     customer(id: number): Nullable<Customer> | Promise<Nullable<Customer>>;

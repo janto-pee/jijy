@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateReviewInput } from './dto/create-review.input';
 import { UpdateReviewInput } from './dto/update-review.input';
+import { Review } from './entities/Review.entity';
 
 @Injectable()
 export class ReviewsService {
-  create(createReviewInput: CreateReviewInput) {
-    return 'This action adds a new review';
+  constructor(
+    @Inject('REVIEWS_REPOSITORY')
+    private ReviewsRepository: typeof Review,
+  ) {}
+  async create(createReviewInput: CreateReviewInput): Promise<Review> {
+    return await this.ReviewsRepository.create({
+      ...createReviewInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all reviews`;
+  async findAll(): Promise<Review[]> {
+    return await this.ReviewsRepository.findAll<Review>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} review`;
+  async findOne(id: number): Promise<Review> {
+    return await this.ReviewsRepository.findOne<Review>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateReviewInput: UpdateReviewInput) {
-    return `This action updates a #${id} review`;
+  async findEmail(email: String): Promise<Review> {
+    return await this.ReviewsRepository.findOne<Review>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} review`;
+  async update(where: any, data: UpdateReviewInput): Promise<Review> {
+    const Review = await this.ReviewsRepository.findOne({
+      where: { ...where },
+    });
+    await Review.update({ ...data });
+    await Review.save();
+    return Review;
+  }
+
+  async remove(id: number): Promise<Review> {
+    return await this.ReviewsRepository.findOne<Review>({
+      where: { id: id },
+    });
   }
 }

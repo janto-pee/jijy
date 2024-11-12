@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateVariantsOptionInput } from './dto/create-variants-option.input';
 import { UpdateVariantsOptionInput } from './dto/update-variants-option.input';
+import { VariantsOption } from './entities/variants-option.entity';
 
 @Injectable()
 export class VariantsOptionService {
-  create(createVariantsOptionInput: CreateVariantsOptionInput) {
-    return 'This action adds a new variantsOption';
+  constructor(
+    @Inject('VariantsOptionS_REPOSITORY')
+    private VariantsOptionsRepository: typeof VariantsOption,
+  ) {}
+  async create(
+    createVariantsOptionInput: CreateVariantsOptionInput,
+  ): Promise<VariantsOption> {
+    return await this.VariantsOptionsRepository.create({
+      ...createVariantsOptionInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all variantsOption`;
+  async findAll(): Promise<VariantsOption[]> {
+    return await this.VariantsOptionsRepository.findAll<VariantsOption>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} variantsOption`;
+  async findOne(id: number): Promise<VariantsOption> {
+    return await this.VariantsOptionsRepository.findOne<VariantsOption>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateVariantsOptionInput: UpdateVariantsOptionInput) {
-    return `This action updates a #${id} variantsOption`;
+  async findEmail(email: String): Promise<VariantsOption> {
+    return await this.VariantsOptionsRepository.findOne<VariantsOption>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} variantsOption`;
+  async update(params: {
+    where: any;
+    data: UpdateVariantsOptionInput;
+  }): Promise<VariantsOption> {
+    const { where, data } = params;
+    const VariantsOption = await this.VariantsOptionsRepository.findOne({
+      where: { ...where },
+    });
+    await VariantsOption.update({ ...data });
+    await VariantsOption.save();
+    return VariantsOption;
+  }
+
+  async remove(id: number): Promise<VariantsOption> {
+    return await this.VariantsOptionsRepository.findOne<VariantsOption>({
+      where: { id: id },
+    });
   }
 }

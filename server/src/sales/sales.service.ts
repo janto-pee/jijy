@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSaleInput } from './dto/create-sale.input';
-import { UpdateSaleInput } from './dto/update-sale.input';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateSaleInput } from 'src/Sales/dto/create-Sale.input';
+import { UpdateSaleInput } from 'src/Sales/dto/update-Sale.input';
+import { Sale } from './entities/sale.entity';
 
 @Injectable()
 export class SalesService {
-  create(createSaleInput: CreateSaleInput) {
-    return 'This action adds a new sale';
+  constructor(
+    @Inject('SALES_REPOSITORY')
+    private SalesRepository: typeof Sale,
+  ) {}
+  async create(createSaleInput: CreateSaleInput): Promise<Sale> {
+    return await this.SalesRepository.create({
+      ...createSaleInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all sales`;
+  async findAll(): Promise<Sale[]> {
+    return await this.SalesRepository.findAll<Sale>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sale`;
+  async findOne(id: number): Promise<Sale> {
+    return await this.SalesRepository.findOne<Sale>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateSaleInput: UpdateSaleInput) {
-    return `This action updates a #${id} sale`;
+  async findEmail(email: String): Promise<Sale> {
+    return await this.SalesRepository.findOne<Sale>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sale`;
+  async update(where: any, data: UpdateSaleInput): Promise<Sale> {
+    const Sale = await this.SalesRepository.findOne({
+      where: { ...where },
+    });
+    await Sale.update({ ...data });
+    await Sale.save();
+    return Sale;
+  }
+
+  async remove(id: number): Promise<Sale> {
+    return await this.SalesRepository.findOne<Sale>({
+      where: { id: id },
+    });
   }
 }

@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateOrderInput } from './dto/create-Order.input';
+import { UpdateOrderInput } from './dto/update-Order.input';
+import { Order } from './entities/Order.entity';
 
 @Injectable()
 export class OrdersService {
-  create(createOrderInput: CreateOrderInput) {
-    return 'This action adds a new order';
+  constructor(
+    @Inject('ORDER_REPOSITORY')
+    private OrdersRepository: typeof Order,
+  ) {}
+  async create(createOrderInput: CreateOrderInput): Promise<Order> {
+    return await this.OrdersRepository.create({
+      ...createOrderInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all orders`;
+  async findAll(): Promise<Order[]> {
+    return await this.OrdersRepository.findAll<Order>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: number): Promise<Order> {
+    return await this.OrdersRepository.findOne<Order>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  async findEmail(email: String): Promise<Order> {
+    return await this.OrdersRepository.findOne<Order>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  async update(where: any, data: UpdateOrderInput): Promise<Order> {
+    const Order = await this.OrdersRepository.findOne({
+      where: { ...where },
+    });
+    await Order.update({ ...data });
+    await Order.save();
+    return Order;
+  }
+
+  async remove(id: number): Promise<Order> {
+    return await this.OrdersRepository.findOne<Order>({
+      where: { id: id },
+    });
   }
 }

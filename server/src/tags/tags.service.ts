@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
+import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class TagsService {
-  create(createTagInput: CreateTagInput) {
-    return 'This action adds a new tag';
+  constructor(
+    @Inject('TAGS_REPOSITORY')
+    private TagsRepository: typeof Tag,
+  ) {}
+  async create(createTagInput: CreateTagInput): Promise<Tag> {
+    return await this.TagsRepository.create({
+      ...createTagInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all tags`;
+  async findAll(): Promise<Tag[]> {
+    return await this.TagsRepository.findAll<Tag>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  async findOne(id: number): Promise<Tag> {
+    return await this.TagsRepository.findOne<Tag>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateTagInput: UpdateTagInput) {
-    return `This action updates a #${id} tag`;
+  async findEmail(email: String): Promise<Tag> {
+    return await this.TagsRepository.findOne<Tag>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  async update(where: any, data: UpdateTagInput): Promise<Tag> {
+    const Tag = await this.TagsRepository.findOne({
+      where: { ...where },
+    });
+    await Tag.update({ ...data });
+    await Tag.save();
+    return Tag;
+  }
+
+  async remove(id: number): Promise<Tag> {
+    return await this.TagsRepository.findOne<Tag>({
+      where: { id: id },
+    });
   }
 }

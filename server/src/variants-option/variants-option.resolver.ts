@@ -8,7 +8,10 @@ export class VariantsOptionResolver {
   constructor(private readonly variantsOptionService: VariantsOptionService) {}
 
   @Mutation('createVariantsOption')
-  create(@Args('createVariantsOptionInput') createVariantsOptionInput: CreateVariantsOptionInput) {
+  create(
+    @Args('createVariantsOptionInput')
+    createVariantsOptionInput: CreateVariantsOptionInput,
+  ) {
     return this.variantsOptionService.create(createVariantsOptionInput);
   }
 
@@ -23,8 +26,14 @@ export class VariantsOptionResolver {
   }
 
   @Mutation('updateVariantsOption')
-  update(@Args('updateVariantsOptionInput') updateVariantsOptionInput: UpdateVariantsOptionInput) {
-    return this.variantsOptionService.update(updateVariantsOptionInput.id, updateVariantsOptionInput);
+  update(
+    @Args('updateVariantsOptionInput')
+    updateVariantsOptionInput: UpdateVariantsOptionInput,
+  ) {
+    return this.variantsOptionService.update({
+      where: updateVariantsOptionInput.id,
+      data: updateVariantsOptionInput,
+    });
   }
 
   @Mutation('removeVariantsOption')
