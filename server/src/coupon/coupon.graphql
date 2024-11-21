@@ -17,16 +17,21 @@ input CreateCouponInput {
 }
 
 input UpdateCouponInput {
-  id: Int!
+  id: ID!
+  code: String
+  couponDescription: String
+  couponValue: String
+  startDate: String
+  endDate: String
 }
 
 type Query {
   coupons: [Coupon]!
-  coupon(id: Int!): Coupon
+  coupon(id: ID!): Coupon
 }
 
 type Mutation {
   createCoupon(createCouponInput: CreateCouponInput!): Coupon!
   updateCoupon(updateCouponInput: UpdateCouponInput!): Coupon!
-  removeCoupon(id: Int!): Coupon
+  removeCoupon(id: ID!): Coupon
 }

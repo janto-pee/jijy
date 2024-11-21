@@ -8,27 +8,38 @@ export class AddressResolver {
   constructor(private readonly addressService: AddressService) {}
 
   @Mutation('createAddress')
-  create(@Args('createAddressInput') createAddressInput: CreateAddressInput) {
-    return this.addressService.create(createAddressInput);
+  async create(
+    @Args('createAddressInput') createAddressInput: CreateAddressInput,
+  ) {
+    const address = await this.addressService.create(createAddressInput);
+    // address.user = user;
+    // await address.save();
+    return address;
+  }
+
+  @Query('addresses')
+  async findAll() {
+    const addresses = await this.addressService.findAll();
+    return addresses;
   }
 
   @Query('address')
-  findAll() {
-    return this.addressService.findAll();
-  }
-
-  @Query('address')
-  findOne(@Args('id') id: number) {
-    return this.addressService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.addressService.findOne(id);
   }
 
   @Mutation('updateAddress')
-  update(@Args('updateAddressInput') updateAddressInput: UpdateAddressInput) {
-    return this.addressService.update(updateAddressInput.id, updateAddressInput);
+  async update(
+    @Args('updateAddressInput') updateAddressInput: UpdateAddressInput,
+  ) {
+    return await this.addressService.update(
+      updateAddressInput.id,
+      updateAddressInput,
+    );
   }
 
   @Mutation('removeAddress')
-  remove(@Args('id') id: number) {
-    return this.addressService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.addressService.remove(id);
   }
 }

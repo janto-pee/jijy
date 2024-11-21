@@ -8,27 +8,27 @@ export class SalesResolver {
   constructor(private readonly salesService: SalesService) {}
 
   @Mutation('createSale')
-  create(@Args('createSaleInput') createSaleInput: CreateSaleInput) {
-    return this.salesService.create(createSaleInput);
+  async create(@Args('createSaleInput') createSaleInput: CreateSaleInput) {
+    return await this.salesService.create(createSaleInput);
   }
 
   @Query('sales')
-  findAll() {
-    return this.salesService.findAll();
+  async findAll() {
+    return await this.salesService.findAll();
   }
 
   @Query('sale')
-  findOne(@Args('id') id: number) {
-    return this.salesService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.salesService.findOne(id);
   }
 
   @Mutation('updateSale')
-  update(@Args('updateSaleInput') updateSaleInput: UpdateSaleInput) {
-    return this.salesService.update(updateSaleInput.id, updateSaleInput);
+  async update(@Args('updateSaleInput') updateSaleInput: UpdateSaleInput) {
+    return await this.salesService.update(updateSaleInput.id, updateSaleInput);
   }
 
   @Mutation('removeSale')
-  remove(@Args('id') id: number) {
-    return this.salesService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.salesService.remove(id);
   }
 }

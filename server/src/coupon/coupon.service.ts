@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateCouponInput } from './dto/create-coupon.input';
 import { UpdateCouponInput } from './dto/update-coupon.input';
-import { Coupon } from './entities/Coupon.entity';
+import { Coupon } from './entities/coupon.entity';
 
 @Injectable()
 export class CouponService {
@@ -31,18 +31,23 @@ export class CouponService {
     });
   }
 
-  async update(where: any, data: UpdateCouponInput): Promise<Coupon> {
+  async update(id: number, data: UpdateCouponInput): Promise<Coupon> {
     const Coupon = await this.CouponsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Coupon) {
+      throw new Error('Coupon not found');
+    }
     await Coupon.update({ ...data });
     await Coupon.save();
     return Coupon;
   }
 
   async remove(id: number): Promise<Coupon> {
-    return await this.CouponsRepository.findOne<Coupon>({
+    const coupon = await this.CouponsRepository.findOne<Coupon>({
       where: { id: id },
     });
+    await coupon.destroy();
+    return coupon;
   }
 }

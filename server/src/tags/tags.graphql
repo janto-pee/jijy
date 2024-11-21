@@ -10,16 +10,18 @@ input CreateTagInput {
 }
 
 input UpdateTagInput {
-  id: Int!
+  id: ID!
+    name: String
+  icon: String
 }
 
 type Query {
   tags: [Tag]!
-  tag(id: Int!): Tag
+  tag(id: ID!): Tag
 }
 
 type Mutation {
   createTag(createTagInput: CreateTagInput!): Tag!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
-  removeTag(id: Int!): Tag
+  removeTag(id: ID!): Tag
 }

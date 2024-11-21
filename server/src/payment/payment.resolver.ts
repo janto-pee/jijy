@@ -8,27 +8,34 @@ export class PaymentResolver {
   constructor(private readonly paymentService: PaymentService) {}
 
   @Mutation('createPayment')
-  create(@Args('createPaymentInput') createPaymentInput: CreatePaymentInput) {
-    return this.paymentService.create(createPaymentInput);
+  async create(
+    @Args('createPaymentInput') createPaymentInput: CreatePaymentInput,
+  ) {
+    return await this.paymentService.create(createPaymentInput);
   }
 
   @Query('payment')
-  findAll() {
-    return this.paymentService.findAll();
+  async findAll() {
+    return await this.paymentService.findAll();
   }
 
   @Query('payment')
-  findOne(@Args('id') id: number) {
-    return this.paymentService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.paymentService.findOne(id);
   }
 
   @Mutation('updatePayment')
-  update(@Args('updatePaymentInput') updatePaymentInput: UpdatePaymentInput) {
-    return this.paymentService.update(updatePaymentInput.id, updatePaymentInput);
+  async update(
+    @Args('updatePaymentInput') updatePaymentInput: UpdatePaymentInput,
+  ) {
+    return await this.paymentService.update(
+      updatePaymentInput.id,
+      updatePaymentInput,
+    );
   }
 
   @Mutation('removePayment')
-  remove(@Args('id') id: number) {
-    return this.paymentService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.paymentService.remove(id);
   }
 }

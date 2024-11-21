@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
-import { comparePassword } from 'src/utils/hashPassword';
+import { comparePassword } from 'src/utils/hashpassword';
 
 @Injectable()
 export class UsersService {
@@ -38,6 +38,9 @@ export class UsersService {
     const user = await this.usersRepository.findOne({
       where: { ...where },
     });
+    if (!user) {
+      throw new Error('user not found');
+    }
     await user.update({ ...data });
     await user.save();
     return user;
@@ -48,7 +51,11 @@ export class UsersService {
       where: { email: email },
     });
 
-    if (!user || user.password === null) return;
+    if (!user || user.password === null) {
+      if (!user) {
+        throw new Error('user not found');
+      }
+    }
 
     const match = await comparePassword(password, user.password);
 

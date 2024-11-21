@@ -8,23 +8,30 @@ export class CouponResolver {
   constructor(private readonly couponService: CouponService) {}
 
   @Mutation('createCoupon')
-  create(@Args('createCouponInput') createCouponInput: CreateCouponInput) {
-    return this.couponService.create(createCouponInput);
+  async create(
+    @Args('createCouponInput') createCouponInput: CreateCouponInput,
+  ) {
+    return await this.couponService.create(createCouponInput);
+  }
+
+  @Query('coupons')
+  async findAll() {
+    return await this.couponService.findAll();
   }
 
   @Query('coupon')
-  findAll() {
-    return this.couponService.findAll();
-  }
-
-  @Query('coupon')
-  findOne(@Args('id') id: number) {
-    return this.couponService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.couponService.findOne(id);
   }
 
   @Mutation('updateCoupon')
-  update(@Args('updateCouponInput') updateCouponInput: UpdateCouponInput) {
-    return this.couponService.update(updateCouponInput.id, updateCouponInput);
+  async update(
+    @Args('updateCouponInput') updateCouponInput: UpdateCouponInput,
+  ) {
+    return await this.couponService.update(
+      updateCouponInput.id,
+      updateCouponInput,
+    );
   }
 
   @Mutation('removeCoupon')

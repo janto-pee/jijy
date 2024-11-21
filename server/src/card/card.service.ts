@@ -31,18 +31,23 @@ export class CardService {
     });
   }
 
-  async update(where: any, data: UpdateCardInput): Promise<Card> {
+  async update(id: number, data: UpdateCardInput): Promise<Card> {
     const Card = await this.CardsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Card) {
+      throw new Error('card not found');
+    }
     await Card.update({ ...data });
     await Card.save();
     return Card;
   }
 
   async remove(id: number): Promise<Card> {
-    return await this.CardsRepository.findOne<Card>({
+    const card = await this.CardsRepository.findOne<Card>({
       where: { id: id },
     });
+    await card.destroy();
+    return card;
   }
 }

@@ -17,8 +17,8 @@ export class Category extends Model {
   code: number;
 
   @Column
-  name: String;
+  name: string;
 
   @Column
-  description: String;
+  description: string;
 }

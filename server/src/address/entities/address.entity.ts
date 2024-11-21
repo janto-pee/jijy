@@ -8,7 +8,9 @@ import {
   AutoIncrement,
   Default,
   Unique,
+  HasOne,
 } from 'sequelize-typescript';
+// import { User } from 'src/users/entities/user.entity';
 
 @Table
 export class Address extends Model {
@@ -16,6 +18,9 @@ export class Address extends Model {
   @AutoIncrement
   @Column
   id: number;
+
+  // @HasOne(() => User, 'id')
+  // user: User;
 
   @Column
   username: string;
@@ -46,4 +51,10 @@ export class Address extends Model {
 
   @Column
   country: string;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
 }

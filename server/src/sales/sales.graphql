@@ -1,24 +1,26 @@
 type Sale {
   # Example field (placeholder)
+  id: Int
   exampleField: Int
 }
 
 input CreateSaleInput {
   # Example field (placeholder)
+  id: Int
   exampleField: Int
 }
 
 input UpdateSaleInput {
-  id: Int!
+  id: ID!
 }
 
 type Query {
   sales: [Sale]!
-  sale(id: Int!): Sale
+  sale(id: ID!): Sale
 }
 
 type Mutation {
   createSale(createSaleInput: CreateSaleInput!): Sale!
   updateSale(updateSaleInput: UpdateSaleInput!): Sale!
-  removeSale(id: Int!): Sale
+  removeSale(id: ID!): Sale
 }

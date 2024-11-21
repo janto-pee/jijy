@@ -8,27 +8,30 @@ export class BrandsResolver {
   constructor(private readonly brandsService: BrandsService) {}
 
   @Mutation('createBrand')
-  create(@Args('createBrandInput') createBrandInput: CreateBrandInput) {
-    return this.brandsService.create(createBrandInput);
+  async create(@Args('createBrandInput') createBrandInput: CreateBrandInput) {
+    return await this.brandsService.create(createBrandInput);
   }
 
   @Query('brands')
-  findAll() {
-    return this.brandsService.findAll();
+  async findAll() {
+    return await this.brandsService.findAll();
   }
 
   @Query('brand')
-  findOne(@Args('id') id: number) {
-    return this.brandsService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.brandsService.findOne(id);
   }
 
   @Mutation('updateBrand')
-  update(@Args('updateBrandInput') updateBrandInput: UpdateBrandInput) {
-    return this.brandsService.update(updateBrandInput.id, updateBrandInput);
+  async update(@Args('updateBrandInput') updateBrandInput: UpdateBrandInput) {
+    return await this.brandsService.update(
+      updateBrandInput.id,
+      updateBrandInput,
+    );
   }
 
   @Mutation('removeBrand')
-  remove(@Args('id') id: number) {
-    return this.brandsService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.brandsService.remove(id);
   }
 }

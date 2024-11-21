@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreatePaymentInput } from './dto/create-Payment.input';
-import { UpdatePaymentInput } from './dto/update-Payment.input';
-import { Payment } from './entities/Payment.entity';
+import { CreatePaymentInput } from './dto/create-payment.input';
+import { UpdatePaymentInput } from './dto/update-payment.input';
+import { Payment } from './entities/payment.entity';
 
 @Injectable()
 export class PaymentService {
@@ -31,18 +31,23 @@ export class PaymentService {
     });
   }
 
-  async update(where: any, data: UpdatePaymentInput): Promise<Payment> {
+  async update(id: number, data: UpdatePaymentInput): Promise<Payment> {
     const Payment = await this.PaymentsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Payment) {
+      throw new Error('Payment not found');
+    }
     await Payment.update({ ...data });
     await Payment.save();
     return Payment;
   }
 
   async remove(id: number): Promise<Payment> {
-    return await this.PaymentsRepository.findOne<Payment>({
+    const payment = await this.PaymentsRepository.findOne<Payment>({
       where: { id: id },
     });
+    await payment.destroy();
+    return payment;
   }
 }

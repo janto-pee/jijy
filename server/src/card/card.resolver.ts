@@ -8,27 +8,27 @@ export class CardResolver {
   constructor(private readonly cardService: CardService) {}
 
   @Mutation('createCard')
-  create(@Args('createCardInput') createCardInput: CreateCardInput) {
-    return this.cardService.create(createCardInput);
+  async create(@Args('createCardInput') createCardInput: CreateCardInput) {
+    return await this.cardService.create(createCardInput);
   }
 
   @Query('card')
-  findAll() {
-    return this.cardService.findAll();
+  async findAll() {
+    return await this.cardService.findAll();
   }
 
   @Query('card')
-  findOne(@Args('id') id: number) {
-    return this.cardService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.cardService.findOne(id);
   }
 
   @Mutation('updateCard')
-  update(@Args('updateCardInput') updateCardInput: UpdateCardInput) {
-    return this.cardService.update(updateCardInput.id, updateCardInput);
+  async update(@Args('updateCardInput') updateCardInput: UpdateCardInput) {
+    return await this.cardService.update(updateCardInput.id, updateCardInput);
   }
 
   @Mutation('removeCard')
-  remove(@Args('id') id: number) {
-    return this.cardService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.cardService.remove(id);
   }
 }

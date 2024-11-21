@@ -1,4 +1,4 @@
-import { Review } from './entities/Review.entity';
+import { Review } from './entities/review.entity';
 
 export const reviewProviders = [
   {

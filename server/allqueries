@@ -1,0 +1,966 @@
+mutation {
+    createAddress(createAddressInput: {
+        city: "city",
+        country: "country",
+        country_code: "country",
+        location: "location"
+        postal_code: "123"
+        state_province_code: "123"
+        state_province_name:"12"
+        street:"street"
+        street2: "street2"
+    }) {
+        city
+        country
+        country_code
+        id
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+createAttribute(
+        createAttributeInput: {
+            description: "descritpion"
+            mandatory: "mandatory"
+            name: "name"
+            translatable: "tranlatable"
+            type: "type"
+            value: "value"
+            variation: "variation"
+        }
+    ) {
+        description
+        id
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+    createBrand(createBrandInput: { code: 4, name: "string" }) {
+        code
+        id
+        name
+    }
+    createCard(createCardInput: { exampleField: 1 }) {
+        exampleField
+    }
+    createCart(createCartInput: { exampleField: 1 }) {
+        exampleField
+    }
+    createCategory(
+        createCategoryInput: { code: 4, description: "string", name: "string" }
+    ) {
+        code
+        description
+        id
+        name
+    }
+    createCoupon(
+        createCouponInput: {
+            code: "string",
+            couponDescription: "string",
+            couponValue: "string",
+            endDate: "string",
+            startDate: "string"
+        }
+    ) {
+        code
+        couponDescription
+        couponValue
+        endDate
+        id
+        startDate
+    }
+    createCustomer(
+        createCustomerInput: {
+            department: "string"
+            photoURL: "string"
+            title: "string"
+            username: "string"
+        }
+    ) {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    createImage(createImageInput: { primary: true, url: "string" }) {
+        primary
+        url
+    }
+    createOrder(
+        createOrderInput: {
+            businessClientCode: "string"
+            comment: "string"
+            products: "string"
+            shippingDate: "string"
+        }
+    ) {
+        businessClientCode
+        comment
+        id
+        products
+        shippingDate
+        shopId
+    }
+    createPayment(createPaymentInput: { exampleField: 10 }) {
+        exampleField
+    }
+    createProduct(
+        createProductInput: {
+            attributes: "string"
+            barcodeEan: "string"
+            brand: "string"
+            category: "string"
+            description: "string"
+            images: "string"
+            name: "string"
+            parentSku: "string"
+            price: "string"
+            sellerSku: "string"
+            stock: "string"
+            variation: "string"
+        }
+    ) {
+        attributes
+        barcodeEan
+        brand
+        category
+        description
+        id
+        images
+        name
+        parentSku
+        price
+        sellerSku
+        stock
+        variation
+    }
+    createReview(
+        createReviewInput: {
+            course: "string"
+            ratings: 4
+            reviewText: "string"
+            reviewer: "string"
+        }
+    ) {
+        course
+        createdAt
+        enrollmmentId
+        id
+        ratings
+        reviewText
+        reviewer
+    }
+    createSale(createSaleInput: { exampleField: 10 }) {
+        exampleField
+    }
+    createSession(
+        validateUserInput: { email: "string", password: "string" }
+    ) {
+        id
+        userAgent
+        valid
+    }
+    createShipping(createShippingInput: { TrackingCode: "string", name: "string" }) {
+        TrackingCode
+        id
+        name
+    }
+    createShop(createShopInput: { email: "string", name: "string" }) {
+        email
+        id
+        name
+    }
+    createUser(
+    createUserInput: {
+      username: "string"
+      email: "string"
+      password: "abcd"
+      first_name: "laka"
+      last_name: "bosch"
+    }
+  ) {
+    createdAt
+    email
+    first_name
+    id
+    is_email_verified
+    last_name
+    password
+    passwordResetCode
+    password_changed_at
+    updatedAt
+    username
+    verificationCode
+  }
+    createStaff(
+        createStaffInput: {
+            department: "string"
+            photoURL: "string"
+            title: "string"
+            username: "string"
+        }
+    ) {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    createTag(createTagInput: { icon: "string", name: "string" }) {
+        icon
+        id
+        name
+    }
+createVariant(createVariantInput: {
+    icon: "icon",
+    name: "name"
+}){
+    icon
+    id
+    name
+}
+    createVariantsOption(createVariantsOptionInput: { exampleField: 10 }) {
+        exampleField
+    }
+     forgotPassword(email: "string") {
+        email
+        message
+    }
+    removeAddress(id: 1) {
+        city
+        country
+        country_code
+        id
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+    removeAttribute(id: 1) {
+        description
+        id
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+    removeBrand(id: 1) {
+        code
+        id
+        name
+    }
+    removeCard(id: 1) {
+        exampleField
+    }
+    removeCart(id: 1) {
+        exampleField
+    }
+    removeCategory(id: 1) {
+        code
+        description
+        id
+        name
+    }
+    removeCoupon(id: 1) {
+        code
+        couponDescription
+        couponValue
+        endDate
+        id
+        startDate
+    }
+    removeCustomer(id: 1) {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    removeImage(id: 1) {
+        primary
+        url
+    }
+    removeOrder(id: 1) {
+        businessClientCode
+        comment
+        id
+        products
+        shippingDate
+        shopId
+    }
+    removePayment(id: 1) {
+        exampleField
+    }
+    removeProduct(id: 1) {
+        attributes
+        barcodeEan
+        brand
+        category
+        description
+        id
+        images
+        name
+        parentSku
+        price
+        sellerSku
+        stock
+        variation
+    }
+    removeReview(id: 1) {
+        course
+        createdAt
+        enrollmmentId
+        id
+        ratings
+        reviewText
+        reviewer
+    }
+    removeSale(id: 1) {
+        exampleField
+    }
+    removeSession(id: 1) {
+        id
+        userAgent
+        valid
+    }
+    removeShipping(id: 1) {
+        TrackingCode
+        id
+        name
+    }
+    removeShop(id: 1) {
+        email
+        id
+        name
+    }
+    removeStaff(id: 1) {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    removeTag(id: 1) {
+        icon
+        id
+        name
+    }
+    removeUser(id: 1) {
+        createdAt
+        email
+        first_name
+        id
+        is_email_verified
+        last_name
+        password
+        passwordResetCode
+        password_changed_at
+        updatedAt
+        username
+        verificationCode
+    }
+    removeVariant(id: 1) {
+        icon
+        id
+        name
+    }
+    removeVariantsOption(id: 1) {
+        exampleField
+    }
+    resetPassword(
+        id: 1
+        password: "abcd"
+        resetcode: "abcd"
+    ) {
+        createdAt
+        email
+        first_name
+        id
+        is_email_verified
+        last_name
+        password
+        passwordResetCode
+        password_changed_at
+        updatedAt
+        username
+        verificationCode
+    }
+
+
+  
+        updateAddress(
+        updateAddressInput: {
+            id: 1,
+            city: "string"
+            country: "string"
+            country_code: "string"
+            location: "string"
+            postal_code: "string"
+            state_province_code: "string"
+            state_province_name: "string"
+            street: "string"
+            street2: "string"
+        }
+    ) {
+        city
+        country
+        country_code
+        id
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+    updateAttribute(
+        updateAttributeInput: {
+            id: 1,
+            description: "string"
+            mandatory: "string"
+            name: "string"
+            translatable: "string"
+            type: "string"
+            value: "string"
+            variation: "string"
+        }
+    ) {
+        description
+        id
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+#   updateBrand(updateBrandInput: {id: 1, code: 4, name: "string" }) {
+#     code
+#     id
+#     name
+#   }
+#   updateCard(updateCardInput: {id: 1, }) {
+#     exampleField
+#   }
+#   updateCart(updateCartInput: {id: 1,  }) {
+#     exampleField
+#   }
+  updateCategory(
+    updateCategoryInput: {id: 1,
+      code: 4
+      description: "string"
+      name: "string"
+    }
+  ) {
+    code
+    description
+    id
+    name
+  }
+  updateCoupon(
+    updateCouponInput: {id: 1,
+      code: "string"
+      couponDescription: "string"
+      couponValue: "string"
+      endDate: "string"
+      startDate: "string"
+    }
+  ) {
+    code
+    couponDescription
+    couponValue
+    endDate
+    id
+    startDate
+  }
+  updateCustomer(
+    updateCustomerInput: {id: 1,
+      department: "string"
+      photoURL: "string"
+      title: "string"
+      username: "string"
+    }
+  ) {
+    created_at
+    department
+    id
+    photoURL
+    title
+    updated_at
+    username
+  }
+  updateImage(updateImageInput: {id: 1, primary: false, url: "string" }) {
+    primary
+    url
+  }
+  updateOrder(
+    updateOrderInput: {id: 1,
+      businessClientCode: "string"
+      comment: "string"
+      products: "string"
+      shippingDate: "string"
+    }
+  ) {
+    businessClientCode
+    comment
+    id
+    products
+    shippingDate
+    shopId
+  }
+  updatePayment(updatePaymentInput: {id: 1, }) {
+    exampleField
+  }
+  updateProduct(
+    updateProductInput: {id: 1,
+      attributes: "string"
+      barcodeEan: "string"
+      brand: "string"
+      category: "string"
+      description: "string"
+      images: "string"
+      name: "string"
+      parentSku: "string"
+      price: "string"
+      sellerSku: "string"
+      stock: "string"
+      variation: "string"
+    }
+  ) {
+    attributes
+    barcodeEan
+    brand
+    category
+    description
+    id
+    images
+    name
+    parentSku
+    price
+    sellerSku
+    stock
+    variation
+  }
+  updateReview(
+    updateReviewInput: {id: 1,
+      course: "string"
+      ratings: 3
+      reviewText: "string"
+      reviewer: "string"
+    }
+  ) {
+    course
+    createdAt
+    enrollmmentId
+    id
+    ratings
+    reviewText
+    reviewer
+  }
+  updateSale(updateSaleInput: {id: 1,  }) {
+    exampleField
+  }
+  updateSession(updateSessionInput: {id: 1, }) {
+    id
+    userAgent
+    valid
+  }
+  updateShipping(
+    updateShippingInput: {id: 1, TrackingCode: "string", name: "string" }
+  ) {
+    TrackingCode
+    id
+    name
+  }
+  updateShop(updateShopInput: {id: 1, email: "string", name: "string" }) {
+    email
+    id
+    name
+  }
+  updateStaff(
+    updateStaffInput: {id: 1,
+      department: "string"
+      photoURL: "string"
+      title: "string"
+      username: "string"
+    }
+  ) {
+    created_at
+    department
+    id
+    photoURL
+    title
+    updated_at
+    username
+  }
+  updateTag(updateTagInput: {id: 1, icon: "string", name: "string" }) {
+    icon
+    id
+    name
+  }
+  updateUser(
+    updateUserInput: {id: 1,
+      email: "string"
+      first_name: "string"
+      last_name: "string"
+      password: "string"
+      username: "string"
+    }
+  ) {
+    createdAt
+    email
+    first_name
+    id
+    is_email_verified
+    last_name
+    password
+    passwordResetCode
+    password_changed_at
+    updatedAt
+    username
+    verificationCode
+  }
+  updateVariant(updateVariantInput: {id: 1, icon: "string", name: "string" }) {
+    icon
+    id
+    name
+  }
+  updateVariantsOption(updateVariantsOptionInput: {id: 1,  }) {
+    exampleField
+  }
+  verifyUser(
+    updateUserInput: {
+        id: 1,
+    },
+    verification: "b0a4ha3"
+  ) {
+    createdAt
+    email
+    first_name
+    id
+    is_email_verified
+    last_name
+    password
+    passwordResetCode
+    password_changed_at
+    updatedAt
+    username
+    verificationCode
+  }
+}
+query Address {
+    address(id: "2") {
+        city
+        country
+        country_code
+        id
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+    addresses {
+        city
+        country
+        country_code
+        id
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+    attribute(id: "1") {
+        description
+        id
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+    attributes {
+        description
+        id
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+    brand(id: "1") {
+        code
+        id
+        name
+    }
+    brands {
+        code
+        id
+        name
+    }
+    # card(id: "1") {
+    #     id
+    # }
+    # cards {
+    #     id
+    # }
+    # cart(id: "1") {
+    #     exampleField
+    # }
+    # carts {
+    #     exampleField
+    # }
+    category(id: "1") {
+        code
+        description
+        id
+        name
+    }
+    categorys {
+        code
+        description
+        id
+        name
+    }
+    coupon(id: "1") {
+        code
+        couponDescription
+        couponValue
+        endDate
+        id
+        startDate
+    }
+    coupons {
+        code
+        couponDescription
+        couponValue
+        endDate
+        id
+        startDate
+    }
+    customer(id: "1") {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    customers {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    image(id: "1") {
+        primary
+        url
+    }
+    images {
+        primary
+        url
+    }
+    order(id: "1") {
+        businessClientCode
+        comment
+        id
+        products
+        shippingDate
+        shopId
+    }
+    orders {
+        businessClientCode
+        comment
+        id
+        products
+        shippingDate
+        shopId
+    }
+    # payment(id: "1") {
+    #     exampleField
+    # }
+    # payments {
+    #     exampleField
+    # }
+    product(id: "1") {
+        attributes
+        barcodeEan
+        brand
+        category
+        description
+        id
+        images
+        name
+        parentSku
+        price
+        sellerSku
+        stock
+        variation
+    }
+    products {
+        attributes
+        barcodeEan
+        brand
+        category
+        description
+        id
+        images
+        name
+        parentSku
+        price
+        sellerSku
+        stock
+        variation
+    }
+    review(id: "1") {
+        course
+        createdAt
+        enrollmmentId
+        id
+        ratings
+        reviewText
+        reviewer
+    }
+    reviews {
+        course
+        createdAt
+        enrollmmentId
+        id
+        ratings
+        reviewText
+        reviewer
+    }
+    # sale(id: "1") {
+    #     exampleField
+    # }
+    # sales {
+    #     exampleField
+    # }
+    session(id: "1") {
+        id
+        userAgent
+        valid
+    }
+    shipping(id: "1") {
+        TrackingCode
+        id
+        name
+    }
+    shippings {
+        TrackingCode
+        id
+        name
+    }
+    shop(id: "1") {
+        email
+        id
+        name
+    }
+    shops {
+        email
+        id
+        name
+    }
+    staff(id: "1") {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    staffs {
+        created_at
+        department
+        id
+        photoURL
+        title
+        updated_at
+        username
+    }
+    tag(id: "1") {
+        icon
+        id
+        name
+    }
+    tags {
+        icon
+        id
+        name
+    }
+    user(id: "1") {
+        createdAt
+        email
+        first_name
+        id
+        is_email_verified
+        last_name
+        password
+        passwordResetCode
+        password_changed_at
+        updatedAt
+        username
+        verificationCode
+    }
+    users {
+        createdAt
+        email
+        first_name
+        id
+        is_email_verified
+        last_name
+        password
+        passwordResetCode
+        password_changed_at
+        updatedAt
+        username
+        verificationCode
+    }
+    variant(id: "1") {
+        icon
+        id
+        name
+    }
+    variants {
+        icon
+        id
+        name
+    }
+    # variantsOption(id: "1") {
+    #     exampleField
+    # }
+    # variantsOptions {
+    #     exampleField
+    # }
+}
+

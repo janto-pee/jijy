@@ -7,6 +7,7 @@ import {
   UpdatedAt,
   Default,
   AutoIncrement,
+  HasOne,
 } from 'sequelize-typescript';
 
 @Table
@@ -16,8 +17,8 @@ export class Session extends Model {
   @Column
   id: number;
 
-  @Column
-  userId: string;
+  // @HasOne(() => User, 'id')
+  // user: User;
 
   @Column
   userAgent: string;

@@ -16,16 +16,20 @@ input CreateStaffInput {
 }
 
 input UpdateStaffInput {
-  id: Int!
+  id: ID!
+    photoURL: String
+  username: String
+  title: String
+  department: String
 }
 
 type Query {
   staffs: [Staff]!
-  staff(id: Int!): Staff
+  staff(id: ID!): Staff
 }
 
 type Mutation {
   createStaff(createStaffInput: CreateStaffInput!): Staff!
   updateStaff(updateStaffInput: UpdateStaffInput!): Staff!
-  removeStaff(id: Int!): Staff
+  removeStaff(id: ID!): Staff
 }

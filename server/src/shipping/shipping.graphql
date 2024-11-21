@@ -10,16 +10,18 @@ input CreateShippingInput {
 }
 
 input UpdateShippingInput {
-  id: Int!
+  id: ID!
+   name: String
+  TrackingCode: String
 }
 
 type Query {
   shippings: [Shipping]!
-  shipping(id: Int!): Shipping
+  shipping(id: ID!): Shipping
 }
 
 type Mutation {
   createShipping(createShippingInput: CreateShippingInput!): Shipping!
   updateShipping(updateShippingInput: UpdateShippingInput!): Shipping!
-  removeShipping(id: Int!): Shipping
+  removeShipping(id: ID!): Shipping
 }

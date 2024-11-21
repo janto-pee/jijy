@@ -8,27 +8,30 @@ export class ImagesResolver {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Mutation('createImage')
-  create(@Args('createImageInput') createImageInput: CreateImageInput) {
-    return this.imagesService.create(createImageInput);
+  async create(@Args('createImageInput') createImageInput: CreateImageInput) {
+    return await this.imagesService.create(createImageInput);
   }
 
   @Query('images')
-  findAll() {
-    return this.imagesService.findAll();
+  async findAll() {
+    return await this.imagesService.findAll();
   }
 
   @Query('image')
-  findOne(@Args('id') id: number) {
-    return this.imagesService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.imagesService.findOne(id);
   }
 
   @Mutation('updateImage')
-  update(@Args('updateImageInput') updateImageInput: UpdateImageInput) {
-    return this.imagesService.update(updateImageInput.id, updateImageInput);
+  async update(@Args('updateImageInput') updateImageInput: UpdateImageInput) {
+    return await this.imagesService.update(
+      updateImageInput.id,
+      updateImageInput,
+    );
   }
 
   @Mutation('removeImage')
-  remove(@Args('id') id: number) {
-    return this.imagesService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.imagesService.remove(id);
   }
 }

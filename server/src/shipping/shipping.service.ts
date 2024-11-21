@@ -31,18 +31,23 @@ export class ShippingService {
     });
   }
 
-  async update(where: any, data: UpdateShippingInput): Promise<Shipping> {
+  async update(id: number, data: UpdateShippingInput): Promise<Shipping> {
     const Shipping = await this.ShippingsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Shipping) {
+      throw new Error('Shipping not found');
+    }
     await Shipping.update({ ...data });
     await Shipping.save();
     return Shipping;
   }
 
   async remove(id: number): Promise<Shipping> {
-    return await this.ShippingsRepository.findOne<Shipping>({
+    const shipping = await this.ShippingsRepository.findOne<Shipping>({
       where: { id: id },
     });
+    await shipping.destroy();
+    return shipping;
   }
 }

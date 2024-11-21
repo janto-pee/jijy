@@ -11,6 +11,7 @@ import {
 } from 'sequelize-typescript';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
+
 @Table
 export class User extends Model {
   @PrimaryKey
@@ -39,6 +40,7 @@ export class User extends Model {
   @Column
   verificationCode: string;
 
+  @Default(null)
   @Column
   passwordResetCode: string;
 

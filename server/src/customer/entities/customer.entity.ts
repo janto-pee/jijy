@@ -11,4 +11,27 @@ import {
 } from 'sequelize-typescript';
 
 @Table
-export class Customer extends Model {}
+export class Customer extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @Column
+  photoURL: string;
+
+  @Column
+  username: string;
+
+  @Column
+  title: string;
+
+  @Column
+  department: string;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

@@ -31,18 +31,23 @@ export class ProductService {
     });
   }
 
-  async update(where: any, data: UpdateProductInput): Promise<Product> {
+  async update(id: number, data: UpdateProductInput): Promise<Product> {
     const Product = await this.ProductsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Product) {
+      throw new Error('Product not found');
+    }
     await Product.update({ ...data });
     await Product.save();
     return Product;
   }
 
   async remove(id: number): Promise<Product> {
-    return await this.ProductsRepository.findOne<Product>({
+    const product = await this.ProductsRepository.findOne<Product>({
       where: { id: id },
     });
+    await product.destroy();
+    return product;
   }
 }

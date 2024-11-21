@@ -31,18 +31,23 @@ export class StaffService {
     });
   }
 
-  async update(where: any, data: UpdateStaffInput): Promise<Staff> {
+  async update(id: number, data: UpdateStaffInput): Promise<Staff> {
     const Staff = await this.StaffsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Staff) {
+      throw new Error('Staff not found');
+    }
     await Staff.update({ ...data });
     await Staff.save();
     return Staff;
   }
 
   async remove(id: number): Promise<Staff> {
-    return await this.StaffsRepository.findOne<Staff>({
+    const Staff = await this.StaffsRepository.findOne<Staff>({
       where: { id: id },
     });
+    await Staff.destroy;
+    return Staff;
   }
 }

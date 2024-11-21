@@ -10,16 +10,18 @@ input CreateShopInput {
 }
 
 input UpdateShopInput {
-  id: Int!
+  id: ID!
+    name: String
+  email: String
 }
 
 type Query {
   shops: [Shop]!
-  shop(id: Int!): Shop
+  shop(id: ID!): Shop
 }
 
 type Mutation {
   createShop(createShopInput: CreateShopInput!): Shop!
   updateShop(updateShopInput: UpdateShopInput!): Shop!
-  removeShop(id: Int!): Shop
+  removeShop(id: ID!): Shop
 }

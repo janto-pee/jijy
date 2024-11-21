@@ -8,27 +8,34 @@ export class CategoryResolver {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Mutation('createCategory')
-  create(@Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
-    return this.categoryService.create(createCategoryInput);
+  async create(
+    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
+  ) {
+    return await this.categoryService.create(createCategoryInput);
+  }
+
+  @Query('categorys')
+  async findAll() {
+    return await this.categoryService.findAll();
   }
 
   @Query('category')
-  findAll() {
-    return this.categoryService.findAll();
-  }
-
-  @Query('category')
-  findOne(@Args('id') id: number) {
-    return this.categoryService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.categoryService.findOne(id);
   }
 
   @Mutation('updateCategory')
-  update(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
-    return this.categoryService.update(updateCategoryInput.id, updateCategoryInput);
+  async update(
+    @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
+  ) {
+    return await this.categoryService.update(
+      updateCategoryInput.id,
+      updateCategoryInput,
+    );
   }
 
   @Mutation('removeCategory')
-  remove(@Args('id') id: number) {
-    return this.categoryService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.categoryService.remove(id);
   }
 }

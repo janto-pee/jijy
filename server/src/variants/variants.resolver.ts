@@ -8,30 +8,34 @@ export class VariantsResolver {
   constructor(private readonly variantsService: VariantsService) {}
 
   @Mutation('createVariant')
-  create(@Args('createVariantInput') createVariantInput: CreateVariantInput) {
-    return this.variantsService.create(createVariantInput);
+  async create(
+    @Args('createVariantInput') createVariantInput: CreateVariantInput,
+  ) {
+    return await this.variantsService.create(createVariantInput);
   }
 
   @Query('variants')
-  findAll() {
-    return this.variantsService.findAll();
+  async findAll() {
+    return await this.variantsService.findAll();
   }
 
   @Query('variant')
-  findOne(@Args('id') id: number) {
-    return this.variantsService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.variantsService.findOne(id);
   }
 
   @Mutation('updateVariant')
-  update(@Args('updateVariantInput') updateVariantInput: UpdateVariantInput) {
-    return this.variantsService.update(
+  async update(
+    @Args('updateVariantInput') updateVariantInput: UpdateVariantInput,
+  ) {
+    return await this.variantsService.update(
       updateVariantInput.id,
       updateVariantInput,
     );
   }
 
   @Mutation('removeVariant')
-  remove(@Args('id') id: number) {
-    return this.variantsService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.variantsService.remove(id);
   }
 }

@@ -22,4 +22,10 @@ export class Brand extends Model {
 
   @Column
   name: String;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
 }

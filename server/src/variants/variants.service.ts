@@ -31,18 +31,23 @@ export class VariantsService {
     });
   }
 
-  async update(where: any, data: UpdateVariantInput): Promise<Variant> {
+  async update(id: number, data: UpdateVariantInput): Promise<Variant> {
     const Variant = await this.VariantsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Variant) {
+      throw new Error('variants not found');
+    }
     await Variant.update({ ...data });
     await Variant.save();
     return Variant;
   }
 
   async remove(id: number): Promise<Variant> {
-    return await this.VariantsRepository.findOne<Variant>({
+    const variant = await this.VariantsRepository.findOne<Variant>({
       where: { id: id },
     });
+    await variant.destroy();
+    return variant;
   }
 }

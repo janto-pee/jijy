@@ -11,4 +11,15 @@ import {
 } from 'sequelize-typescript';
 
 @Table
-export class Sale extends Model {}
+export class Sale extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

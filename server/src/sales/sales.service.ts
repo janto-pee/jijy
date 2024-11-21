@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateSaleInput } from 'src/Sales/dto/create-Sale.input';
-import { UpdateSaleInput } from 'src/Sales/dto/update-Sale.input';
+import { CreateSaleInput } from 'src/sales/dto/create-sale.input';
+import { UpdateSaleInput } from 'src/sales/dto/update-sale.input';
 import { Sale } from './entities/sale.entity';
 
 @Injectable()
@@ -31,18 +31,23 @@ export class SalesService {
     });
   }
 
-  async update(where: any, data: UpdateSaleInput): Promise<Sale> {
+  async update(id: number, data: UpdateSaleInput): Promise<Sale> {
     const Sale = await this.SalesRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Sale) {
+      throw new Error('Sale not found');
+    }
     await Sale.update({ ...data });
     await Sale.save();
     return Sale;
   }
 
   async remove(id: number): Promise<Sale> {
-    return await this.SalesRepository.findOne<Sale>({
+    const sales = await this.SalesRepository.findOne<Sale>({
       where: { id: id },
     });
+    await sales.destroy();
+    return sales;
   }
 }

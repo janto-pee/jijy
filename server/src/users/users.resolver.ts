@@ -3,7 +3,6 @@ import { UsersService } from './users.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { customAlphabet } from 'nanoid';
-import { hashPassword } from 'src/utils/hashPassword';
 
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
 
@@ -13,17 +12,8 @@ export class UsersResolver {
 
   @Mutation('createUser')
   async create(@Args('createUserInput') createUserInput: CreateUserInput) {
-    // const password = await hashPassword(createUserInput.password);
-
-    const user = await this.usersService.create({
-      ...createUserInput,
-      password: createUserInput.password,
-    });
-    return {
-      id: user.id,
-      email: user.email,
-      message: `user successfully created. kindly check your email to verify`,
-    };
+    const user = await this.usersService.create(createUserInput);
+    return user;
   }
 
   @Query('users')
@@ -34,6 +24,9 @@ export class UsersResolver {
   @Query('user')
   async findOne(@Args('id') id: number) {
     const user = await this.usersService.findUser(id);
+    if (!user) {
+      throw new Error('user not found');
+    }
     return user;
   }
 
@@ -43,11 +36,7 @@ export class UsersResolver {
       where: { id: updateUserInput.id },
       data: { ...updateUserInput },
     });
-    return {
-      id: user.id,
-      email: user.email,
-      message: `user successfully updated`,
-    };
+    return user;
   }
 
   @Mutation('verifyUser')
@@ -56,28 +45,19 @@ export class UsersResolver {
     @Args('verification') verification: String,
   ) {
     const user = await this.findOne(updateUserInput.id);
+
     if (!user) {
-      return {
-        id: 'id does not exist',
-        email: user.email,
-        message: `email does not exist`,
-      };
+      throw new Error('user not found');
     }
+
     if (user.is_email_verified) {
-      return {
-        email: user.email,
-        message: `user already verified`,
-      };
+      throw new Error('user not verified');
     }
     if (user.verificationCode === verification) {
       user.verificationCode = null;
       user.is_email_verified = true;
       await user.save();
-      return {
-        id: user.id,
-        email: user.email,
-        message: `user is now verified`,
-      };
+      return user;
     }
   }
 
@@ -102,11 +82,7 @@ export class UsersResolver {
     }
     user.passwordResetCode = pRC;
     await user.save();
-    return {
-      id: user.id,
-      email: user.email,
-      message: `check your email for the password reset code ${user.passwordResetCode}`,
-    };
+    return user;
   }
 
   @Mutation('resetPassword')
@@ -122,22 +98,15 @@ export class UsersResolver {
       !user.passwordResetCode ||
       user.passwordResetCode !== resetcode
     ) {
-      return {
-        email: user.email,
-        message: `user does not exist`,
-      };
+      throw new Error('unable to reset password');
     }
     if (!user.is_email_verified) {
-      return { email: user.email, message: 'kindly verify your email first' };
+      throw new Error('kindly verify your email before you proceed');
     }
     user.passwordResetCode = null;
     // user.password = await hashPassword(password);
     user.password = password;
     await user.save();
-    return {
-      id: user.id,
-      email: user.email,
-      message: `password reset successful`,
-    };
+    return user;
   }
 }

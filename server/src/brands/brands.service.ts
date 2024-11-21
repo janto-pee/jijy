@@ -31,18 +31,23 @@ export class BrandsService {
     });
   }
 
-  async update(where: any, data: UpdateBrandInput): Promise<Brand> {
-    const Brand = await this.BrandsRepository.findOne({
-      where: { ...where },
+  async update(id: number, data: UpdateBrandInput): Promise<Brand> {
+    const brand = await this.BrandsRepository.findOne({
+      where: { id: id },
     });
-    await Brand.update({ ...data });
-    await Brand.save();
-    return Brand;
+    if (!brand) {
+      throw new Error('brand not found');
+    }
+    await brand.update({ ...data });
+    await brand.save();
+    return brand;
   }
 
   async remove(id: number): Promise<Brand> {
-    return await this.BrandsRepository.findOne<Brand>({
+    const brand = await this.BrandsRepository.findOne<Brand>({
       where: { id: id },
     });
+    await brand.destroy();
+    return brand;
   }
 }

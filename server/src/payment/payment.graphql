@@ -1,24 +1,27 @@
 type Payment {
   # Example field (placeholder)
+  id: Int
   exampleField: Int
+  
 }
 
 input CreatePaymentInput {
   # Example field (placeholder)
+  id: Int
   exampleField: Int
 }
 
 input UpdatePaymentInput {
-  id: Int!
+  id: ID!
 }
 
 type Query {
   payments: [Payment]!
-  payment(id: Int!): Payment
+  payment(id: ID!): Payment
 }
 
 type Mutation {
   createPayment(createPaymentInput: CreatePaymentInput!): Payment!
   updatePayment(updatePaymentInput: UpdatePaymentInput!): Payment!
-  removePayment(id: Int!): Payment
+  removePayment(id: ID!): Payment
 }

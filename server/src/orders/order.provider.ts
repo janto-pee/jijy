@@ -1,4 +1,4 @@
-import { Order } from './entities/Order.entity';
+import { Order } from './entities/order.entity';
 
 export const orderProviders = [
   {

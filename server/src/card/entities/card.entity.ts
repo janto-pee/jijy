@@ -10,4 +10,14 @@ import {
   Unique,
 } from 'sequelize-typescript';
 @Table
-export class Card extends Model {}
+export class Card extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

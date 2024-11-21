@@ -21,16 +21,23 @@ input CreateAttributeInput {
 }
 
 input UpdateAttributeInput {
-  id: Int!
+  id: ID!
+    name: String
+  value: String
+  description: String
+  type: String
+  mandatory: String
+  variation: String
+  translatable: String
 }
 
 type Query {
   attributes: [Attribute]!
-  attribute(id: Int!): Attribute
+  attribute(id: ID!): Attribute
 }
 
 type Mutation {
   createAttribute(createAttributeInput: CreateAttributeInput!): Attribute!
   updateAttribute(updateAttributeInput: UpdateAttributeInput!): Attribute!
-  removeAttribute(id: Int!): Attribute
+  removeAttribute(id: ID!): Attribute
 }

@@ -31,18 +31,27 @@ export class AddressService {
     });
   }
 
-  async update(where: any, data: UpdateAddressInput): Promise<Address> {
+  async update(id: number, data: UpdateAddressInput): Promise<Address> {
     const Address = await this.AddresssRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    console.log('id', id, 'address...', Address, 'data', data);
+    if (!Address) {
+      throw new Error('unable to find address');
+    }
     await Address.update({ ...data });
     await Address.save();
     return Address;
   }
 
   async remove(id: number): Promise<Address> {
-    return await this.AddresssRepository.findOne<Address>({
+    const address = await this.AddresssRepository.findOne<Address>({
       where: { id: id },
     });
+    if (!address) {
+      throw new Error('address not found');
+    }
+    await address.destroy();
+    return address;
   }
 }

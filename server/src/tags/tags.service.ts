@@ -31,18 +31,23 @@ export class TagsService {
     });
   }
 
-  async update(where: any, data: UpdateTagInput): Promise<Tag> {
+  async update(id: number, data: UpdateTagInput): Promise<Tag> {
     const Tag = await this.TagsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Tag) {
+      throw new Error('Tag not found');
+    }
     await Tag.update({ ...data });
     await Tag.save();
     return Tag;
   }
 
   async remove(id: number): Promise<Tag> {
-    return await this.TagsRepository.findOne<Tag>({
+    const Tag = await this.TagsRepository.findOne<Tag>({
       where: { id: id },
     });
+    await Tag.destroy();
+    return Tag;
   }
 }

@@ -10,16 +10,18 @@ input CreateBrandInput {
 }
 
 input UpdateBrandInput {
-  id: Int!
+  id: ID!
+   code: Int
+  name: String
 }
 
 type Query {
   brands: [Brand]!
-  brand(id: Int!): Brand
+  brand(id: ID!): Brand
 }
 
 type Mutation {
   createBrand(createBrandInput: CreateBrandInput!): Brand!
   updateBrand(updateBrandInput: UpdateBrandInput!): Brand!
-  removeBrand(id: Int!): Brand
+  removeBrand(id: ID!): Brand
 }

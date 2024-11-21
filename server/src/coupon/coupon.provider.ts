@@ -1,4 +1,4 @@
-import { Coupon } from './entities/Coupon.entity';
+import { Coupon } from './entities/coupon.entity';
 
 export const couponsProviders = [
   {

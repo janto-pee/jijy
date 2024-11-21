@@ -9,16 +9,18 @@ input CreateImageInput {
 }
 
 input UpdateImageInput {
-  id: Int!
+  id: ID!
+  url: String
+  primary: Boolean
 }
 
 type Query {
   images: [Image]!
-  image(id: Int!): Image
+  image(id: ID!): Image
 }
 
 type Mutation {
   createImage(createImageInput: CreateImageInput!): Image!
   updateImage(updateImageInput: UpdateImageInput!): Image!
-  removeImage(id: Int!): Image
+  removeImage(id: ID!): Image
 }

@@ -10,16 +10,18 @@ input CreateVariantInput {
 }
 
 input UpdateVariantInput {
-  id: Int!
+  id: ID!
+    name: String
+  icon: String
 }
 
 type Query {
   variants: [Variant]!
-  variant(id: Int!): Variant
+  variant(id: ID!): Variant
 }
 
 type Mutation {
   createVariant(createVariantInput: CreateVariantInput!): Variant!
   updateVariant(updateVariantInput: UpdateVariantInput!): Variant!
-  removeVariant(id: Int!): Variant
+  removeVariant(id: ID!): Variant
 }

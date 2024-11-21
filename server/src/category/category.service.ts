@@ -32,18 +32,23 @@ export class CategoryService {
     });
   }
 
-  async update(where: any, data: UpdateCategoryInput): Promise<Category> {
+  async update(id: number, data: UpdateCategoryInput): Promise<Category> {
     const Category = await this.categoryRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Category) {
+      throw new Error('Category not found');
+    }
     await Category.update({ ...data });
     await Category.save();
     return Category;
   }
 
   async remove(id: number): Promise<Category> {
-    return await this.categoryRepository.findOne<Category>({
+    const category = await this.categoryRepository.findOne<Category>({
       where: { id: id },
     });
+    await category.destroy();
+    return category;
   }
 }

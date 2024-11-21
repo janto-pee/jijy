@@ -8,27 +8,30 @@ export class OrdersResolver {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Mutation('createOrder')
-  create(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
-    return this.ordersService.create(createOrderInput);
+  async create(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
+    return await this.ordersService.create(createOrderInput);
   }
 
   @Query('orders')
-  findAll() {
-    return this.ordersService.findAll();
+  async findAll() {
+    return await this.ordersService.findAll();
   }
 
   @Query('order')
-  findOne(@Args('id') id: number) {
-    return this.ordersService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.ordersService.findOne(id);
   }
 
   @Mutation('updateOrder')
-  update(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
-    return this.ordersService.update(updateOrderInput.id, updateOrderInput);
+  async update(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
+    return await this.ordersService.update(
+      updateOrderInput.id,
+      updateOrderInput,
+    );
   }
 
   @Mutation('removeOrder')
-  remove(@Args('id') id: number) {
-    return this.ordersService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.ordersService.remove(id);
   }
 }

@@ -30,16 +30,28 @@ input CreateProductInput {
 }
 
 input UpdateProductInput {
-  id: Int!
+  id: ID!
+    name: String
+  description: String
+  parentSku: String
+  sellerSku: String
+  barcodeEan: String
+  variation: String
+  brand: String
+  category: String
+  images: String
+  price: String
+  stock: String
+  attributes: String
 }
 
 type Query {
   products: [Product]!
-  product(id: Int!): Product
+  product(id: ID!): Product
 }
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
-  removeProduct(id: Int!): Product
+  removeProduct(id: ID!): Product
 }

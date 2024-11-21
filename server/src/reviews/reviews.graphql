@@ -14,20 +14,24 @@ input CreateReviewInput {
   enrollmmentId: Int
   ratings: Int
   reviewText: String
-  createdAt: String
 }
 
 input UpdateReviewInput {
-  id: Int!
+  id: ID!
+  reviewer: String
+  course: String
+  enrollmmentId: Int
+  ratings: Int
+  reviewText: String
 }
 
 type Query {
   reviews: [Review]!
-  review(id: Int!): Review
+  review(id: ID!): Review
 }
 
 type Mutation {
   createReview(createReviewInput: CreateReviewInput!): Review!
   updateReview(updateReviewInput: UpdateReviewInput!): Review!
-  removeReview(id: Int!): Review
+  removeReview(id: ID!): Review
 }

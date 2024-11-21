@@ -31,10 +31,13 @@ export class CartService {
     });
   }
 
-  async update(where: any, data: UpdateCartInput): Promise<Cart> {
+  async update(id: number, data: UpdateCartInput): Promise<Cart> {
     const Cart = await this.CartsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Cart) {
+      throw new Error('attribute not found');
+    }
     await Cart.update({ ...data });
     await Cart.save();
     return Cart;

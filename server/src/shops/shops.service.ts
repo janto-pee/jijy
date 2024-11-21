@@ -31,18 +31,23 @@ export class ShopsService {
     });
   }
 
-  async update(where: any, data: UpdateShopInput): Promise<Shop> {
+  async update(id: number, data: UpdateShopInput): Promise<Shop> {
     const Shop = await this.ShopsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Shop) {
+      throw new Error('Shop not found');
+    }
     await Shop.update({ ...data });
     await Shop.save();
     return Shop;
   }
 
   async remove(id: number): Promise<Shop> {
-    return await this.ShopsRepository.findOne<Shop>({
+    const shop = await this.ShopsRepository.findOne<Shop>({
       where: { id: id },
     });
+    await shop.destroy;
+    return shop;
   }
 }

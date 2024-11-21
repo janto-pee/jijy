@@ -8,27 +8,34 @@ export class AttributesResolver {
   constructor(private readonly attributesService: AttributesService) {}
 
   @Mutation('createAttribute')
-  create(@Args('createAttributeInput') createAttributeInput: CreateAttributeInput) {
-    return this.attributesService.create(createAttributeInput);
+  async create(
+    @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
+  ) {
+    return await this.attributesService.create(createAttributeInput);
   }
 
   @Query('attributes')
-  findAll() {
-    return this.attributesService.findAll();
+  async findAll() {
+    return await this.attributesService.findAll();
   }
 
   @Query('attribute')
-  findOne(@Args('id') id: number) {
-    return this.attributesService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.attributesService.findOne(id);
   }
 
   @Mutation('updateAttribute')
-  update(@Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput) {
-    return this.attributesService.update(updateAttributeInput.id, updateAttributeInput);
+  async update(
+    @Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput,
+  ) {
+    return await this.attributesService.update(
+      updateAttributeInput.id,
+      updateAttributeInput,
+    );
   }
 
   @Mutation('removeAttribute')
-  remove(@Args('id') id: number) {
-    return this.attributesService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.attributesService.remove(id);
   }
 }

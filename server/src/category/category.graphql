@@ -12,16 +12,19 @@ input CreateCategoryInput {
 }
 
 input UpdateCategoryInput {
-  id: Int!
+  id: ID!
+  code: Int
+  name: String
+  description: String
 }
 
 type Query {
   categorys: [Category]!
-  category(id: Int!): Category
+  category(id: ID!): Category
 }
 
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
-  removeCategory(id: Int!): Category
+  removeCategory(id: ID!): Category
 }

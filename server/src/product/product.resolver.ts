@@ -8,27 +8,34 @@ export class ProductResolver {
   constructor(private readonly productService: ProductService) {}
 
   @Mutation('createProduct')
-  create(@Args('createProductInput') createProductInput: CreateProductInput) {
-    return this.productService.create(createProductInput);
+  async create(
+    @Args('createProductInput') createProductInput: CreateProductInput,
+  ) {
+    return await this.productService.create(createProductInput);
+  }
+
+  @Query('products')
+  async findAll() {
+    return await this.productService.findAll();
   }
 
   @Query('product')
-  findAll() {
-    return this.productService.findAll();
-  }
-
-  @Query('product')
-  findOne(@Args('id') id: number) {
-    return this.productService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.productService.findOne(id);
   }
 
   @Mutation('updateProduct')
-  update(@Args('updateProductInput') updateProductInput: UpdateProductInput) {
-    return this.productService.update(updateProductInput.id, updateProductInput);
+  async update(
+    @Args('updateProductInput') updateProductInput: UpdateProductInput,
+  ) {
+    return await this.productService.update(
+      updateProductInput.id,
+      updateProductInput,
+    );
   }
 
   @Mutation('removeProduct')
-  remove(@Args('id') id: number) {
-    return this.productService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.productService.remove(id);
   }
 }

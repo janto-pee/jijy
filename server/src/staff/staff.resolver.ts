@@ -8,27 +8,30 @@ export class StaffResolver {
   constructor(private readonly staffService: StaffService) {}
 
   @Mutation('createStaff')
-  create(@Args('createStaffInput') createStaffInput: CreateStaffInput) {
-    return this.staffService.create(createStaffInput);
+  async create(@Args('createStaffInput') createStaffInput: CreateStaffInput) {
+    return await this.staffService.create(createStaffInput);
+  }
+
+  @Query('staffs')
+  async findAll() {
+    return await this.staffService.findAll();
   }
 
   @Query('staff')
-  findAll() {
-    return this.staffService.findAll();
-  }
-
-  @Query('staff')
-  findOne(@Args('id') id: number) {
-    return this.staffService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.staffService.findOne(id);
   }
 
   @Mutation('updateStaff')
-  update(@Args('updateStaffInput') updateStaffInput: UpdateStaffInput) {
-    return this.staffService.update(updateStaffInput.id, updateStaffInput);
+  async update(@Args('updateStaffInput') updateStaffInput: UpdateStaffInput) {
+    return await this.staffService.update(
+      updateStaffInput.id,
+      updateStaffInput,
+    );
   }
 
   @Mutation('removeStaff')
-  remove(@Args('id') id: number) {
-    return this.staffService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.staffService.remove(id);
   }
 }

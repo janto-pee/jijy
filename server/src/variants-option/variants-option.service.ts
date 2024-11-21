@@ -33,22 +33,27 @@ export class VariantsOptionService {
     });
   }
 
-  async update(params: {
-    where: any;
-    data: UpdateVariantsOptionInput;
-  }): Promise<VariantsOption> {
-    const { where, data } = params;
+  async update(
+    id: number,
+    data: UpdateVariantsOptionInput,
+  ): Promise<VariantsOption> {
     const VariantsOption = await this.VariantsOptionsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!VariantsOption) {
+      throw new Error('VariantsOption not found');
+    }
     await VariantsOption.update({ ...data });
     await VariantsOption.save();
     return VariantsOption;
   }
 
   async remove(id: number): Promise<VariantsOption> {
-    return await this.VariantsOptionsRepository.findOne<VariantsOption>({
-      where: { id: id },
-    });
+    const variantsOption =
+      await this.VariantsOptionsRepository.findOne<VariantsOption>({
+        where: { id: id },
+      });
+    await variantsOption.destroy();
+    return variantsOption;
   }
 }

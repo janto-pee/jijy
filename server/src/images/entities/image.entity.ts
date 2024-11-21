@@ -11,4 +11,21 @@ import {
 } from 'sequelize-typescript';
 
 @Table
-export class Image extends Model {}
+export class Image extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @Column
+  url: string;
+
+  @Column
+  primary: boolean;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

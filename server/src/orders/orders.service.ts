@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-Order.input';
-import { UpdateOrderInput } from './dto/update-Order.input';
-import { Order } from './entities/Order.entity';
+import { CreateOrderInput } from './dto/create-order.input';
+import { UpdateOrderInput } from './dto/update-order.input';
+import { Order } from './entities/order.entity';
 
 @Injectable()
 export class OrdersService {
@@ -31,18 +31,23 @@ export class OrdersService {
     });
   }
 
-  async update(where: any, data: UpdateOrderInput): Promise<Order> {
+  async update(id: number, data: UpdateOrderInput): Promise<Order> {
     const Order = await this.OrdersRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Order) {
+      throw new Error('Order not found');
+    }
     await Order.update({ ...data });
     await Order.save();
     return Order;
   }
 
   async remove(id: number): Promise<Order> {
-    return await this.OrdersRepository.findOne<Order>({
+    const order = await this.OrdersRepository.findOne<Order>({
       where: { id: id },
     });
+    await order.destroy();
+    return order;
   }
 }

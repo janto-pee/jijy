@@ -1,5 +1,5 @@
 type User {
-  id: Int!
+  id: ID!
   username: String
   password: String
   email: String
@@ -12,13 +12,10 @@ type User {
   createdAt: String
   updatedAt: String
 }
-
-type ResponseObject {
-  id: Int!
+type forgotPasswordResponse {
   email: String
   message: String
 }
-
 input CreateUserInput {
   username: String
   password: String
@@ -28,19 +25,24 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  id: Int!
+  id: ID!
+  username: String
+  password: String
+  email: String
+  first_name: String
+  last_name: String
 }
 
 type Query {
   users: [User]!
-  user(id: Int!): User
+  user(id: ID!): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): ResponseObject!
-  updateUser(updateUserInput: UpdateUserInput!): ResponseObject!
-  verifyUser(updateUserInput: UpdateUserInput!, verification: String ): ResponseObject!
-  forgotPassword(email: String ): ResponseObject!
-  resetPassword( id: Int!, resetcode: String,  password: String, ): ResponseObject!
-  removeUser(id: Int!): ResponseObject
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  verifyUser(updateUserInput: UpdateUserInput!, verification: String ): User!
+  forgotPassword(email: String ): forgotPasswordResponse!
+  resetPassword( id: ID!, resetcode: String,  password: String, ): User!
+  removeUser(id: ID!): User
 }

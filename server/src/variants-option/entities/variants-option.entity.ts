@@ -11,4 +11,15 @@ import {
 } from 'sequelize-typescript';
 
 @Table
-export class VariantsOption extends Model {}
+export class VariantsOption extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 import { Session } from './entities/session.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class SessionService {
@@ -26,26 +27,11 @@ export class SessionService {
     const session = await this.sessionRepository.findOne({
       where: { id: id, valid: true },
     });
+    if (!session) {
+      throw new Error('cannot find session');
+    }
     await session.update({ valid: false });
     await session.save();
     return session;
   }
-
-  // async validateUser(email: string, password: string) {
-  //   const user = await this.sessionRepository.findOne<Session>({
-  //     where: { email: email },
-  //   });
-
-  //   if (!user || user.password === null) return false;
-
-  //   const match = await comparePassword(password, user.password);
-
-  //   if (match) {
-  //     return user;
-  //   }
-
-  //   return false;
-  // }move(id: number) {
-  //   return `This action removes a #${id} session`;
-  // }
 }

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateReviewInput } from './dto/create-review.input';
 import { UpdateReviewInput } from './dto/update-review.input';
-import { Review } from './entities/Review.entity';
+import { Review } from './entities/review.entity';
 
 @Injectable()
 export class ReviewsService {
@@ -31,18 +31,23 @@ export class ReviewsService {
     });
   }
 
-  async update(where: any, data: UpdateReviewInput): Promise<Review> {
+  async update(id: number, data: UpdateReviewInput): Promise<Review> {
     const Review = await this.ReviewsRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Review) {
+      throw new Error('Review not found');
+    }
     await Review.update({ ...data });
     await Review.save();
     return Review;
   }
 
   async remove(id: number): Promise<Review> {
-    return await this.ReviewsRepository.findOne<Review>({
+    const reviews = await this.ReviewsRepository.findOne<Review>({
       where: { id: id },
     });
+    await reviews.destroy();
+    return reviews;
   }
 }

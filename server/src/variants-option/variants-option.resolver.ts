@@ -8,36 +8,36 @@ export class VariantsOptionResolver {
   constructor(private readonly variantsOptionService: VariantsOptionService) {}
 
   @Mutation('createVariantsOption')
-  create(
+  async create(
     @Args('createVariantsOptionInput')
     createVariantsOptionInput: CreateVariantsOptionInput,
   ) {
-    return this.variantsOptionService.create(createVariantsOptionInput);
+    return await this.variantsOptionService.create(createVariantsOptionInput);
   }
 
   @Query('variantsOption')
-  findAll() {
-    return this.variantsOptionService.findAll();
+  async findAll() {
+    return await this.variantsOptionService.findAll();
   }
 
   @Query('variantsOption')
-  findOne(@Args('id') id: number) {
-    return this.variantsOptionService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.variantsOptionService.findOne(id);
   }
 
   @Mutation('updateVariantsOption')
-  update(
+  async update(
     @Args('updateVariantsOptionInput')
     updateVariantsOptionInput: UpdateVariantsOptionInput,
   ) {
-    return this.variantsOptionService.update({
-      where: updateVariantsOptionInput.id,
-      data: updateVariantsOptionInput,
-    });
+    return await this.variantsOptionService.update(
+      updateVariantsOptionInput.id,
+      updateVariantsOptionInput,
+    );
   }
 
   @Mutation('removeVariantsOption')
-  remove(@Args('id') id: number) {
-    return this.variantsOptionService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.variantsOptionService.remove(id);
   }
 }

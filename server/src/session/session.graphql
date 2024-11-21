@@ -1,6 +1,5 @@
 type Session {
     id: Int
-    userId: String
     userAgent: String
     valid: Boolean
 }
@@ -15,16 +14,15 @@ input ValidateUserInput {
 # }
 
 input UpdateSessionInput {
-  id: Int!
+  id: ID!
 }
 
 type Query {
-  sessions: [Session]!
-  session(id: Int!): Session
+  session(id: ID!): Session
 }
 
 type Mutation {
   createSession(validateUserInput: ValidateUserInput!): Session!
   updateSession(updateSessionInput: UpdateSessionInput!): Session!
-  removeSession(id: Int!): Session
+  removeSession(id: ID!): Session
 }

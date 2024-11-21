@@ -31,10 +31,13 @@ export class AttributesService {
     });
   }
 
-  async update(where: any, data: UpdateAttributeInput): Promise<Attribute> {
+  async update(id: number, data: UpdateAttributeInput): Promise<Attribute> {
     const Attribute = await this.AttributesRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Attribute) {
+      throw new Error('attribute not found');
+    }
     await Attribute.update({ ...data });
     await Attribute.save();
     return Attribute;

@@ -8,27 +8,27 @@ export class CartResolver {
   constructor(private readonly cartService: CartService) {}
 
   @Mutation('createCart')
-  create(@Args('createCartInput') createCartInput: CreateCartInput) {
-    return this.cartService.create(createCartInput);
+  async create(@Args('createCartInput') createCartInput: CreateCartInput) {
+    return await this.cartService.create(createCartInput);
   }
 
   @Query('cart')
-  findAll() {
-    return this.cartService.findAll();
+  async findAll() {
+    return await this.cartService.findAll();
   }
 
   @Query('cart')
-  findOne(@Args('id') id: number) {
-    return this.cartService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    return await this.cartService.findOne(id);
   }
 
   @Mutation('updateCart')
-  update(@Args('updateCartInput') updateCartInput: UpdateCartInput) {
-    return this.cartService.update(updateCartInput.id, updateCartInput);
+  async update(@Args('updateCartInput') updateCartInput: UpdateCartInput) {
+    return await this.cartService.update(updateCartInput.id, updateCartInput);
   }
 
   @Mutation('removeCart')
-  remove(@Args('id') id: number) {
-    return this.cartService.remove(id);
+  async remove(@Args('id') id: number) {
+    return await this.cartService.remove(id);
   }
 }

@@ -31,18 +31,23 @@ export class ImagesService {
     });
   }
 
-  async update(where: any, data: UpdateImageInput): Promise<Image> {
+  async update(id: number, data: UpdateImageInput): Promise<Image> {
     const Image = await this.ImagesRepository.findOne({
-      where: { ...where },
+      where: { id: id },
     });
+    if (!Image) {
+      throw new Error('Image not found');
+    }
     await Image.update({ ...data });
     await Image.save();
     return Image;
   }
 
   async remove(id: number): Promise<Image> {
-    return await this.ImagesRepository.findOne<Image>({
+    const image = await this.ImagesRepository.findOne<Image>({
       where: { id: id },
     });
+    await image.destroy();
+    return image;
   }
 }

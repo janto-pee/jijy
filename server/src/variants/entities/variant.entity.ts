@@ -11,4 +11,21 @@ import {
 } from 'sequelize-typescript';
 
 @Table
-export class Variant extends Model {}
+export class Variant extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
+  @Column
+  name: String;
+
+  @Column
+  icon: String;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
+}

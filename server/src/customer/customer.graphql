@@ -16,16 +16,20 @@ input CreateCustomerInput {
 }
 
 input UpdateCustomerInput {
-  id: Int!
+  id: ID!
+   photoURL: String
+  username: String
+  title: String
+  department: String
 }
 
 type Query {
   customers: [Customer]!
-  customer(id: Int!): Customer
+  customer(id: ID!): Customer
 }
 
 type Mutation {
   createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
   updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
-  removeCustomer(id: Int!): Customer
+  removeCustomer(id: ID!): Customer
 }

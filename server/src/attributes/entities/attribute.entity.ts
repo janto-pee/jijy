@@ -36,4 +36,10 @@ export class Attribute extends Model {
 
   @Column
   translatable: string;
+
+  @CreatedAt
+  createdAt: Date;
+
+  @UpdatedAt
+  updatedAt: Date;
 }
