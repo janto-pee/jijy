@@ -11,27 +11,31 @@ export class CustomerResolver {
   async create(
     @Args('createCustomerInput') createCustomerInput: CreateCustomerInput,
   ) {
-    return await this.customerService.create(createCustomerInput);
+    const customer = await this.customerService.create(createCustomerInput);
+    return customer;
   }
 
   @Query('customers')
   async findAll() {
-    return await this.customerService.findAll();
+    const customer = await this.customerService.findAll();
+    return customer;
   }
 
   @Query('customer')
   async findOne(@Args('id') id: number) {
-    return await this.customerService.findOne(id);
+    const customer = await this.customerService.findOne(id);
+    return customer;
   }
 
   @Mutation('updateCustomer')
   async update(
     @Args('updateCustomerInput') updateCustomerInput: UpdateCustomerInput,
   ) {
-    return await this.customerService.update(
+    const customer = await this.customerService.update(
       updateCustomerInput.id,
       updateCustomerInput,
     );
+    return customer;
   }
 
   @Mutation('removeCustomer')

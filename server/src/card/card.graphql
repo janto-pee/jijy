@@ -1,17 +1,20 @@
 type Card {
   # Example field (placeholder)
   id: Int
-  exampleField: Int
+  type: String
+  name: String
 }
 
 input CreateCardInput {
   # Example field (placeholder)
-  id: Int
-  exampleField: Int
+  type: String
+  name: String
 }
 
 input UpdateCardInput {
   id: ID!
+  type: String
+  name: String
 }
 
 type Query {

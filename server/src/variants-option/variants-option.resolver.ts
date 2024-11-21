@@ -15,7 +15,7 @@ export class VariantsOptionResolver {
     return await this.variantsOptionService.create(createVariantsOptionInput);
   }
 
-  @Query('variantsOption')
+  @Query('variantsOptions')
   async findAll() {
     return await this.variantsOptionService.findAll();
   }

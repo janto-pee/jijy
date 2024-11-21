@@ -36,13 +36,13 @@ export interface CreateBrandInput {
 }
 
 export interface CreateCardInput {
-    exampleField?: Nullable<number>;
-    id?: Nullable<number>;
+    name?: Nullable<string>;
+    type?: Nullable<string>;
 }
 
 export interface CreateCartInput {
-    exampleField?: Nullable<number>;
-    id?: Nullable<number>;
+    product?: Nullable<string>;
+    quantity?: Nullable<number>;
 }
 
 export interface CreateCategoryInput {
@@ -108,8 +108,8 @@ export interface CreateReviewInput {
 }
 
 export interface CreateSaleInput {
-    exampleField?: Nullable<number>;
-    id?: Nullable<number>;
+    amount?: Nullable<number>;
+    quantity?: Nullable<number>;
 }
 
 export interface CreateShippingInput {
@@ -148,8 +148,7 @@ export interface CreateVariantInput {
 }
 
 export interface CreateVariantsOptionInput {
-    exampleField?: Nullable<number>;
-    id?: Nullable<number>;
+    type?: Nullable<string>;
 }
 
 export interface UpdateAddressInput {
@@ -184,10 +183,14 @@ export interface UpdateBrandInput {
 
 export interface UpdateCardInput {
     id: string;
+    name?: Nullable<string>;
+    type?: Nullable<string>;
 }
 
 export interface UpdateCartInput {
     id: string;
+    product?: Nullable<string>;
+    quantity?: Nullable<number>;
 }
 
 export interface UpdateCategoryInput {
@@ -259,7 +262,9 @@ export interface UpdateReviewInput {
 }
 
 export interface UpdateSaleInput {
+    amount?: Nullable<number>;
     id: string;
+    quantity?: Nullable<number>;
 }
 
 export interface UpdateSessionInput {
@@ -309,6 +314,7 @@ export interface UpdateVariantInput {
 
 export interface UpdateVariantsOptionInput {
     id: string;
+    type?: Nullable<string>;
 }
 
 export interface ValidateUserInput {
@@ -347,13 +353,15 @@ export interface Brand {
 }
 
 export interface Card {
-    exampleField?: Nullable<number>;
     id?: Nullable<number>;
+    name?: Nullable<string>;
+    type?: Nullable<string>;
 }
 
 export interface Cart {
-    exampleField?: Nullable<number>;
     id?: Nullable<number>;
+    product?: Nullable<string>;
+    quantity?: Nullable<number>;
 }
 
 export interface Category {
@@ -546,8 +554,9 @@ export interface Review {
 }
 
 export interface Sale {
-    exampleField?: Nullable<number>;
+    amount?: Nullable<number>;
     id?: Nullable<number>;
+    quantity?: Nullable<number>;
 }
 
 export interface Session {
@@ -606,8 +615,8 @@ export interface Variant {
 }
 
 export interface VariantsOption {
-    exampleField?: Nullable<number>;
     id?: Nullable<number>;
+    type?: Nullable<string>;
 }
 
 export interface ForgotPasswordResponse {

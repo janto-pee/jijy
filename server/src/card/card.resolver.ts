@@ -12,7 +12,7 @@ export class CardResolver {
     return await this.cardService.create(createCardInput);
   }
 
-  @Query('card')
+  @Query('cards')
   async findAll() {
     return await this.cardService.findAll();
   }

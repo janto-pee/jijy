@@ -1,17 +1,20 @@
 type Cart {
   # Example field (placeholder)
   id: Int
-  exampleField: Int
+  quantity: Int
+  product: String
 }
 
 input CreateCartInput {
   # Example field (placeholder)
-  id: Int
-  exampleField: Int
+  quantity: Int
+  product: String
 }
 
 input UpdateCartInput {
   id: ID!
+  quantity: Int
+  product: String
 }
 
 type Query {

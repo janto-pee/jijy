@@ -1,17 +1,16 @@
 type VariantsOption {
   # Example field (placeholder)
   id: Int
-  exampleField: Int
+  type: String
 }
 
 input CreateVariantsOptionInput {
-  # Example field (placeholder)
-  id: Int
-  exampleField: Int
+  type: String
 }
 
 input UpdateVariantsOptionInput {
   id: ID!
+  type: String
 }
 
 type Query {

@@ -18,6 +18,12 @@ export class Cart extends Model {
   @CreatedAt
   createdAt: Date;
 
+  @Column
+  quantity: number;
+
+  @Column
+  product: string;
+
   @UpdatedAt
   updatedAt: Date;
 }

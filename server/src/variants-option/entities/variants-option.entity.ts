@@ -17,6 +17,9 @@ export class VariantsOption extends Model {
   @Column
   id: number;
 
+  @Column
+  type: string;
+
   @CreatedAt
   createdAt: Date;
 

@@ -12,7 +12,7 @@ export class CartResolver {
     return await this.cartService.create(createCartInput);
   }
 
-  @Query('cart')
+  @Query('carts')
   async findAll() {
     return await this.cartService.findAll();
   }

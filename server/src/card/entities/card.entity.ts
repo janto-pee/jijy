@@ -18,6 +18,12 @@ export class Card extends Model {
   @CreatedAt
   createdAt: Date;
 
+  @Column
+  type: string;
+
+  @Column
+  name: string;
+
   @UpdatedAt
   updatedAt: Date;
 }

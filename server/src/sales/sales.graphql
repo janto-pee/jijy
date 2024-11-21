@@ -1,17 +1,20 @@
 type Sale {
   # Example field (placeholder)
   id: Int
-  exampleField: Int
+  amount: Int
+  quantity: Int
 }
 
 input CreateSaleInput {
   # Example field (placeholder)
-  id: Int
-  exampleField: Int
+  amount: Int
+  quantity: Int
 }
 
 input UpdateSaleInput {
   id: ID!
+  amount: Int
+  quantity: Int
 }
 
 type Query {

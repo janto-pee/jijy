@@ -6,8 +6,6 @@ import {
   UpdatedAt,
   PrimaryKey,
   AutoIncrement,
-  Default,
-  Unique,
 } from 'sequelize-typescript';
 
 @Table
@@ -16,6 +14,12 @@ export class Sale extends Model {
   @AutoIncrement
   @Column
   id: number;
+
+  @Column
+  amount: number;
+
+  @Column
+  quantity: number;
 
   @CreatedAt
   createdAt: Date;
