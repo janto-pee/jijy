@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { AddressService } from './address.service';
 import { CreateAddressInput } from './dto/create-address.input';
 import { UpdateAddressInput } from './dto/update-address.input';
 import { UsersService } from 'src/users/users.service';
+import Ctx from 'src/utils/context.type';
 
 @Resolver('Address')
 export class AddressResolver {
@@ -14,14 +15,21 @@ export class AddressResolver {
   @Mutation('createAddress')
   async create(
     @Args('createAddressInput') createAddressInput: CreateAddressInput,
+    @Context() context: any,
   ) {
     const address = await this.addressService.create(createAddressInput);
-    const user = await this.userService.findUser(createAddressInput.userId);
+    // const user = await this.userService.findUser(createAddressInput.userId);
+    const { user } = context.req.user;
     if (!user) {
+      throw new Error('access token expired, kindly login again');
+    }
+    console.log('user....', user);
+    const foundUser = await this.userService.findUser(user);
+    if (!foundUser) {
       throw new Error('user not found');
     }
-    address.user = user;
-    // await address.save();
+    address.user = foundUser;
+    await address.save();
     return address;
   }
 

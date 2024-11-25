@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AttributesService } from './attributes.service';
 import { attributesProviders } from './attributes.provider';
+import { ProductService } from 'src/product/product.service';
 
 describe('AttributesService', () => {
   let service: AttributesService;

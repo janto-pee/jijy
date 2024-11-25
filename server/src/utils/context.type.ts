@@ -3,7 +3,7 @@ import { User } from 'src/users/entities/user.entity';
 
 type Ctx = {
   req: Request & {
-    user?: Pick<User, 'username' | 'email' | 'first_name' | 'last_name'>;
+    user?: Pick<User, 'id' | 'username' | 'email' | 'first_name' | 'last_name'>;
   };
   res: Response;
 };

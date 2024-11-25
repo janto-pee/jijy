@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AttributesResolver } from './attributes.resolver';
 import { AttributesService } from './attributes.service';
 import { attributesProviders } from './attributes.provider';
+import { ProductService } from 'src/product/product.service';
+import { productProviders } from 'src/product/product.provider';
 
 describe('AttributesResolver', () => {
   let resolver: AttributesResolver;
@@ -12,6 +14,8 @@ describe('AttributesResolver', () => {
         AttributesResolver,
         AttributesService,
         ...attributesProviders,
+        ProductService,
+        ...productProviders,
       ],
     }).compile();
 

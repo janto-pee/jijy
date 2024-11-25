@@ -15,15 +15,7 @@ export class AttributesResolver {
   async create(
     @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
   ) {
-    const product = await this.productService.findOne(
-      createAttributeInput.productId,
-    );
-    if (!product) {
-      throw new Error('product not found');
-    }
     const attribute = await this.attributesService.create(createAttributeInput);
-    attribute.product = product;
-    attribute.save();
     return attribute;
   }
 

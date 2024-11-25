@@ -26,7 +26,7 @@ export class OrdersResolver {
 
     const order = await this.ordersService.create(createOrderInput);
     order.shop = shop;
-    order.product = product;
+    // order.product = product;
     await order.save();
     return;
   }

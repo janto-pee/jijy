@@ -7,6 +7,7 @@ import { VariantsService } from 'src/variants/variants.service';
 import { ImagesService } from 'src/images/images.service';
 import { ShopsService } from 'src/shops/shops.service';
 import { AttributesService } from 'src/attributes/attributes.service';
+import { BrandsService } from 'src/brands/brands.service';
 
 @Resolver('Product')
 export class ProductResolver {
@@ -17,6 +18,7 @@ export class ProductResolver {
     private readonly imagesService: ImagesService,
     private readonly shopsService: ShopsService,
     private readonly attributeService: AttributesService,
+    private readonly brandService: BrandsService,
   ) {}
 
   @Mutation('createProduct')
@@ -49,10 +51,16 @@ export class ProductResolver {
     if (!attribute) {
       throw new Error('attribute not found');
     }
+    const brand = await this.brandService.findOne(createProductInput.brand);
+    if (!brand) {
+      throw new Error('brand not found');
+    }
     const product = await this.productService.create(createProductInput);
     product.category = category;
     product.variant = variant;
     product.image = image;
+    product.shop = shop;
+    product.brand = brand;
     product.attribute = attribute;
 
     await product.save();

@@ -41,7 +41,7 @@ export class ReviewsResolver {
     review.product = product;
     review.payment = payment;
     review.customer = customer;
-    await review.save();
+    return await review.save();
   }
 
   @Query('reviews')

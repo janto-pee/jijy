@@ -12,6 +12,8 @@ import { ShopsService } from 'src/shops/shops.service';
 import { shopProviders } from 'src/shops/shops.providers';
 import { AttributesService } from 'src/attributes/attributes.service';
 import { attributesProviders } from 'src/attributes/attributes.provider';
+import { BrandsService } from 'src/brands/brands.service';
+import { brandsProviders } from 'src/brands/brands.provider';
 
 @Module({
   providers: [
@@ -28,6 +30,8 @@ import { attributesProviders } from 'src/attributes/attributes.provider';
     ...shopProviders,
     AttributesService,
     ...attributesProviders,
+    BrandsService,
+    ...brandsProviders,
   ],
 })
 export class ProductModule {}

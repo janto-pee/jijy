@@ -18,14 +18,12 @@ export interface CreateAddressInput {
     state_province_name?: Nullable<string>;
     street?: Nullable<string>;
     street2?: Nullable<string>;
-    userId?: Nullable<number>;
 }
 
 export interface CreateAttributeInput {
     description?: Nullable<string>;
     mandatory?: Nullable<string>;
     name?: Nullable<string>;
-    productId?: Nullable<number>;
     translatable?: Nullable<string>;
     type?: Nullable<string>;
     value?: Nullable<string>;
@@ -37,28 +35,10 @@ export interface CreateBrandInput {
     name?: Nullable<string>;
 }
 
-export interface CreateCardInput {
-    name?: Nullable<string>;
-    type?: Nullable<string>;
-}
-
-export interface CreateCartInput {
-    product?: Nullable<string>;
-    quantity?: Nullable<number>;
-}
-
 export interface CreateCategoryInput {
     code?: Nullable<number>;
     description?: Nullable<string>;
     name?: Nullable<string>;
-}
-
-export interface CreateCouponInput {
-    code?: Nullable<string>;
-    couponDescription?: Nullable<string>;
-    couponValue?: Nullable<string>;
-    endDate?: Nullable<string>;
-    startDate?: Nullable<string>;
 }
 
 export interface CreateCustomerInput {
@@ -88,19 +68,19 @@ export interface CreatePaymentInput {
 }
 
 export interface CreateProductInput {
-    attribute?: Nullable<string>;
-    barcodeEan?: Nullable<string>;
-    brand?: Nullable<string>;
+    attribute?: Nullable<number>;
+    barcode?: Nullable<string>;
+    brand?: Nullable<number>;
     category?: Nullable<number>;
     description?: Nullable<string>;
-    images?: Nullable<string>;
+    image?: Nullable<number>;
     name?: Nullable<string>;
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
     shop?: Nullable<number>;
     stock?: Nullable<string>;
-    variation?: Nullable<string>;
+    variant?: Nullable<number>;
 }
 
 export interface CreateReviewInput {
@@ -109,11 +89,6 @@ export interface CreateReviewInput {
     product?: Nullable<number>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-}
-
-export interface CreateSaleInput {
-    amount?: Nullable<number>;
-    quantity?: Nullable<number>;
 }
 
 export interface CreateShippingInput {
@@ -152,10 +127,6 @@ export interface CreateVariantInput {
     name?: Nullable<string>;
 }
 
-export interface CreateVariantsOptionInput {
-    type?: Nullable<string>;
-}
-
 export interface UpdateAddressInput {
     city?: Nullable<string>;
     country?: Nullable<string>;
@@ -167,7 +138,6 @@ export interface UpdateAddressInput {
     state_province_name?: Nullable<string>;
     street?: Nullable<string>;
     street2?: Nullable<string>;
-    userId?: Nullable<number>;
 }
 
 export interface UpdateAttributeInput {
@@ -175,7 +145,6 @@ export interface UpdateAttributeInput {
     id: string;
     mandatory?: Nullable<string>;
     name?: Nullable<string>;
-    productId?: Nullable<number>;
     translatable?: Nullable<string>;
     type?: Nullable<string>;
     value?: Nullable<string>;
@@ -188,32 +157,11 @@ export interface UpdateBrandInput {
     name?: Nullable<string>;
 }
 
-export interface UpdateCardInput {
-    id: string;
-    name?: Nullable<string>;
-    type?: Nullable<string>;
-}
-
-export interface UpdateCartInput {
-    id: string;
-    product?: Nullable<string>;
-    quantity?: Nullable<number>;
-}
-
 export interface UpdateCategoryInput {
     code?: Nullable<number>;
     description?: Nullable<string>;
     id: string;
     name?: Nullable<string>;
-}
-
-export interface UpdateCouponInput {
-    code?: Nullable<string>;
-    couponDescription?: Nullable<string>;
-    couponValue?: Nullable<string>;
-    endDate?: Nullable<string>;
-    id: string;
-    startDate?: Nullable<string>;
 }
 
 export interface UpdateCustomerInput {
@@ -245,20 +193,20 @@ export interface UpdatePaymentInput {
 }
 
 export interface UpdateProductInput {
-    attribute?: Nullable<string>;
-    barcodeEan?: Nullable<string>;
-    brand?: Nullable<string>;
+    attribute?: Nullable<number>;
+    barcode?: Nullable<string>;
+    brand?: Nullable<number>;
     category?: Nullable<number>;
     description?: Nullable<string>;
     id: string;
-    images?: Nullable<string>;
+    image?: Nullable<number>;
     name?: Nullable<string>;
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
     shop?: Nullable<number>;
     stock?: Nullable<string>;
-    variation?: Nullable<string>;
+    variant?: Nullable<number>;
 }
 
 export interface UpdateReviewInput {
@@ -268,12 +216,6 @@ export interface UpdateReviewInput {
     product?: Nullable<number>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-}
-
-export interface UpdateSaleInput {
-    amount?: Nullable<number>;
-    id: string;
-    quantity?: Nullable<number>;
 }
 
 export interface UpdateSessionInput {
@@ -322,11 +264,6 @@ export interface UpdateVariantInput {
     name?: Nullable<string>;
 }
 
-export interface UpdateVariantsOptionInput {
-    id: string;
-    type?: Nullable<string>;
-}
-
 export interface ValidateUserInput {
     email?: Nullable<string>;
     password?: Nullable<string>;
@@ -363,32 +300,11 @@ export interface Brand {
     name?: Nullable<string>;
 }
 
-export interface Card {
-    id?: Nullable<number>;
-    name?: Nullable<string>;
-    type?: Nullable<string>;
-}
-
-export interface Cart {
-    id?: Nullable<number>;
-    product?: Nullable<string>;
-    quantity?: Nullable<number>;
-}
-
 export interface Category {
     code?: Nullable<number>;
     description?: Nullable<string>;
     id?: Nullable<number>;
     name?: Nullable<string>;
-}
-
-export interface Coupon {
-    code?: Nullable<string>;
-    couponDescription?: Nullable<string>;
-    couponValue?: Nullable<string>;
-    endDate?: Nullable<string>;
-    id?: Nullable<number>;
-    startDate?: Nullable<string>;
 }
 
 export interface Customer {
@@ -411,17 +327,13 @@ export interface IMutation {
     createAddress(createAddressInput: CreateAddressInput): Address | Promise<Address>;
     createAttribute(createAttributeInput: CreateAttributeInput): Attribute | Promise<Attribute>;
     createBrand(createBrandInput: CreateBrandInput): Brand | Promise<Brand>;
-    createCard(createCardInput: CreateCardInput): Card | Promise<Card>;
-    createCart(createCartInput: CreateCartInput): Cart | Promise<Cart>;
     createCategory(createCategoryInput: CreateCategoryInput): Category | Promise<Category>;
-    createCoupon(createCouponInput: CreateCouponInput): Coupon | Promise<Coupon>;
     createCustomer(createCustomerInput: CreateCustomerInput): Customer | Promise<Customer>;
     createImage(createImageInput: CreateImageInput): Image | Promise<Image>;
     createOrder(createOrderInput: CreateOrderInput): Order | Promise<Order>;
     createPayment(createPaymentInput: CreatePaymentInput): Payment | Promise<Payment>;
     createProduct(createProductInput: CreateProductInput): Product | Promise<Product>;
     createReview(createReviewInput: CreateReviewInput): Review | Promise<Review>;
-    createSale(createSaleInput: CreateSaleInput): Sale | Promise<Sale>;
     createSession(validateUserInput: ValidateUserInput): Token | Promise<Token>;
     createShipping(createShippingInput: CreateShippingInput): Shipping | Promise<Shipping>;
     createShop(createShopInput: CreateShopInput): Shop | Promise<Shop>;
@@ -429,44 +341,34 @@ export interface IMutation {
     createTag(createTagInput: CreateTagInput): Tag | Promise<Tag>;
     createUser(createUserInput: CreateUserInput): User | Promise<User>;
     createVariant(createVariantInput: CreateVariantInput): Variant | Promise<Variant>;
-    createVariantsOption(createVariantsOptionInput: CreateVariantsOptionInput): VariantsOption | Promise<VariantsOption>;
     forgotPassword(email?: Nullable<string>): ForgotPasswordResponse | Promise<ForgotPasswordResponse>;
     removeAddress(id: string): Nullable<Address> | Promise<Nullable<Address>>;
     removeAttribute(id: string): Nullable<Attribute> | Promise<Nullable<Attribute>>;
     removeBrand(id: string): Nullable<Brand> | Promise<Nullable<Brand>>;
-    removeCard(id: string): Nullable<Card> | Promise<Nullable<Card>>;
-    removeCart(id: string): Nullable<Cart> | Promise<Nullable<Cart>>;
     removeCategory(id: string): Nullable<Category> | Promise<Nullable<Category>>;
-    removeCoupon(id: string): Nullable<Coupon> | Promise<Nullable<Coupon>>;
     removeCustomer(id: string): Nullable<Customer> | Promise<Nullable<Customer>>;
     removeImage(id: string): Nullable<Image> | Promise<Nullable<Image>>;
     removeOrder(id: string): Nullable<Order> | Promise<Nullable<Order>>;
     removePayment(id: string): Nullable<Payment> | Promise<Nullable<Payment>>;
     removeProduct(id: string): Nullable<Product> | Promise<Nullable<Product>>;
     removeReview(id: string): Nullable<Review> | Promise<Nullable<Review>>;
-    removeSale(id: string): Nullable<Sale> | Promise<Nullable<Sale>>;
     removeShipping(id: string): Nullable<Shipping> | Promise<Nullable<Shipping>>;
     removeShop(id: string): Nullable<Shop> | Promise<Nullable<Shop>>;
     removeStaff(id: string): Nullable<Staff> | Promise<Nullable<Staff>>;
     removeTag(id: string): Nullable<Tag> | Promise<Nullable<Tag>>;
     removeUser(id: string): Nullable<User> | Promise<Nullable<User>>;
     removeVariant(id: string): Nullable<Variant> | Promise<Nullable<Variant>>;
-    removeVariantsOption(id: string): Nullable<VariantsOption> | Promise<Nullable<VariantsOption>>;
     resetPassword(id: string, password?: Nullable<string>, resetcode?: Nullable<string>): User | Promise<User>;
     updateAddress(updateAddressInput: UpdateAddressInput): Address | Promise<Address>;
     updateAttribute(updateAttributeInput: UpdateAttributeInput): Attribute | Promise<Attribute>;
     updateBrand(updateBrandInput: UpdateBrandInput): Brand | Promise<Brand>;
-    updateCard(updateCardInput: UpdateCardInput): Card | Promise<Card>;
-    updateCart(updateCartInput: UpdateCartInput): Cart | Promise<Cart>;
     updateCategory(updateCategoryInput: UpdateCategoryInput): Category | Promise<Category>;
-    updateCoupon(updateCouponInput: UpdateCouponInput): Coupon | Promise<Coupon>;
     updateCustomer(updateCustomerInput: UpdateCustomerInput): Customer | Promise<Customer>;
     updateImage(updateImageInput: UpdateImageInput): Image | Promise<Image>;
     updateOrder(updateOrderInput: UpdateOrderInput): Order | Promise<Order>;
     updatePayment(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
     updateProduct(updateProductInput: UpdateProductInput): Product | Promise<Product>;
     updateReview(updateReviewInput: UpdateReviewInput): Review | Promise<Review>;
-    updateSale(updateSaleInput: UpdateSaleInput): Sale | Promise<Sale>;
     updateSession(): Nullable<TokenResponse> | Promise<Nullable<TokenResponse>>;
     updateShipping(updateShippingInput: UpdateShippingInput): Shipping | Promise<Shipping>;
     updateShop(updateShopInput: UpdateShopInput): Shop | Promise<Shop>;
@@ -474,7 +376,6 @@ export interface IMutation {
     updateTag(updateTagInput: UpdateTagInput): Tag | Promise<Tag>;
     updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
     updateVariant(updateVariantInput: UpdateVariantInput): Variant | Promise<Variant>;
-    updateVariantsOption(updateVariantsOptionInput: UpdateVariantsOptionInput): VariantsOption | Promise<VariantsOption>;
     verifyUser(id: string, verification?: Nullable<string>): User | Promise<User>;
 }
 
@@ -499,14 +400,14 @@ export interface Product {
     category?: Nullable<Category>;
     description?: Nullable<string>;
     id?: Nullable<number>;
-    images?: Nullable<Image>;
+    image?: Nullable<Image>;
     name?: Nullable<string>;
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
     shop?: Nullable<Shop>;
     stock?: Nullable<string>;
-    variation?: Nullable<Variant>;
+    variant?: Nullable<Variant>;
 }
 
 export interface IQuery {
@@ -516,14 +417,8 @@ export interface IQuery {
     attributes(): Nullable<Attribute>[] | Promise<Nullable<Attribute>[]>;
     brand(id: string): Nullable<Brand> | Promise<Nullable<Brand>>;
     brands(): Nullable<Brand>[] | Promise<Nullable<Brand>[]>;
-    card(id: string): Nullable<Card> | Promise<Nullable<Card>>;
-    cards(): Nullable<Card>[] | Promise<Nullable<Card>[]>;
-    cart(id: string): Nullable<Cart> | Promise<Nullable<Cart>>;
-    carts(): Nullable<Cart>[] | Promise<Nullable<Cart>[]>;
     category(id: string): Nullable<Category> | Promise<Nullable<Category>>;
     categorys(): Nullable<Category>[] | Promise<Nullable<Category>[]>;
-    coupon(id: string): Nullable<Coupon> | Promise<Nullable<Coupon>>;
-    coupons(): Nullable<Coupon>[] | Promise<Nullable<Coupon>[]>;
     customer(id: string): Nullable<Customer> | Promise<Nullable<Customer>>;
     customers(): Nullable<Customer>[] | Promise<Nullable<Customer>[]>;
     image(id: string): Nullable<Image> | Promise<Nullable<Image>>;
@@ -537,8 +432,6 @@ export interface IQuery {
     products(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
     review(id: string): Nullable<Review> | Promise<Nullable<Review>>;
     reviews(): Nullable<Review>[] | Promise<Nullable<Review>[]>;
-    sale(id: string): Nullable<Sale> | Promise<Nullable<Sale>>;
-    sales(): Nullable<Sale>[] | Promise<Nullable<Sale>[]>;
     session(): Nullable<TokenResponse> | Promise<Nullable<TokenResponse>>;
     shipping(id: string): Nullable<Shipping> | Promise<Nullable<Shipping>>;
     shippings(): Nullable<Shipping>[] | Promise<Nullable<Shipping>[]>;
@@ -552,8 +445,6 @@ export interface IQuery {
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     variant(id: string): Nullable<Variant> | Promise<Nullable<Variant>>;
     variants(): Nullable<Variant>[] | Promise<Nullable<Variant>[]>;
-    variantsOption(id: string): Nullable<VariantsOption> | Promise<Nullable<VariantsOption>>;
-    variantsOptions(): Nullable<VariantsOption>[] | Promise<Nullable<VariantsOption>[]>;
 }
 
 export interface Review {
@@ -564,12 +455,6 @@ export interface Review {
     product?: Nullable<Product>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-}
-
-export interface Sale {
-    amount?: Nullable<number>;
-    id?: Nullable<number>;
-    quantity?: Nullable<number>;
 }
 
 export interface Session {
@@ -620,11 +505,6 @@ export interface Variant {
     icon?: Nullable<string>;
     id?: Nullable<number>;
     name?: Nullable<string>;
-}
-
-export interface VariantsOption {
-    id?: Nullable<number>;
-    type?: Nullable<string>;
 }
 
 export interface ForgotPasswordResponse {
