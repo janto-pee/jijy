@@ -9,6 +9,7 @@ type Address {
   country_code: String
   location: String
   country: String
+  user: User
   }
 
 input CreateAddressInput {
@@ -21,6 +22,7 @@ input CreateAddressInput {
   country_code: String
   location: String
   country: String
+  userId: Int
 }
 
 input UpdateAddressInput {
@@ -34,6 +36,7 @@ input UpdateAddressInput {
   country_code: String
   location: String
   country: String
+  userId: Int
 }
 
 type Query {

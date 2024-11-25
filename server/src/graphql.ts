@@ -18,12 +18,14 @@ export interface CreateAddressInput {
     state_province_name?: Nullable<string>;
     street?: Nullable<string>;
     street2?: Nullable<string>;
+    userId?: Nullable<number>;
 }
 
 export interface CreateAttributeInput {
     description?: Nullable<string>;
     mandatory?: Nullable<string>;
     name?: Nullable<string>;
+    productId?: Nullable<number>;
     translatable?: Nullable<string>;
     type?: Nullable<string>;
     value?: Nullable<string>;
@@ -63,6 +65,7 @@ export interface CreateCustomerInput {
     department?: Nullable<string>;
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
+    user?: Nullable<number>;
     username?: Nullable<string>;
 }
 
@@ -74,9 +77,9 @@ export interface CreateImageInput {
 export interface CreateOrderInput {
     businessClientCode?: Nullable<string>;
     comment?: Nullable<string>;
-    products?: Nullable<string>;
+    product?: Nullable<number>;
     shippingDate?: Nullable<string>;
-    shopId?: Nullable<string>;
+    shop?: Nullable<number>;
 }
 
 export interface CreatePaymentInput {
@@ -85,26 +88,27 @@ export interface CreatePaymentInput {
 }
 
 export interface CreateProductInput {
-    attributes?: Nullable<string>;
+    attribute?: Nullable<string>;
     barcodeEan?: Nullable<string>;
     brand?: Nullable<string>;
-    category?: Nullable<string>;
+    category?: Nullable<number>;
     description?: Nullable<string>;
     images?: Nullable<string>;
     name?: Nullable<string>;
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
+    shop?: Nullable<number>;
     stock?: Nullable<string>;
     variation?: Nullable<string>;
 }
 
 export interface CreateReviewInput {
-    course?: Nullable<string>;
-    enrollmmentId?: Nullable<number>;
+    customer?: Nullable<number>;
+    payment?: Nullable<number>;
+    product?: Nullable<number>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-    reviewer?: Nullable<string>;
 }
 
 export interface CreateSaleInput {
@@ -126,6 +130,7 @@ export interface CreateStaffInput {
     department?: Nullable<string>;
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
+    user?: Nullable<number>;
     username?: Nullable<string>;
 }
 
@@ -162,6 +167,7 @@ export interface UpdateAddressInput {
     state_province_name?: Nullable<string>;
     street?: Nullable<string>;
     street2?: Nullable<string>;
+    userId?: Nullable<number>;
 }
 
 export interface UpdateAttributeInput {
@@ -169,6 +175,7 @@ export interface UpdateAttributeInput {
     id: string;
     mandatory?: Nullable<string>;
     name?: Nullable<string>;
+    productId?: Nullable<number>;
     translatable?: Nullable<string>;
     type?: Nullable<string>;
     value?: Nullable<string>;
@@ -214,6 +221,7 @@ export interface UpdateCustomerInput {
     id: string;
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
+    user?: Nullable<number>;
     username?: Nullable<string>;
 }
 
@@ -227,7 +235,7 @@ export interface UpdateOrderInput {
     businessClientCode?: Nullable<string>;
     comment?: Nullable<string>;
     id: string;
-    products?: Nullable<string>;
+    product?: Nullable<string>;
     shippingDate?: Nullable<string>;
     shopId?: Nullable<string>;
 }
@@ -237,10 +245,10 @@ export interface UpdatePaymentInput {
 }
 
 export interface UpdateProductInput {
-    attributes?: Nullable<string>;
+    attribute?: Nullable<string>;
     barcodeEan?: Nullable<string>;
     brand?: Nullable<string>;
-    category?: Nullable<string>;
+    category?: Nullable<number>;
     description?: Nullable<string>;
     id: string;
     images?: Nullable<string>;
@@ -248,17 +256,18 @@ export interface UpdateProductInput {
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
+    shop?: Nullable<number>;
     stock?: Nullable<string>;
     variation?: Nullable<string>;
 }
 
 export interface UpdateReviewInput {
-    course?: Nullable<string>;
-    enrollmmentId?: Nullable<number>;
+    customer?: Nullable<number>;
     id: string;
+    payment?: Nullable<number>;
+    product?: Nullable<number>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-    reviewer?: Nullable<string>;
 }
 
 export interface UpdateSaleInput {
@@ -288,6 +297,7 @@ export interface UpdateStaffInput {
     id: string;
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
+    user?: Nullable<number>;
     username?: Nullable<string>;
 }
 
@@ -333,6 +343,7 @@ export interface Address {
     state_province_name?: Nullable<string>;
     street?: Nullable<string>;
     street2?: Nullable<string>;
+    user?: Nullable<User>;
 }
 
 export interface Attribute {
@@ -387,6 +398,7 @@ export interface Customer {
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
     updated_at?: Nullable<string>;
+    user?: Nullable<User>;
     username?: Nullable<string>;
 }
 
@@ -410,7 +422,7 @@ export interface IMutation {
     createProduct(createProductInput: CreateProductInput): Product | Promise<Product>;
     createReview(createReviewInput: CreateReviewInput): Review | Promise<Review>;
     createSale(createSaleInput: CreateSaleInput): Sale | Promise<Sale>;
-    createSession(validateUserInput: ValidateUserInput): Session | Promise<Session>;
+    createSession(validateUserInput: ValidateUserInput): Token | Promise<Token>;
     createShipping(createShippingInput: CreateShippingInput): Shipping | Promise<Shipping>;
     createShop(createShopInput: CreateShopInput): Shop | Promise<Shop>;
     createStaff(createStaffInput: CreateStaffInput): Staff | Promise<Staff>;
@@ -433,7 +445,6 @@ export interface IMutation {
     removeProduct(id: string): Nullable<Product> | Promise<Nullable<Product>>;
     removeReview(id: string): Nullable<Review> | Promise<Nullable<Review>>;
     removeSale(id: string): Nullable<Sale> | Promise<Nullable<Sale>>;
-    removeSession(id: string): Nullable<Session> | Promise<Nullable<Session>>;
     removeShipping(id: string): Nullable<Shipping> | Promise<Nullable<Shipping>>;
     removeShop(id: string): Nullable<Shop> | Promise<Nullable<Shop>>;
     removeStaff(id: string): Nullable<Staff> | Promise<Nullable<Staff>>;
@@ -456,7 +467,7 @@ export interface IMutation {
     updateProduct(updateProductInput: UpdateProductInput): Product | Promise<Product>;
     updateReview(updateReviewInput: UpdateReviewInput): Review | Promise<Review>;
     updateSale(updateSaleInput: UpdateSaleInput): Sale | Promise<Sale>;
-    updateSession(updateSessionInput: UpdateSessionInput): Session | Promise<Session>;
+    updateSession(): Nullable<TokenResponse> | Promise<Nullable<TokenResponse>>;
     updateShipping(updateShippingInput: UpdateShippingInput): Shipping | Promise<Shipping>;
     updateShop(updateShopInput: UpdateShopInput): Shop | Promise<Shop>;
     updateStaff(updateStaffInput: UpdateStaffInput): Staff | Promise<Staff>;
@@ -464,16 +475,16 @@ export interface IMutation {
     updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
     updateVariant(updateVariantInput: UpdateVariantInput): Variant | Promise<Variant>;
     updateVariantsOption(updateVariantsOptionInput: UpdateVariantsOptionInput): VariantsOption | Promise<VariantsOption>;
-    verifyUser(updateUserInput: UpdateUserInput, verification?: Nullable<string>): User | Promise<User>;
+    verifyUser(id: string, verification?: Nullable<string>): User | Promise<User>;
 }
 
 export interface Order {
     businessClientCode?: Nullable<string>;
     comment?: Nullable<string>;
     id?: Nullable<number>;
-    products?: Nullable<string>;
+    product?: Nullable<Product>;
     shippingDate?: Nullable<string>;
-    shopId?: Nullable<string>;
+    shop?: Nullable<Shop>;
 }
 
 export interface Payment {
@@ -482,19 +493,20 @@ export interface Payment {
 }
 
 export interface Product {
-    attributes?: Nullable<string>;
-    barcodeEan?: Nullable<string>;
-    brand?: Nullable<string>;
-    category?: Nullable<string>;
+    attribute?: Nullable<Attribute>;
+    barcode?: Nullable<string>;
+    brand?: Nullable<Brand>;
+    category?: Nullable<Category>;
     description?: Nullable<string>;
     id?: Nullable<number>;
-    images?: Nullable<string>;
+    images?: Nullable<Image>;
     name?: Nullable<string>;
     parentSku?: Nullable<string>;
     price?: Nullable<string>;
     sellerSku?: Nullable<string>;
+    shop?: Nullable<Shop>;
     stock?: Nullable<string>;
-    variation?: Nullable<string>;
+    variation?: Nullable<Variant>;
 }
 
 export interface IQuery {
@@ -516,6 +528,7 @@ export interface IQuery {
     customers(): Nullable<Customer>[] | Promise<Nullable<Customer>[]>;
     image(id: string): Nullable<Image> | Promise<Nullable<Image>>;
     images(): Nullable<Image>[] | Promise<Nullable<Image>[]>;
+    me(): Nullable<User> | Promise<Nullable<User>>;
     order(id: string): Nullable<Order> | Promise<Nullable<Order>>;
     orders(): Nullable<Order>[] | Promise<Nullable<Order>[]>;
     payment(id: string): Nullable<Payment> | Promise<Nullable<Payment>>;
@@ -526,7 +539,7 @@ export interface IQuery {
     reviews(): Nullable<Review>[] | Promise<Nullable<Review>[]>;
     sale(id: string): Nullable<Sale> | Promise<Nullable<Sale>>;
     sales(): Nullable<Sale>[] | Promise<Nullable<Sale>[]>;
-    session(id: string): Nullable<Session> | Promise<Nullable<Session>>;
+    session(): Nullable<TokenResponse> | Promise<Nullable<TokenResponse>>;
     shipping(id: string): Nullable<Shipping> | Promise<Nullable<Shipping>>;
     shippings(): Nullable<Shipping>[] | Promise<Nullable<Shipping>[]>;
     shop(id: string): Nullable<Shop> | Promise<Nullable<Shop>>;
@@ -544,13 +557,13 @@ export interface IQuery {
 }
 
 export interface Review {
-    course?: Nullable<string>;
     createdAt?: Nullable<string>;
-    enrollmmentId?: Nullable<number>;
+    customer?: Nullable<Customer>;
     id?: Nullable<number>;
+    payment?: Nullable<Payment>;
+    product?: Nullable<Product>;
     ratings?: Nullable<number>;
     reviewText?: Nullable<string>;
-    reviewer?: Nullable<string>;
 }
 
 export interface Sale {
@@ -584,7 +597,7 @@ export interface Staff {
     photoURL?: Nullable<string>;
     title?: Nullable<string>;
     updated_at?: Nullable<string>;
-    username?: Nullable<string>;
+    user?: Nullable<User>;
 }
 
 export interface Tag {
@@ -598,14 +611,9 @@ export interface User {
     email?: Nullable<string>;
     first_name?: Nullable<string>;
     id: string;
-    is_email_verified?: Nullable<boolean>;
     last_name?: Nullable<string>;
-    password?: Nullable<string>;
-    passwordResetCode?: Nullable<string>;
-    password_changed_at?: Nullable<string>;
     updatedAt?: Nullable<string>;
     username?: Nullable<string>;
-    verificationCode?: Nullable<string>;
 }
 
 export interface Variant {
@@ -622,6 +630,17 @@ export interface VariantsOption {
 export interface ForgotPasswordResponse {
     email?: Nullable<string>;
     message?: Nullable<string>;
+}
+
+export interface Token {
+    accessToken?: Nullable<string>;
+    refreshToken?: Nullable<string>;
+    session?: Nullable<Session>;
+}
+
+export interface TokenResponse {
+    session: string;
+    user: string;
 }
 
 type Nullable<T> = T | null;

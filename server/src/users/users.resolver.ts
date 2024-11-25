@@ -1,8 +1,10 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { customAlphabet } from 'nanoid';
+import { hashPassword } from 'src/utils/hashpassword';
+import Ctx from 'src/utils/context.type';
 
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
 
@@ -12,7 +14,11 @@ export class UsersResolver {
 
   @Mutation('createUser')
   async create(@Args('createUserInput') createUserInput: CreateUserInput) {
-    const user = await this.usersService.create(createUserInput);
+    const password = await hashPassword(createUserInput.password);
+    const user = await this.usersService.create({
+      ...createUserInput,
+      password: password,
+    });
     return user;
   }
 
@@ -41,10 +47,11 @@ export class UsersResolver {
 
   @Mutation('verifyUser')
   async verifyUser(
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
-    @Args('verification') verification: String,
+    @Args('id') id: number,
+    @Args('verification') verification: string,
   ) {
-    const user = await this.findOne(updateUserInput.id);
+    console.log('got here', id, verification);
+    const user = await this.usersService.findUser(id);
 
     if (!user) {
       throw new Error('user not found');
@@ -64,7 +71,6 @@ export class UsersResolver {
   @Mutation('forgotPassword')
   async forgotPassword(@Args('email') email: String) {
     const user = await this.usersService.findEmail(email);
-    console.log('user .....', user);
     const pRC = nanoid(7);
     if (!user) {
       return {
@@ -82,7 +88,10 @@ export class UsersResolver {
     }
     user.passwordResetCode = pRC;
     await user.save();
-    return user;
+    return {
+      email: user.email,
+      message: `kindly check your email for your password reset code ${user.passwordResetCode}`,
+    };
   }
 
   @Mutation('resetPassword')
@@ -105,8 +114,13 @@ export class UsersResolver {
     }
     user.passwordResetCode = null;
     // user.password = await hashPassword(password);
-    user.password = password;
+    user.password = await hashPassword(password);
     await user.save();
     return user;
+  }
+
+  @Query('me')
+  async me(@Context() context: Ctx) {
+    return context.req.user;
   }
 }

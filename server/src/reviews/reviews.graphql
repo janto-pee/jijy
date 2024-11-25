@@ -1,26 +1,26 @@
 type Review {
   id: Int
-  reviewer: String
-  course: String
-  enrollmmentId: Int
+  customer: Customer
+  product: Product
+  payment: Payment
   ratings: Int
   reviewText: String
   createdAt: String
 }
 
 input CreateReviewInput {
-  reviewer: String
-  course: String
-  enrollmmentId: Int
+  customer: Int
+  product: Int
+  payment: Int
   ratings: Int
   reviewText: String
 }
 
 input UpdateReviewInput {
   id: ID!
-  reviewer: String
-  course: String
-  enrollmmentId: Int
+  customer: Int
+  product: Int
+  payment: Int
   ratings: Int
   reviewText: String
 }

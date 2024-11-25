@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { usersProviders } from './users.provider';
-import { hashPassword } from 'src/utils/hashPassword';
+import { hashPassword } from 'src/utils/hashpasswords';
 
 describe('UsersService', () => {
   let service: UsersService;

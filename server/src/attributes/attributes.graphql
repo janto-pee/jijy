@@ -18,6 +18,7 @@ input CreateAttributeInput {
   mandatory: String
   variation: String
   translatable: String
+  productId: Int
 }
 
 input UpdateAttributeInput {
@@ -29,6 +30,7 @@ input UpdateAttributeInput {
   mandatory: String
   variation: String
   translatable: String
+  productId: Int
 }
 
 type Query {

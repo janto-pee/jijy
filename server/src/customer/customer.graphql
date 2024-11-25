@@ -6,6 +6,7 @@ type Customer {
   department: String
   created_at: String
   updated_at: String
+  user: User
 }
 
 input CreateCustomerInput {
@@ -13,14 +14,16 @@ input CreateCustomerInput {
   username: String
   title: String
   department: String
+  user: Int
 }
 
 input UpdateCustomerInput {
   id: ID!
-   photoURL: String
+  photoURL: String
   username: String
   title: String
   department: String
+  user: Int
 }
 
 type Query {

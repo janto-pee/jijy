@@ -7,6 +7,15 @@ input ValidateUserInput {
     email: String
     password: String
 }
+type token {
+  session: Session
+  accessToken: String
+  refreshToken: String
+}
+type tokenResponse {
+  user: ID!
+  session: ID!
+}
 
 # input CreateSessionInput {
 #     userId: String
@@ -18,11 +27,10 @@ input UpdateSessionInput {
 }
 
 type Query {
-  session(id: ID!): Session
+  session: tokenResponse
 }
 
 type Mutation {
-  createSession(validateUserInput: ValidateUserInput!): Session!
-  updateSession(updateSessionInput: UpdateSessionInput!): Session!
-  removeSession(id: ID!): Session
+  createSession(validateUserInput: ValidateUserInput!): token!
+  updateSession: tokenResponse
 }

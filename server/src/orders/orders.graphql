@@ -1,18 +1,18 @@
 type Order {
   id: Int
-  shopId: String
+  shop: Shop
   businessClientCode: String
   shippingDate: String
   comment: String
-  products: String 
+  product: Product
 }
 
 input CreateOrderInput {
-  shopId: String
+  shop: Int
   businessClientCode: String
   shippingDate: String
   comment: String
-  products: String 
+  product: Int
 }
 
 input UpdateOrderInput {
@@ -21,7 +21,7 @@ input UpdateOrderInput {
   businessClientCode: String
   shippingDate: String
   comment: String
-  products: String
+  product: String
 }
 
 type Query {

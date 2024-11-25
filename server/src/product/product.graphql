@@ -4,14 +4,15 @@ type Product {
   description: String
   parentSku: String
   sellerSku: String
-  barcodeEan: String
-  variation: String
-  brand: String
-  category: String
-  images: String
+  barcode: String
+  variation: Variant
+  brand: Brand
+  category: Category
+  images: Image
   price: String
   stock: String
-  attributes: String
+  shop: Shop
+  attribute: Attribute
 }
 
 input CreateProductInput {
@@ -21,28 +22,30 @@ input CreateProductInput {
   sellerSku: String
   barcodeEan: String
   variation: String
+  shop: Int
   brand: String
-  category: String
+  category: Int
   images: String
   price: String
   stock: String
-  attributes: String
+  attribute: String
 }
 
 input UpdateProductInput {
   id: ID!
-    name: String
+  name: String
   description: String
   parentSku: String
   sellerSku: String
   barcodeEan: String
   variation: String
   brand: String
-  category: String
+  category: Int
+  shop: Int
   images: String
   price: String
   stock: String
-  attributes: String
+  attribute: String
 }
 
 type Query {

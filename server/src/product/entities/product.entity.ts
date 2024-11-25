@@ -8,7 +8,12 @@ import {
   AutoIncrement,
   Default,
   Unique,
+  HasOne,
 } from 'sequelize-typescript';
+import { Attribute } from 'src/attributes/entities/attribute.entity';
+import { Category } from 'src/category/entities/category.entity';
+import { Image } from 'src/images/entities/image.entity';
+import { Variant } from 'src/variants/entities/variant.entity';
 
 @Table
 export class Product extends Model {
@@ -32,17 +37,17 @@ export class Product extends Model {
   @Column
   barcodeEan: string;
 
-  @Column
-  variation: string;
+  @HasOne(() => Variant, 'id')
+  variant: Variant;
 
   @Column
   brand: string;
 
-  @Column
-  category: string;
+  @HasOne(() => Category, 'id')
+  category: Category;
 
-  @Column
-  images: string;
+  @HasOne(() => Image, 'id')
+  image: Image;
 
   @Column
   price: string;
@@ -50,8 +55,8 @@ export class Product extends Model {
   @Column
   stock: string;
 
-  @Column
-  attributes: string;
+  @HasOne(() => Attribute, 'id')
+  attribute: Attribute;
 
   @CreatedAt
   createdAt: Date;

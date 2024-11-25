@@ -4,7 +4,9 @@ import {
   PrimaryKey,
   AutoIncrement,
   Table,
+  HasMany,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 
 @Table
 export class Category extends Model {
@@ -21,4 +23,7 @@ export class Category extends Model {
 
   @Column
   description: string;
+
+  // @HasMany(() => Product, /* foreign key */ 'id')
+  // Products?: Product[];
 }

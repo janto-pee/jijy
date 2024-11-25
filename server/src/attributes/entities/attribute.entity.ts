@@ -8,7 +8,9 @@ import {
   AutoIncrement,
   Default,
   Unique,
+  HasOne,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 @Table
 export class Attribute extends Model {
   @PrimaryKey
@@ -18,6 +20,9 @@ export class Attribute extends Model {
 
   @Column
   name: string;
+
+  @HasOne(() => Product, 'id')
+  product: Product;
 
   @Column
   value: string;

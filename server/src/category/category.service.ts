@@ -26,11 +26,11 @@ export class CategoryService {
     });
   }
 
-  async findEmail(email: String): Promise<Category> {
-    return await this.categoryRepository.findOne<Category>({
-      where: { email: email },
-    });
-  }
+  // async findEmail(email: String): Promise<Category> {
+  //   return await this.categoryRepository.findOne<Category>({
+  //     where: { email: email },
+  //   });
+  // }
 
   async update(id: number, data: UpdateCategoryInput): Promise<Category> {
     const Category = await this.categoryRepository.findOne({

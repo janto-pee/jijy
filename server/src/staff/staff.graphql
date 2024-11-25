@@ -1,7 +1,7 @@
 type Staff {
   id: Int
   photoURL: String
-  username: String
+  user: User
   title: String
   department: String
   created_at: String
@@ -13,6 +13,7 @@ input CreateStaffInput {
   username: String
   title: String
   department: String
+  user: Int
 }
 
 input UpdateStaffInput {
@@ -21,6 +22,7 @@ input UpdateStaffInput {
   username: String
   title: String
   department: String
+  user: Int
 }
 
 type Query {

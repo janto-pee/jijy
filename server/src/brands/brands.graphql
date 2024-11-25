@@ -11,7 +11,7 @@ input CreateBrandInput {
 
 input UpdateBrandInput {
   id: ID!
-   code: Int
+  code: Int
   name: String
 }
 

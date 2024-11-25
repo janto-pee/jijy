@@ -2,7 +2,7 @@ import { Field } from '@nestjs/graphql';
 
 export class CreateAddressInput {
   @Field()
-  username: string;
+  userId: number;
 
   @Field()
   street: string;

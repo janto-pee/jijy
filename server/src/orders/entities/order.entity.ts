@@ -8,7 +8,10 @@ import {
   AutoIncrement,
   Default,
   Unique,
+  HasOne,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
+import { Shop } from 'src/shops/entities/shop.entity';
 
 @Table
 export class Order extends Model {
@@ -17,8 +20,8 @@ export class Order extends Model {
   @Column
   id: number;
 
-  @Column
-  shopId: string;
+  @HasOne(() => Shop, 'id')
+  shop: Shop;
 
   @Column
   businessClientCode: string;
@@ -29,8 +32,8 @@ export class Order extends Model {
   @Column
   comment: string;
 
-  @Column
-  products: string;
+  @HasOne(() => Product, 'id')
+  product: Product;
 
   @CreatedAt
   createdAt: Date;

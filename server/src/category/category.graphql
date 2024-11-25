@@ -3,6 +3,7 @@ type Category {
   code: Int
   name: String
   description: String
+  # products: [Product]
 }
 
 input CreateCategoryInput {

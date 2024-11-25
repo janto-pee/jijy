@@ -2,14 +2,24 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { StaffService } from './staff.service';
 import { CreateStaffInput } from './dto/create-staff.input';
 import { UpdateStaffInput } from './dto/update-staff.input';
+import { UsersService } from 'src/users/users.service';
 
 @Resolver('Staff')
 export class StaffResolver {
-  constructor(private readonly staffService: StaffService) {}
+  constructor(
+    private readonly staffService: StaffService,
+    private readonly userService: UsersService,
+  ) {}
 
   @Mutation('createStaff')
   async create(@Args('createStaffInput') createStaffInput: CreateStaffInput) {
-    return await this.staffService.create(createStaffInput);
+    const user = await this.userService.findUser(createStaffInput.user);
+    if (!user) {
+      throw new Error('user not found ');
+    }
+    const staff = await this.staffService.create(createStaffInput);
+    staff.user = user;
+    return await staff.save();
   }
 
   @Query('staffs')

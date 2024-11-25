@@ -1,9 +1,8 @@
-import config from 'config';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 export async function hashPassword(password: string) {
-  console.log('hellooooo ............. ', password);
-  const salt = await bcrypt.genSalt(config.get<number>('saltWorkFactor'));
+  console.log('password...', password);
+  const salt = await bcrypt.genSalt();
   const hash = bcrypt.hashSync(password, salt);
   password = hash;
   return password;

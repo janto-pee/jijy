@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 import { usersProviders } from './users.provider';
-import { hashPassword } from 'src/utils/hashPassword';
+import { hashPassword } from 'src/utils/hashpasswords';
 
 describe('UsersResolver', () => {
   let resolver: UsersResolver;

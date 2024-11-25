@@ -8,7 +8,12 @@ import {
   AutoIncrement,
   Default,
   Unique,
+  HasMany,
+  HasOne,
 } from 'sequelize-typescript';
+import { Customer } from 'src/customer/entities/customer.entity';
+import { Payment } from 'src/payment/entities/payment.entity';
+import { Product } from 'src/product/entities/product.entity';
 
 @Table
 export class Review extends Model {
@@ -17,14 +22,20 @@ export class Review extends Model {
   @Column
   id: number;
 
-  @Column
-  reviewer: string;
+  // @HasMany(() => Customer, /* foreign key */ 'id')
+  // customer: Customer[]
+
+  @HasOne(() => Customer, 'id')
+  customer: Customer;
+
+  @HasOne(() => Product, 'id')
+  product: Product;
 
   @Column
   course: string;
 
-  @Column
-  enrollmmentId: number;
+  @HasOne(() => Payment, 'id')
+  payment: Payment;
 
   @Column
   ratings: number;

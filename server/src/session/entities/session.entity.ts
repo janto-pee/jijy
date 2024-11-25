@@ -9,6 +9,7 @@ import {
   AutoIncrement,
   HasOne,
 } from 'sequelize-typescript';
+import { User } from 'src/users/entities/user.entity';
 
 @Table
 export class Session extends Model {
@@ -17,8 +18,8 @@ export class Session extends Model {
   @Column
   id: number;
 
-  // @HasOne(() => User, 'id')
-  // user: User;
+  @HasOne(() => User, 'id')
+  user: User;
 
   @Column
   userAgent: string;

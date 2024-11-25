@@ -2,16 +2,29 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { AttributesService } from './attributes.service';
 import { CreateAttributeInput } from './dto/create-attribute.input';
 import { UpdateAttributeInput } from './dto/update-attribute.input';
+import { ProductService } from 'src/product/product.service';
 
 @Resolver('Attribute')
 export class AttributesResolver {
-  constructor(private readonly attributesService: AttributesService) {}
+  constructor(
+    private readonly attributesService: AttributesService,
+    private readonly productService: ProductService,
+  ) {}
 
   @Mutation('createAttribute')
   async create(
     @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
   ) {
-    return await this.attributesService.create(createAttributeInput);
+    const product = await this.productService.findOne(
+      createAttributeInput.productId,
+    );
+    if (!product) {
+      throw new Error('product not found');
+    }
+    const attribute = await this.attributesService.create(createAttributeInput);
+    attribute.product = product;
+    attribute.save();
+    return attribute;
   }
 
   @Query('attributes')
