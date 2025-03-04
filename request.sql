@@ -1,0 +1,11 @@
+-- shop
+-- GET - Search Location
+-- GET - Get Hotels Filter
+-- GET - Search Hotels
+-- GET - Search Hotels By Location
+-- GET - Get Hotel Details
+-- Product
+-- GET - Search Restaurant Location
+-- GET - Search Restaurants
+-- GET - Get Restaurant Details V2
+-- GET - Get Restaurant Details (Deprecated)
