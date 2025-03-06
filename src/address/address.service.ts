@@ -1,33 +1,58 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateAddressInput } from './dto/create-address.input';
 import { UpdateAddressInput } from './dto/update-address.input';
-import { Repository } from 'typeorm';
 import { Address } from './entities/address.entity';
 
 @Injectable()
 export class AddressService {
   constructor(
     @Inject('ADDRESS_REPOSITORY')
-    private addressRepository: Repository<Address>,
+    private addresssRepository: typeof Address,
   ) {}
-
-  create(createAddressInput: CreateAddressInput) {
-    return 'This action adds a new address';
+  async create(createAddressInput: CreateAddressInput): Promise<Address> {
+    console.log('check point 1....', createAddressInput);
+    return await this.addresssRepository.create({
+      ...createAddressInput,
+    });
   }
 
   async findAll(): Promise<Address[]> {
-    return this.addressRepository.find();
+    return await this.addresssRepository.findAll<Address>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  async findOne(id: string) {
+    return await this.addresssRepository.findOne<Address>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateAddressInput: UpdateAddressInput) {
-    return `This action updates a #${id} address`;
+  async findEmail(email: string) {
+    return await this.addresssRepository.findOne<Address>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} address`;
+  async update(id: string, data: UpdateAddressInput): Promise<Address> {
+    const Address = await this.addresssRepository.findOne({
+      where: { id: id },
+    });
+    console.log('id', id, 'address...', Address, 'data', data);
+    if (!Address) {
+      throw new Error('unable to find address');
+    }
+    await Address.update({ ...data });
+    await Address.save();
+    return Address;
+  }
+
+  async remove(id: string): Promise<Address> {
+    const address = await this.addresssRepository.findOne<Address>({
+      where: { id: id },
+    });
+    if (!address) {
+      throw new Error('address not found');
+    }
+    await address.destroy();
+    return address;
   }
 }

@@ -1,14 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CategoryResolver } from './category.resolver';
 import { CategoryService } from './category.service';
-import { categoryProviders } from './category.provider';
 
 describe('CategoryResolver', () => {
   let resolver: CategoryResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CategoryResolver, CategoryService, ...categoryProviders],
+      providers: [CategoryResolver, CategoryService],
     }).compile();
 
     resolver = module.get<CategoryResolver>(CategoryResolver);

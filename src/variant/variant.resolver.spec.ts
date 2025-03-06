@@ -3,7 +3,7 @@ import { VariantResolver } from './variant.resolver';
 import { VariantService } from './variant.service';
 import { variantProviders } from './variant.provider';
 
-describe('VariantResolver', () => {
+describe('VariantsResolver', () => {
   let resolver: VariantResolver;
 
   beforeEach(async () => {

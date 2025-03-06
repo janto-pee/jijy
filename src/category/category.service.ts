@@ -1,32 +1,55 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
-import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @Inject('CATEGORY_REPOSITORY')
-    private categoryRepository: Repository<Category>,
+    private categoryRepository: typeof Category,
   ) {}
-  create(createCategoryInput: CreateCategoryInput) {
-    return 'This action adds a new category';
+
+  async create(createCatgeoriesInput: CreateCategoryInput): Promise<Category> {
+    return await this.categoryRepository.create({
+      ...createCatgeoriesInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll(): Promise<Category[]> {
+    return await this.categoryRepository.findAll<Category>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string): Promise<Category> {
+    const category = await this.categoryRepository.findOne<Category>({
+      where: { id: id },
+    });
+    if (!category) {
+      throw new Error();
+    }
+    return category;
   }
 
-  update(id: number, updateCategoryInput: UpdateCategoryInput) {
-    return `This action updates a #${id} category`;
+  async update(id: string, data: UpdateCategoryInput): Promise<Category> {
+    const Category = await this.categoryRepository.findOne({
+      where: { id: id },
+    });
+    if (!Category) {
+      throw new Error('Category not found');
+    }
+    await Category.update({ ...data });
+    await Category.save();
+    return Category;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string): Promise<Category> {
+    const category = await this.categoryRepository.findOne<Category>({
+      where: { id: id },
+    });
+    if (!category) {
+      throw new Error();
+    }
+    await category.destroy();
+    return category;
   }
 }

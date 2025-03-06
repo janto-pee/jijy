@@ -1,32 +1,51 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateAttributeInput } from './dto/create-attribute.input';
 import { UpdateAttributeInput } from './dto/update-attribute.input';
-import { Repository } from 'typeorm';
-import { Address } from 'src/address/entities/address.entity';
+import { Attribute } from './entities/attribute.entity';
 
 @Injectable()
 export class AttributeService {
   constructor(
     @Inject('ATTRIBUTE_REPOSITORY')
-    private attributeRepository: Repository<Address>,
+    private attributeRepository: typeof Attribute,
   ) {}
-  create(createAttributeInput: CreateAttributeInput) {
-    return 'This action adds a new attribute';
+  async create(createAttributeInput: CreateAttributeInput): Promise<Attribute> {
+    return await this.attributeRepository.create({
+      ...createAttributeInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all attribute`;
+  async findAll(): Promise<Attribute[]> {
+    return await this.attributeRepository.findAll<Attribute>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} attribute`;
+  async findOne(id: string) {
+    return await this.attributeRepository.findOne<Attribute>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateAttributeInput: UpdateAttributeInput) {
-    return `This action updates a #${id} attribute`;
+  async findEmail(email: string) {
+    return await this.attributeRepository.findOne<Attribute>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} attribute`;
+  async update(id: string, data: UpdateAttributeInput): Promise<Attribute> {
+    const Attribute = await this.attributeRepository.findOne({
+      where: { id: id },
+    });
+    if (!Attribute) {
+      throw new Error('attribute not found');
+    }
+    await Attribute.update({ ...data });
+    await Attribute.save();
+    return Attribute;
+  }
+
+  async remove(id: string) {
+    return await this.attributeRepository.findOne<Attribute>({
+      where: { id: id },
+    });
   }
 }

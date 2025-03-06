@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VariantService } from './variant.service';
 import { variantProviders } from './variant.provider';
 
-describe('VariantService', () => {
+describe('VariantsService', () => {
   let service: VariantService;
 
   beforeEach(async () => {

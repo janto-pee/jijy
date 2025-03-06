@@ -9,27 +9,34 @@ export class BrandResolver {
   constructor(private readonly brandService: BrandService) {}
 
   @Mutation(() => Brand)
-  createBrand(@Args('createBrandInput') createBrandInput: CreateBrandInput) {
-    return this.brandService.create(createBrandInput);
+  async createBrand(
+    @Args('createBrandInput') createBrandInput: CreateBrandInput,
+  ) {
+    return await this.brandService.create(createBrandInput);
   }
 
   @Query(() => [Brand], { name: 'brand' })
-  findAll() {
-    return this.brandService.findAll();
+  async findAll() {
+    return await this.brandService.findAll();
   }
 
   @Query(() => Brand, { name: 'brand' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.brandService.findOne(id);
+  async findOne(@Args('id', { type: () => String }) id: string) {
+    return await this.brandService.findOne(id);
   }
 
   @Mutation(() => Brand)
-  updateBrand(@Args('updateBrandInput') updateBrandInput: UpdateBrandInput) {
-    return this.brandService.update(updateBrandInput.id, updateBrandInput);
+  async updateBrand(
+    @Args('updateBrandInput') updateBrandInput: UpdateBrandInput,
+  ) {
+    return await this.brandService.update(
+      updateBrandInput.id,
+      updateBrandInput,
+    );
   }
 
   @Mutation(() => Brand)
-  removeBrand(@Args('id', { type: () => Int }) id: number) {
-    return this.brandService.remove(id);
+  async removeBrand(@Args('id', { type: () => String }) id: string) {
+    return await this.brandService.remove(id);
   }
 }

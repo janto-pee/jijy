@@ -1,32 +1,64 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateVariantInput } from './dto/create-variant.input';
 import { UpdateVariantInput } from './dto/update-variant.input';
-import { Repository } from 'typeorm';
 import { Variant } from './entities/variant.entity';
 
 @Injectable()
 export class VariantService {
   constructor(
     @Inject('VARIANT_REPOSITORY')
-    private variantRepository: Repository<Variant>,
+    private VariantsRepository: typeof Variant,
   ) {}
-  create(createVariantInput: CreateVariantInput) {
-    return 'This action adds a new variant';
+  async create(createVariantInput: CreateVariantInput): Promise<Variant> {
+    return await this.VariantsRepository.create({
+      ...createVariantInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all variant`;
+  async findAll(): Promise<Variant[]> {
+    return await this.VariantsRepository.findAll<Variant>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} variant`;
+  async findOne(id: string): Promise<Variant> {
+    const variant = await this.VariantsRepository.findOne<Variant>({
+      where: { id: id },
+    });
+    if (!variant) {
+      throw new Error('variant not found');
+    }
+    return variant;
   }
 
-  update(id: number, updateVariantInput: UpdateVariantInput) {
-    return `This action updates a #${id} variant`;
+  async findEmail(email: string): Promise<Variant> {
+    const variant = await this.VariantsRepository.findOne<Variant>({
+      where: { email: email },
+    });
+    if (!variant) {
+      throw new Error('variant not found');
+    }
+    return variant;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} variant`;
+  async update(id: string, data: UpdateVariantInput): Promise<Variant> {
+    const Variant = await this.VariantsRepository.findOne({
+      where: { id: id },
+    });
+    if (!Variant) {
+      throw new Error('variants not found');
+    }
+    await Variant.update({ ...data });
+    await Variant.save();
+    return Variant;
+  }
+
+  async remove(id: string): Promise<Variant> {
+    const variant = await this.VariantsRepository.findOne<Variant>({
+      where: { id: id },
+    });
+    if (!variant) {
+      throw new Error('variant not found');
+    }
+    await variant.destroy();
+    return variant;
   }
 }

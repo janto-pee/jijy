@@ -6,6 +6,6 @@ import { categoryProviders } from './category.provider';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...categoryProviders, CategoryResolver, CategoryService],
+  providers: [CategoryResolver, CategoryService, ...categoryProviders],
 })
 export class CategoryModule {}

@@ -1,21 +1,42 @@
-import { DataSource } from 'typeorm';
+import { Sequelize } from 'sequelize-typescript';
+import { Address } from './address/entities/address.entity';
+import { Attribute } from './attribute/entities/attribute.entity';
+import { Brand } from './brand/entities/brand.entity';
+import { Category } from './category/entities/category.entity';
+import { Order } from './order/entities/order.entity';
+import { Image } from './image/entities/image.entity';
+import { Product } from './product/entities/product.entity';
+import { Shop } from './shop/entities/shop.entity';
+import { Tag } from './tag/entities/tag.entity';
+import { Variant } from './variant/entities/variant.entity';
 
 export const databaseProviders = [
   {
-    provide: 'DATA_SOURCE',
+    provide: 'SEQUELIZE',
     useFactory: async () => {
-      const dataSource = new DataSource({
-        type: 'postgres',
+      const sequelize = new Sequelize({
+        dialect: 'postgres',
         host: 'localhost',
         port: 5432,
         username: 'root',
         password: 'secret',
-        database: 'ecommerce',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true,
+        database: 'nest',
       });
-
-      return dataSource.initialize();
+      sequelize.addModels([
+        Address,
+        Address,
+        Attribute,
+        Brand,
+        Category,
+        Image,
+        Order,
+        Product,
+        Shop,
+        Tag,
+        Variant,
+      ]);
+      await sequelize.sync();
+      return sequelize;
     },
   },
 ];

@@ -2,6 +2,30 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateAddressInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  street: string;
+
+  @Field()
+  street2: string;
+
+  @Field()
+  city: string;
+
+  @Field()
+  state_province_code: string;
+
+  @Field()
+  state_province_name: string;
+
+  @Field()
+  postal_code: string;
+
+  @Field()
+  country_code: string;
+
+  @Field()
+  location: string;
+
+  @Field()
+  country: string;
 }

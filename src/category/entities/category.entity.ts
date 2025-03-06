@@ -1,7 +1,34 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import {
+  Column,
+  Model,
+  PrimaryKey,
+  AutoIncrement,
+  Table,
+  Default,
+  DataType,
+} from 'sequelize-typescript';
 
+@Table
 @ObjectType()
-export class Category {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+export class Category extends Model {
+  @PrimaryKey
+  @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
+  declare id: string;
+
+  @Column
+  @Field()
+  code: number;
+
+  @Column
+  @Field()
+  name: string;
+
+  @Column
+  @Field()
+  description: string;
+
+  // @HasMany(() => Product, /* foreign key */ 'id')
+  // Products?: Product[];
 }

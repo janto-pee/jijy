@@ -6,6 +6,6 @@ import { brandProviders } from './brand.provider';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...brandProviders, BrandResolver, BrandService],
+  providers: [BrandResolver, BrandService, ...brandProviders],
 })
 export class BrandModule {}

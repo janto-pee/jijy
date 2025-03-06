@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TagResolver } from './tag.resolver';
 import { TagService } from './tag.service';
-import { tagProviders } from './tag.provider';
+import { tagProviders } from './tag.providers';
 
-describe('TagResolver', () => {
+describe('TagsResolver', () => {
   let resolver: TagResolver;
 
   beforeEach(async () => {

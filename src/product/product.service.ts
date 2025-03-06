@@ -1,32 +1,64 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
-import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductService {
   constructor(
     @Inject('PRODUCT_REPOSITORY')
-    private productRepository: Repository<Product>,
+    private ProductsRepository: typeof Product,
   ) {}
-  create(createProductInput: CreateProductInput) {
-    return 'This action adds a new product';
+  async create(createProductInput: CreateProductInput): Promise<Product> {
+    return await this.ProductsRepository.create({
+      ...createProductInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all product`;
+  async findAll(): Promise<Product[]> {
+    return await this.ProductsRepository.findAll<Product>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: string): Promise<Product> {
+    const product = await this.ProductsRepository.findOne<Product>({
+      where: { id: id },
+    });
+    if (!product) {
+      throw new Error();
+    }
+    return product;
   }
 
-  update(id: number, updateProductInput: UpdateProductInput) {
-    return `This action updates a #${id} product`;
+  async findEmail(email: string): Promise<Product> {
+    const product = await this.ProductsRepository.findOne<Product>({
+      where: { email: email },
+    });
+    if (!product) {
+      throw new Error();
+    }
+    return product;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async update(id: string, data: UpdateProductInput): Promise<Product> {
+    const Product = await this.ProductsRepository.findOne({
+      where: { id: id },
+    });
+    if (!Product) {
+      throw new Error('Product not found');
+    }
+    await Product.update({ ...data });
+    await Product.save();
+    return Product;
+  }
+
+  async remove(id: string): Promise<Product> {
+    const product = await this.ProductsRepository.findOne<Product>({
+      where: { id: id },
+    });
+    if (!product) {
+      throw new Error();
+    }
+    await product.destroy();
+    return product;
   }
 }

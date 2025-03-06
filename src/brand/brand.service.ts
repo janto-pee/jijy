@@ -1,32 +1,56 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
-import { Repository } from 'typeorm';
 import { Brand } from './entities/brand.entity';
 
 @Injectable()
 export class BrandService {
   constructor(
     @Inject('BRAND_REPOSITORY')
-    private brandRepository: Repository<Brand>,
+    private brandRepository: typeof Brand,
   ) {}
-  create(createBrandInput: CreateBrandInput) {
-    return 'This action adds a new brand';
+  async create(createBrandInput: CreateBrandInput): Promise<Brand> {
+    return await this.brandRepository.create({
+      ...createBrandInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all brand`;
+  async findAll(): Promise<Brand[]> {
+    return await this.brandRepository.findAll<Brand>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} brand`;
+  async findOne(id: string) {
+    return await this.brandRepository.findOne<Brand>({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updateBrandInput: UpdateBrandInput) {
-    return `This action updates a #${id} brand`;
+  async findEmail(email: string) {
+    return await this.brandRepository.findOne<Brand>({
+      where: { email: email },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} brand`;
+  async update(id: string, data: UpdateBrandInput): Promise<Brand> {
+    const brand = await this.brandRepository.findOne({
+      where: { id: id },
+    });
+    if (!brand) {
+      throw new Error('brand not found');
+    }
+    await brand.update({ ...data });
+    await brand.save();
+    return brand;
+  }
+
+  async remove(id: string): Promise<Brand> {
+    const brand = await this.brandRepository.findOne<Brand>({
+      where: { id: id },
+    });
+    if (!brand) {
+      throw new Error('address not found');
+    }
+    await brand.destroy();
+    return brand;
   }
 }

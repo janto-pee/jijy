@@ -1,0 +1,50 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Address {
+  city: String!
+  country: String!
+  country_code: String!
+  location: String!
+  postal_code: String!
+  state_province_code: String!
+  state_province_name: String!
+  street: String!
+  street2: String!
+}
+
+input CreateAddressInput {
+  city: String!
+  country: String!
+  country_code: String!
+  location: String!
+  postal_code: String!
+  state_province_code: String!
+  state_province_name: String!
+  street: String!
+  street2: String!
+}
+
+type Mutation {
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  removeAddress(id: String!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+}
+
+type Query {
+  address(id: String!): Address!
+}
+
+input UpdateAddressInput {
+  city: String
+  country: String
+  country_code: String
+  id: String!
+  location: String
+  postal_code: String
+  state_province_code: String
+  state_province_name: String
+  street: String
+  street2: String
+}

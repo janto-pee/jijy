@@ -1,11 +1,23 @@
 import { Module } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductResolver } from './product.resolver';
-import { DatabaseModule } from 'src/database.module';
 import { productProviders } from './product.provider';
+import { DatabaseModule } from 'src/database.module';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...productProviders, ProductResolver, ProductService],
+  providers: [ProductResolver, ProductService, ...productProviders],
 })
 export class ProductModule {}
+// VariantsService,
+// ...variantsProviders,
+// ShopsService,
+// ...shopProviders,
+// AttributesService,
+// ImagesService,
+// ...imageProviders,
+// ...attributesProviders,
+// BrandsService,
+// CategoryService,
+// ...categoryProviders,
+// ...brandsProviders,

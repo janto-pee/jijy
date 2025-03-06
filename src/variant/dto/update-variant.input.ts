@@ -1,8 +1,9 @@
+import { Field, InputType } from '@nestjs/graphql';
 import { CreateVariantInput } from './create-variant.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { PartialType } from '@nestjs/mapped-types';
 
 @InputType()
 export class UpdateVariantInput extends PartialType(CreateVariantInput) {
-  @Field(() => Int)
-  id: number;
+  @Field(() => String)
+  id: string;
 }

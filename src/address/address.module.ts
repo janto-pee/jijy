@@ -6,6 +6,6 @@ import { addressProviders } from './address.provider';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...addressProviders, AddressResolver, AddressService],
+  providers: [AddressResolver, AddressService, ...addressProviders],
 })
 export class AddressModule {}

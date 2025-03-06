@@ -6,6 +6,6 @@ import { DatabaseModule } from 'src/database.module';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...variantProviders, VariantResolver, VariantService],
+  providers: [VariantResolver, VariantService, ...variantProviders],
 })
 export class VariantModule {}

@@ -1,32 +1,64 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
-import { Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @Inject('ORDER_REPOSITORY')
-    private orderRepository: Repository<Order>,
+    private OrdersRepository: typeof Order,
   ) {}
-  create(createOrderInput: CreateOrderInput) {
-    return 'This action adds a new order';
+  async create(createOrderInput: CreateOrderInput): Promise<Order> {
+    return await this.OrdersRepository.create({
+      ...createOrderInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all order`;
+  async findAll(): Promise<Order[]> {
+    return await this.OrdersRepository.findAll<Order>();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string): Promise<Order> {
+    const order = await this.OrdersRepository.findOne<Order>({
+      where: { id: id },
+    });
+    if (!order) {
+      throw new Error();
+    }
+    return order;
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  async findEmail(email: string): Promise<Order> {
+    const order = await this.OrdersRepository.findOne<Order>({
+      where: { email: email },
+    });
+    if (!order) {
+      throw new Error();
+    }
+    return order;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  async update(id: string, data: UpdateOrderInput): Promise<Order> {
+    const Order = await this.OrdersRepository.findOne({
+      where: { id: id },
+    });
+    if (!Order) {
+      throw new Error('Order not found');
+    }
+    await Order.update({ ...data });
+    await Order.save();
+    return Order;
+  }
+
+  async remove(id: string): Promise<Order> {
+    const order = await this.OrdersRepository.findOne<Order>({
+      where: { id: id },
+    });
+    if (!order) {
+      throw new Error();
+    }
+    await order.destroy();
+    return order;
   }
 }

@@ -9,7 +9,9 @@ export class AttributeResolver {
   constructor(private readonly attributeService: AttributeService) {}
 
   @Mutation(() => Attribute)
-  createAttribute(@Args('createAttributeInput') createAttributeInput: CreateAttributeInput) {
+  async createAttribute(
+    @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
+  ) {
     return this.attributeService.create(createAttributeInput);
   }
 
@@ -19,17 +21,22 @@ export class AttributeResolver {
   }
 
   @Query(() => Attribute, { name: 'attribute' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.attributeService.findOne(id);
   }
 
   @Mutation(() => Attribute)
-  updateAttribute(@Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput) {
-    return this.attributeService.update(updateAttributeInput.id, updateAttributeInput);
+  updateAttribute(
+    @Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput,
+  ) {
+    return this.attributeService.update(
+      updateAttributeInput.id,
+      updateAttributeInput,
+    );
   }
 
   @Mutation(() => Attribute)
-  removeAttribute(@Args('id', { type: () => Int }) id: number) {
+  removeAttribute(@Args('id', { type: () => String }) id: string) {
     return this.attributeService.remove(id);
   }
 }
