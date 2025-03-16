@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ImageService } from './image.service';
+import { imageProviders } from './image.provider';
 
 describe('ImageService', () => {
   let service: ImageService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ImageService],
+      providers: [ImageService, ...imageProviders],
     }).compile();
 
     service = module.get<ImageService>(ImageService);

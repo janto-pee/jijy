@@ -1,19 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { productProviders } from './product.provider';
 import { ProductResolver } from './product.resolver';
 import { ProductService } from './product.service';
-import { productProviders } from './product.provider';
-import { CategoryService } from 'src/categorys/category.service';
-import { VariantsService } from 'src/variant/variant.service';
-import { ImagesService } from 'src/images/images.service';
-import { ShopsService } from 'src/shop/shop.service';
-import { AttributesService } from 'src/attributes/attributes.service';
-import { BrandsService } from 'src/brands/brands.service';
-import { categoryProviders } from 'src/categorys/category.provider';
-import { variantsProviders } from 'src/variant/variant.provider';
-import { imageProviders } from 'src/images/images.provider';
+import { VariantService } from 'src/variant/variant.service';
+import { ImageService } from 'src/image/image.service';
+import { ShopService } from 'src/shop/shop.service';
+import { AttributeService } from 'src/attribute/attribute.service';
+import { BrandService } from 'src/brand/brand.service';
+import { categoryProviders } from 'src/category/category.provider';
+import { variantProviders } from 'src/variant/variant.provider';
+import { imageProviders } from 'src/image/image.provider';
 import { shopProviders } from 'src/shop/shop.providers';
-import { attributesProviders } from 'src/attributes/attributes.provider';
-import { brandsProviders } from 'src/brands/brands.provider';
+import { attributeProviders } from 'src/attribute/attribute.provider';
+import { brandProviders } from 'src/brand/brand.provider';
 
 describe('ProductResolver', () => {
   let resolver: ProductResolver;
@@ -24,18 +23,18 @@ describe('ProductResolver', () => {
         ProductResolver,
         ProductService,
         ...productProviders,
-        CategoryService,
         ...categoryProviders,
-        VariantsService,
-        ...variantsProviders,
-        ImagesService,
+        VariantService,
+        ...variantProviders,
+        ImageService,
         ...imageProviders,
-        ShopsService,
+        ShopService,
         ...shopProviders,
-        AttributesService,
-        ...attributesProviders,
-        BrandsService,
-        ...brandsProviders,
+        AttributeService,
+        ...attributeProviders,
+        BrandService,
+        ...brandProviders,
+        ...productProviders,
       ],
     }).compile();
 
