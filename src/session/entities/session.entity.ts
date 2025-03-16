@@ -1,16 +1,18 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Model } from 'sequelize';
 import {
   Column,
+  CreatedAt,
   DataType,
   Default,
-  Model,
   PrimaryKey,
   Table,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
 @Table
 @ObjectType()
-export class Attribute extends Model {
+export class Session extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
@@ -18,29 +20,16 @@ export class Attribute extends Model {
 
   @Column
   @Field()
-  name: string;
+  userAgent: string;
 
+  @Default(true)
   @Column
   @Field()
-  value: string;
+  valid: boolean;
 
-  @Column
-  @Field()
-  description: string;
+  @CreatedAt
+  declare createdAt: Date;
 
-  @Column
-  @Field()
-  type: string;
-
-  @Column
-  @Field()
-  mandatory: string;
-
-  @Column
-  @Field()
-  variation: string;
-
-  @Column
-  @Field()
-  translatable: string;
+  @UpdatedAt
+  declare updatedAt: Date;
 }

@@ -14,6 +14,8 @@ import { ShopModule } from './shop/shop.module';
 import { TagModule } from './tag/tag.module';
 import { VariantModule } from './variant/variant.module';
 import { join } from 'path';
+import { UserModule } from './user/user.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -24,15 +26,17 @@ import { join } from 'path';
     }),
 
     AddressModule,
-    // AttributeModule,
-    // BrandModule,
-    // CategoryModule,
-    // ImageModule,
-    // OrderModule,
-    // ProductModule,
-    // ShopModule,
-    // TagModule,
-    // VariantModule,
+    UserModule,
+    SessionModule,
+    AttributeModule,
+    BrandModule,
+    CategoryModule,
+    ImageModule,
+    OrderModule,
+    ProductModule,
+    ShopModule,
+    TagModule,
+    VariantModule,
   ],
   controllers: [AppController],
   providers: [AppService],

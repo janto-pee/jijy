@@ -15,7 +15,7 @@ export class VariantResolver {
     return await this.VariantService.create(createVariantInput);
   }
 
-  @Query(() => [Variant], { name: 'Variant' })
+  @Query(() => [Variant], { name: 'Variants' })
   async findAll() {
     return await this.VariantService.findAll();
   }

@@ -15,12 +15,14 @@ export class AddressResolver {
     return await this.addressService.create(createAddressInput);
   }
 
-  @Query(() => [Address], { name: 'address' })
+  @Query(() => [Address], { name: 'Addresses' })
   async findAll() {
-    return await this.addressService.findAll();
+    const address = await this.addressService.findAll();
+    console.log('address resolver ...............................', address);
+    return address;
   }
 
-  @Query(() => Address, { name: 'address' })
+  @Query(() => Address, { name: 'Address' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return await this.addressService.findOne(id);
   }

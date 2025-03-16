@@ -15,12 +15,12 @@ export class OrderResolver {
     return await this.orderService.create(createOrderInput);
   }
 
-  @Query(() => [Order], { name: 'order' })
+  @Query(() => [Order], { name: 'Orders' })
   async findAll() {
     return await this.orderService.findAll();
   }
 
-  @Query(() => Order, { name: 'order' })
+  @Query(() => Order, { name: 'Order' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return await this.orderService.findOne(id);
   }

@@ -3,9 +3,6 @@ import { Field, InputType } from '@nestjs/graphql';
 @InputType()
 export class CreateProductInput {
   @Field()
-  id: string;
-
-  @Field()
   name: string;
 
   @Field()
@@ -15,7 +12,7 @@ export class CreateProductInput {
   parentSku: string;
 
   @Field()
-  shop: number;
+  shop: string;
 
   @Field()
   sellerSku: string;
@@ -23,30 +20,21 @@ export class CreateProductInput {
   @Field()
   barcode: string;
 
-  @Field()
-  variant: number;
+  // @Field()
+  // variant: number;
 
-  @Field()
-  brand: number;
+  // @Field()
+  // brand: number;
 
-  @Field()
-  category: number;
+  // @Field()
+  // category: number;
 
-  @Field()
-  image: number;
+  // @Field()
+  // image: number;
 
   @Field()
   price: string;
 
   @Field()
   stock: string;
-
-  @Field()
-  attribute: number;
-
-  @Field()
-  createdAt: Date;
-
-  @Field()
-  updatedAt: Date;
 }

@@ -13,7 +13,7 @@ export class TagResolver {
     return await this.TagService.create(createTagInput);
   }
 
-  @Query(() => [Tag], { name: 'Tag' })
+  @Query(() => [Tag], { name: 'Tags' })
   async findAll() {
     return await this.TagService.findAll();
   }

@@ -15,7 +15,7 @@ export class ProductResolver {
     return await this.productService.create(createProductInput);
   }
 
-  @Query(() => [Product], { name: 'Product' })
+  @Query(() => [Product], { name: 'Products' })
   async findAll() {
     return await this.productService.findAll();
   }

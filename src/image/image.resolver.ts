@@ -12,15 +12,19 @@ export class ImageResolver {
   async createImage(
     @Args('createImageInput') createImageInput: CreateImageInput,
   ) {
-    return this.imageService.create(createImageInput);
+    const image = await this.imageService.create(createImageInput);
+    console.log(image);
+    return image.dataValues;
   }
 
-  @Query(() => [Image], { name: 'image' })
+  @Query(() => [Image], { name: 'Images' })
   async findAll() {
-    return await this.imageService.findAll();
+    const images = await this.imageService.findAll();
+    console.log('imges resolver..........', images);
+    return images;
   }
 
-  @Query(() => Image, { name: 'image' })
+  @Query(() => Image, { name: 'Image' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return await this.imageService.findOne(id);
   }

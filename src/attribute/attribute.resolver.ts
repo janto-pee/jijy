@@ -12,31 +12,31 @@ export class AttributeResolver {
   async createAttribute(
     @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
   ) {
-    return this.attributeService.create(createAttributeInput);
+    return await this.attributeService.create(createAttributeInput);
   }
 
-  @Query(() => [Attribute], { name: 'attribute' })
-  findAll() {
-    return this.attributeService.findAll();
+  @Query(() => [Attribute], { name: 'Attributes' })
+  async findAll() {
+    return await this.attributeService.findAll();
   }
 
-  @Query(() => Attribute, { name: 'attribute' })
-  findOne(@Args('id', { type: () => String }) id: string) {
-    return this.attributeService.findOne(id);
+  @Query(() => Attribute, { name: 'Attribute' })
+  async findOne(@Args('id', { type: () => String }) id: string) {
+    return await this.attributeService.findOne(id);
   }
 
   @Mutation(() => Attribute)
-  updateAttribute(
+  async pdateAttribute(
     @Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput,
   ) {
-    return this.attributeService.update(
+    return await this.attributeService.update(
       updateAttributeInput.id,
       updateAttributeInput,
     );
   }
 
   @Mutation(() => Attribute)
-  removeAttribute(@Args('id', { type: () => String }) id: string) {
-    return this.attributeService.remove(id);
+  async removeAttribute(@Args('id', { type: () => String }) id: string) {
+    return await this.attributeService.remove(id);
   }
 }

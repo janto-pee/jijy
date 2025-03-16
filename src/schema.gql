@@ -14,6 +14,27 @@ type Address {
   street2: String!
 }
 
+type Attribute {
+  description: String!
+  mandatory: String!
+  name: String!
+  translatable: String!
+  type: String!
+  value: String!
+  variation: String!
+}
+
+type Brand {
+  code: Float!
+  name: String!
+}
+
+type Category {
+  code: Float!
+  description: String!
+  name: String!
+}
+
 input CreateAddressInput {
   city: String!
   country: String!
@@ -26,14 +47,177 @@ input CreateAddressInput {
   street2: String!
 }
 
+input CreateAttributeInput {
+  description: String!
+  mandatory: String!
+  name: String!
+  translatable: String!
+  type: String!
+  value: String!
+  variation: String!
+}
+
+input CreateBrandInput {
+  code: Float!
+  name: String!
+}
+
+input CreateCategoryInput {
+  code: String!
+  description: String!
+  name: String!
+}
+
+input CreateImageInput {
+  primary: Boolean!
+  url: String!
+}
+
+input CreateOrderInput {
+  businessClientCode: String!
+  comment: String!
+  shippingDate: String!
+}
+
+input CreateProductInput {
+  barcode: String!
+  description: String!
+  name: String!
+  parentSku: String!
+  price: String!
+  sellerSku: String!
+  shop: String!
+  stock: String!
+}
+
+input CreateSessionInput {
+  email: String!
+  password: String!
+}
+
+input CreateShopInput {
+  email: String!
+  name: String!
+}
+
+input CreateTagInput {
+  icon: String!
+  name: String!
+}
+
+input CreateUserInput {
+  email: String!
+  first_name: String!
+  last_name: String!
+  password: String!
+  username: String!
+}
+
+input CreateVariantInput {
+  icon: String!
+  name: String!
+}
+
+type Image {
+  primary: Boolean!
+  url: String!
+}
+
 type Mutation {
   createAddress(createAddressInput: CreateAddressInput!): Address!
+  createAttribute(createAttributeInput: CreateAttributeInput!): Attribute!
+  createBrand(createBrandInput: CreateBrandInput!): Brand!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createImage(createImageInput: CreateImageInput!): Image!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  createSession(createSessionInput: CreateSessionInput!): Session!
+  createShop(createShopInput: CreateShopInput!): Shop!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  createUser(createUserInput: CreateUserInput!): User!
+  createVariant(createVariantInput: CreateVariantInput!): Variant!
+  pdateAttribute(updateAttributeInput: UpdateAttributeInput!): Attribute!
   removeAddress(id: String!): Address!
+  removeAttribute(id: String!): Attribute!
+  removeBrand(id: String!): Brand!
+  removeCategory(id: String!): Category!
+  removeImage(id: String!): Image!
+  removeOrder(id: String!): Order!
+  removeProduct(id: String!): Product!
+  removeSession(id: String!): Session!
+  removeShop(id: String!): Shop!
+  removeTag(id: String!): Tag!
+  removeUser(id: String!): User!
+  removeVariant(id: String!): Variant!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  updateBrand(updateBrandInput: UpdateBrandInput!): Brand!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateImage(updateImageInput: UpdateImageInput!): Image!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  updateSession(updateSessionInput: UpdateSessionInput!): Session!
+  updateShop(updateShopInput: UpdateShopInput!): Shop!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  updateVariant(updateVariantInput: UpdateVariantInput!): Variant!
+}
+
+type Order {
+  businessClientCode: String!
+  comment: String!
+  shippingDate: String!
+}
+
+type Product {
+  barcode: String!
+  description: String!
+  name: String!
+  parentSku: String!
+  price: String!
+  sellerSku: String!
+  stock: String!
 }
 
 type Query {
-  address(id: String!): Address!
+  Address(id: String!): Address!
+  Addresses: [Address!]!
+  Attribute(id: String!): Attribute!
+  Attributes: [Attribute!]!
+  Brand(id: String!): Brand!
+  Brands: [Brand!]!
+  Category(id: String!): Category!
+  Categorys: [Category!]!
+  Image(id: String!): Image!
+  Images: [Image!]!
+  Order(id: String!): Order!
+  Orders: [Order!]!
+  Product(id: String!): Product!
+  Products: [Product!]!
+  Shop(id: String!): Shop!
+  Shops: [Shop!]!
+  Tag(id: String!): Tag!
+  Tags: [Tag!]!
+  User(id: String!): User!
+  Users: [User!]!
+  Variant(id: String!): Variant!
+  Variants: [Variant!]!
+  session(id: String!): Session!
+  sessions: [Session!]!
+}
+
+type Session {
+  userAgent: String!
+  valid: Boolean!
+}
+
+type Shop {
+  email: String!
+  name: String!
+}
+
+type Tag {
+  icon: String!
+  name: String!
 }
 
 input UpdateAddressInput {
@@ -47,4 +231,85 @@ input UpdateAddressInput {
   state_province_name: String
   street: String
   street2: String
+}
+
+input UpdateAttributeInput {
+  description: String
+  id: String!
+  mandatory: String
+  name: String
+  translatable: String
+  type: String
+  value: String
+  variation: String
+}
+
+input UpdateBrandInput {
+  code: Float
+  id: String!
+  name: String
+}
+
+input UpdateCategoryInput {
+  code: String
+  description: String
+  id: String!
+  name: String
+}
+
+input UpdateImageInput {
+  id: String!
+  primary: Boolean
+  url: String
+}
+
+input UpdateOrderInput {
+  businessClientCode: String
+  comment: String
+  id: String!
+  shippingDate: String
+}
+
+input UpdateProductInput {
+  id: String!
+}
+
+input UpdateSessionInput {
+  email: String
+  id: String!
+  password: String
+}
+
+input UpdateShopInput {
+  id: String!
+}
+
+input UpdateTagInput {
+  id: String!
+}
+
+input UpdateUserInput {
+  email: String
+  first_name: String
+  id: String!
+  last_name: String
+  password: String
+  username: String
+}
+
+input UpdateVariantInput {
+  id: String!
+}
+
+type User {
+  email: String!
+  first_name: String!
+  last_name: String!
+  password: String!
+  username: String!
+}
+
+type Variant {
+  icon: String!
+  name: String!
 }

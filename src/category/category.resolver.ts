@@ -15,12 +15,12 @@ export class CategoryResolver {
     return await this.categoryService.create(createCategoryInput);
   }
 
-  @Query(() => [Category], { name: 'category' })
+  @Query(() => [Category], { name: 'Categorys' })
   async findAll() {
     return await this.categoryService.findAll();
   }
 
-  @Query(() => Category, { name: 'category' })
+  @Query(() => Category, { name: 'Category' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return await this.categoryService.findOne(id);
   }

@@ -1,10 +1,10 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
-export class CreateBrandInput {
+export class CreateSessionInput {
   @Field()
-  code: number;
+  email: string;
 
   @Field()
-  name: string;
+  password: string;
 }

@@ -23,6 +23,7 @@ export class Image extends Model {
   @Field()
   url: string;
 
+  @Default(false)
   @Column
   @Field()
   primary: boolean;

@@ -16,7 +16,9 @@ export class ImageService {
   }
 
   async findAll(): Promise<Image[]> {
-    return await this.ImagesRepository.findAll<Image>();
+    const images = await this.ImagesRepository.findAll<Image>();
+    console.log('find all ............', images);
+    return images;
   }
 
   async findOne(id: string): Promise<Image> {

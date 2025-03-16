@@ -15,12 +15,12 @@ export class BrandResolver {
     return await this.brandService.create(createBrandInput);
   }
 
-  @Query(() => [Brand], { name: 'brand' })
+  @Query(() => [Brand], { name: 'Brands' })
   async findAll() {
     return await this.brandService.findAll();
   }
 
-  @Query(() => Brand, { name: 'brand' })
+  @Query(() => Brand, { name: 'Brand' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return await this.brandService.findOne(id);
   }
