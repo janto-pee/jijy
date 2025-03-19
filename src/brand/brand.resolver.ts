@@ -12,7 +12,7 @@ export class BrandResolver {
   async createBrand(
     @Args('createBrandInput') createBrandInput: CreateBrandInput,
   ) {
-    return await this.brandService.create(createBrandInput);
+    return (await this.brandService.create(createBrandInput)).dataValues;
   }
 
   @Query(() => [Brand], { name: 'Brands' })
@@ -22,21 +22,30 @@ export class BrandResolver {
 
   @Query(() => Brand, { name: 'Brand' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.brandService.findOne(id);
+    const data = await this.brandService.findOne(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Brand)
   async updateBrand(
     @Args('updateBrandInput') updateBrandInput: UpdateBrandInput,
   ) {
-    return await this.brandService.update(
+    const data = await this.brandService.update(
       updateBrandInput.id,
       updateBrandInput,
     );
+    return data.dataValues;
   }
 
   @Mutation(() => Brand)
   async removeBrand(@Args('id', { type: () => String }) id: string) {
-    return await this.brandService.remove(id);
+    const data = await this.brandService.remove(id);
+    if (!data) {
+      throw new Error('address not found');
+    }
+    return data.dataValues;
   }
 }

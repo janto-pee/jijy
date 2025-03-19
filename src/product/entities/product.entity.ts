@@ -8,7 +8,14 @@ import {
   PrimaryKey,
   DataType,
   Default,
+  HasOne,
 } from 'sequelize-typescript';
+import { Attribute } from 'src/attribute/entities/attribute.entity';
+import { Brand } from 'src/brand/entities/brand.entity';
+import { Category } from 'src/category/entities/category.entity';
+import { Image } from 'src/image/entities/image.entity';
+import { Shop } from 'src/shop/entities/shop.entity';
+import { Variant } from 'src/variant/entities/variant.entity';
 
 @Table
 @ObjectType()
@@ -38,20 +45,20 @@ export class Product extends Model {
   @Field()
   barcode: string;
 
-  // @HasOne(() => Variant, 'id')
-  // variant: Variant;
+  @HasOne(() => Variant, 'id')
+  variant: Variant;
 
-  // @HasOne(() => Shop, 'id')
-  // shop: Shop;
+  @HasOne(() => Shop, 'id')
+  shop: Shop;
 
-  // @HasOne(() => Brand, 'id')
-  // brand: Brand;
+  @HasOne(() => Brand, 'id')
+  brand: Brand;
 
-  // @HasOne(() => Category, 'id')
-  // category: Category;
+  @HasOne(() => Category, 'id')
+  category: Category;
 
-  // @HasOne(() => Image, 'id')
-  // image: Image;
+  @HasOne(() => Image, 'id')
+  image: Image;
 
   @Column
   @Field()
@@ -61,8 +68,8 @@ export class Product extends Model {
   @Field()
   stock: string;
 
-  // @HasOne(() => Attribute, 'id')
-  // attribute: Attribute;
+  @HasOne(() => Attribute, 'id')
+  attribute: Attribute;
 
   @CreatedAt
   declare createdAt: Date;

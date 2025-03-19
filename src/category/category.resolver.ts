@@ -12,7 +12,7 @@ export class CategoryResolver {
   async createCategory(
     @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
   ) {
-    return await this.categoryService.create(createCategoryInput);
+    return (await this.categoryService.create(createCategoryInput)).dataValues;
   }
 
   @Query(() => [Category], { name: 'Categorys' })
@@ -22,21 +22,30 @@ export class CategoryResolver {
 
   @Query(() => Category, { name: 'Category' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.categoryService.findOne(id);
+    const data = await this.categoryService.findOne(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Category)
   async updateCategory(
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
   ) {
-    return await this.categoryService.update(
+    const data = await this.categoryService.update(
       updateCategoryInput.id,
       updateCategoryInput,
     );
+    return data.dataValues;
   }
 
   @Mutation(() => Category)
   async removeCategory(@Args('id', { type: () => String }) id: string) {
-    return await this.categoryService.remove(id);
+    const data = await this.categoryService.remove(id);
+    if (!data) {
+      throw new Error('address not found');
+    }
+    return data.dataValues;
   }
 }

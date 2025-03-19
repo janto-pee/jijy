@@ -12,7 +12,8 @@ export class AttributeResolver {
   async createAttribute(
     @Args('createAttributeInput') createAttributeInput: CreateAttributeInput,
   ) {
-    return await this.attributeService.create(createAttributeInput);
+    return (await this.attributeService.create(createAttributeInput))
+      .dataValues;
   }
 
   @Query(() => [Attribute], { name: 'Attributes' })
@@ -22,21 +23,30 @@ export class AttributeResolver {
 
   @Query(() => Attribute, { name: 'Attribute' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.attributeService.findOne(id);
+    const data = await this.attributeService.findOne(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Attribute)
-  async pdateAttribute(
+  async updateAttribute(
     @Args('updateAttributeInput') updateAttributeInput: UpdateAttributeInput,
   ) {
-    return await this.attributeService.update(
+    const data = await this.attributeService.update(
       updateAttributeInput.id,
       updateAttributeInput,
     );
+    return data.dataValues;
   }
 
   @Mutation(() => Attribute)
   async removeAttribute(@Args('id', { type: () => String }) id: string) {
-    return await this.attributeService.remove(id);
+    const data = await this.attributeService.remove(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 }

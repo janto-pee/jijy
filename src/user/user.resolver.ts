@@ -10,7 +10,8 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return await this.userService.create(createUserInput);
+    const user = (await this.userService.create(createUserInput)).dataValues;
+    return user;
   }
 
   @Query(() => [User], { name: 'Users' })
@@ -20,16 +21,17 @@ export class UserResolver {
 
   @Query(() => User, { name: 'User' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.userService.findOne(id);
+    return (await this.userService.findOne(id)).dataValues;
   }
 
   @Mutation(() => User)
   async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return await this.userService.update(updateUserInput.id, updateUserInput);
+    return (await this.userService.update(updateUserInput.id, updateUserInput))
+      .dataValues;
   }
 
   @Mutation(() => User)
   async removeUser(@Args('id', { type: () => String }) id: string) {
-    return await this.userService.remove(id);
+    return (await this.userService.remove(id)).dataValues;
   }
 }

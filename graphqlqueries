@@ -1,23 +1,4 @@
 mutation CreateAddress {
-    createUser(
-        createUserInput: {
-            username: "string5"
-            email: "string5"
-            password: "abcd"
-            first_name: "laka"
-            last_name: "bosch"
-        }
-    ) {
-        email
-        first_name
-        last_name
-        password
-        username
-    }
-    createSession(createSessionInput: { email: "string", password: "abcd" }) {
-        userAgent
-        valid
-    }
     createAddress(
         createAddressInput: {
             city: "city"
@@ -65,7 +46,7 @@ mutation CreateAddress {
         name
     }
     createCategory(
-        createCategoryInput: { code: "category", description: "string", name: "string" }
+        createCategoryInput: { code: 2.0, description: "string", name: "string" }
     ) {
         code
         description
@@ -111,6 +92,61 @@ mutation CreateAddress {
     }
     createVariant(createVariantInput: { icon: "icon", name: "name" }) {
         icon
+        name
+    }
+}
+
+
+query Addresses {
+    Addresses {
+        city
+        country
+        country_code
+        location
+        postal_code
+        state_province_code
+        state_province_name
+        street
+        street2
+    }
+    Attributes {
+        description
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+    Brands {
+        code
+        name
+    }
+    Categorys {
+        code
+        description
+        name
+    }
+    Images {
+        primary
+        url
+    }
+    Orders {
+        businessClientCode
+        comment
+        shippingDate
+    }
+    Products {
+        barcode
+        description
+        name
+        parentSku
+        price
+        sellerSku
+        stock
+    }
+    Shops {
+        email
         name
     }
 }

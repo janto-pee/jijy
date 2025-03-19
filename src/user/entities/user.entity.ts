@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Model } from 'sequelize';
 import {
   Column,
   CreatedAt,
@@ -9,6 +8,7 @@ import {
   Table,
   Unique,
   UpdatedAt,
+  Model,
 } from 'sequelize-typescript';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
@@ -31,8 +31,8 @@ export class User extends Model {
   @Field()
   email: string;
 
-  // @Column
-  // AddressId: number;
+  @Column
+  AddressId: number;
 
   @Column
   @Field()
@@ -59,8 +59,8 @@ export class User extends Model {
   is_email_verified: boolean;
 
   @CreatedAt
-  createdAt: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
-  updatedAt: Date;
+  declare updatedAt: Date;
 }

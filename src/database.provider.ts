@@ -8,6 +8,7 @@ import { Image } from './image/entities/image.entity';
 import { Product } from './product/entities/product.entity';
 import { Shop } from './shop/entities/shop.entity';
 import { Tag } from './tag/entities/tag.entity';
+import { User } from './user/entities/user.entity';
 import { Variant } from './variant/entities/variant.entity';
 
 export const databaseProviders = [
@@ -34,6 +35,7 @@ export const databaseProviders = [
         Shop,
         Tag,
         Variant,
+        User,
       ]);
       await sequelize.sync();
       return sequelize;

@@ -12,7 +12,7 @@ export class VariantResolver {
   async createVariant(
     @Args('createVariantInput') createVariantInput: CreateVariantInput,
   ) {
-    return await this.VariantService.create(createVariantInput);
+    return (await this.VariantService.create(createVariantInput)).dataValues;
   }
 
   @Query(() => [Variant], { name: 'Variants' })
@@ -22,21 +22,23 @@ export class VariantResolver {
 
   @Query(() => Variant, { name: 'Variant' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.VariantService.findOne(id);
+    return (await this.VariantService.findOne(id)).dataValues;
   }
 
   @Mutation(() => Variant)
   async updateVariant(
     @Args('updateVariantInput') updateVariantInput: UpdateVariantInput,
   ) {
-    return await this.VariantService.update(
-      updateVariantInput.id,
-      updateVariantInput,
-    );
+    return (
+      await this.VariantService.update(
+        updateVariantInput.id,
+        updateVariantInput,
+      )
+    ).dataValues;
   }
 
   @Mutation(() => Variant)
   async removeVariant(@Args('id', { type: () => String }) id: string) {
-    return await this.VariantService.remove(id);
+    return (await this.VariantService.remove(id)).dataValues;
   }
 }

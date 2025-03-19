@@ -12,7 +12,7 @@ export class OrderResolver {
   async createOrder(
     @Args('createOrderInput') createOrderInput: CreateOrderInput,
   ) {
-    return await this.orderService.create(createOrderInput);
+    return (await this.orderService.create(createOrderInput)).dataValues;
   }
 
   @Query(() => [Order], { name: 'Orders' })
@@ -22,21 +22,30 @@ export class OrderResolver {
 
   @Query(() => Order, { name: 'Order' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.orderService.findOne(id);
+    const data = await this.orderService.findOne(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Order)
   async updateOrder(
     @Args('updateOrderInput') updateOrderInput: UpdateOrderInput,
   ) {
-    return await this.orderService.update(
+    const data = await this.orderService.update(
       updateOrderInput.id,
       updateOrderInput,
     );
+    return data.dataValues;
   }
 
   @Mutation(() => Order)
   async removeOrder(@Args('id', { type: () => String }) id: string) {
-    return await this.orderService.remove(id);
+    const data = await this.orderService.remove(id);
+    if (!data) {
+      throw new Error('address not found');
+    }
+    return data.dataValues;
   }
 }

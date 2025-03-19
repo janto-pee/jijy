@@ -16,7 +16,7 @@ export class BrandService {
   }
 
   async findAll(): Promise<Brand[]> {
-    return await this.brandRepository.findAll<Brand>();
+    return await this.brandRepository.findAll<Brand>({ raw: true });
   }
 
   async findOne(id: string) {

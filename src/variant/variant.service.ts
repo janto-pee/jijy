@@ -16,7 +16,7 @@ export class VariantService {
   }
 
   async findAll(): Promise<Variant[]> {
-    return await this.VariantsRepository.findAll<Variant>();
+    return await this.VariantsRepository.findAll<Variant>({ raw: true });
   }
 
   async findOne(id: string): Promise<Variant> {

@@ -1,15 +1,18 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
   Default,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { User } from 'src/user/entities/user.entity';
 
 @Table
 @ObjectType()
@@ -65,8 +68,6 @@ export class Address extends Model {
   // user: User;
 
   // @ForeignKey(() => User)
-  // @Column({
-  //   field: 'user_id',
-  // })
+  // @Column
   // userId: string;
 }

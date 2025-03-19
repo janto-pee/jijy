@@ -10,14 +10,13 @@ export class AddressService {
     private addresssRepository: typeof Address,
   ) {}
   async create(createAddressInput: CreateAddressInput): Promise<Address> {
-    console.log('check point 1....', createAddressInput);
     return await this.addresssRepository.create({
       ...createAddressInput,
     });
   }
 
   async findAll(): Promise<Address[]> {
-    return await this.addresssRepository.findAll<Address>();
+    return await this.addresssRepository.findAll<Address>({ raw: true });
   }
 
   async findOne(id: string) {

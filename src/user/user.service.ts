@@ -10,13 +10,17 @@ export class UserService {
     private userRepository: typeof User,
   ) {}
   async create(createUserInput: CreateUserInput): Promise<User> {
-    return await this.userRepository.create({
+    const user = await this.userRepository.create({
       ...createUserInput,
     });
+    // await user.save();
+    // delete user.dataValues.password;
+    console.log('create user', createUserInput, 'user', user);
+    return user;
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.findAll<User>();
+    return await this.userRepository.findAll<User>({ raw: true });
   }
 
   async findOne(id: string): Promise<User> {

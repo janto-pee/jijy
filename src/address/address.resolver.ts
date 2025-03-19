@@ -12,33 +12,38 @@ export class AddressResolver {
   async createAddress(
     @Args('createAddressInput') createAddressInput: CreateAddressInput,
   ) {
-    return await this.addressService.create(createAddressInput);
+    return (await this.addressService.create(createAddressInput)).dataValues;
   }
 
   @Query(() => [Address], { name: 'Addresses' })
   async findAll() {
     const address = await this.addressService.findAll();
-    console.log('address resolver ...............................', address);
     return address;
   }
 
   @Query(() => Address, { name: 'Address' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.addressService.findOne(id);
+    const address = await this.addressService.findOne(id);
+    if (!address) {
+      throw new Error('address not found');
+    }
+    return address.dataValues;
   }
 
   @Mutation(() => Address)
   async updateAddress(
     @Args('updateAddressInput') updateAddressInput: UpdateAddressInput,
   ) {
-    return await this.addressService.update(
+    const address = await this.addressService.update(
       updateAddressInput.id,
       updateAddressInput,
     );
+    return address.dataValues;
   }
 
   @Mutation(() => Address)
   async removeAddress(@Args('id', { type: () => String }) id: string) {
-    return await this.addressService.remove(id);
+    const address = await this.addressService.remove(id);
+    return address.dataValues;
   }
 }

@@ -16,7 +16,7 @@ export class ShopService {
   }
 
   async findAll(): Promise<Shop[]> {
-    return await this.ShopsRepository.findAll<Shop>();
+    return await this.ShopsRepository.findAll<Shop>({ raw: true });
   }
 
   async findOne(id: string): Promise<Shop> {

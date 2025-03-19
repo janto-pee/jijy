@@ -7,7 +7,9 @@ import {
   Table,
   Default,
   DataType,
+  HasMany,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 
 @Table
 @ObjectType()
@@ -29,6 +31,6 @@ export class Category extends Model {
   @Field()
   description: string;
 
-  // @HasMany(() => Product, /* foreign key */ 'id')
-  // Products?: Product[];
+  @HasMany(() => Product, /* foreign key */ 'id')
+  Products?: Product[];
 }

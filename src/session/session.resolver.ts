@@ -1,42 +1,37 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SessionService } from './session.service';
-import { Session } from './entities/session.entity';
 import { CreateSessionInput } from './dto/create-session.input';
-import { UpdateSessionInput } from './dto/update-session.input';
+import { SessionResponse } from './dto/session-response';
+import { GqlAuthGuard } from './session.guard';
+import { Request, UseGuards } from '@nestjs/common';
+import { User } from 'src/user/entities/user.entity';
+import { SessionProfile } from './dto/profile-session';
 
-@Resolver(() => Session)
+@Resolver()
 export class SessionResolver {
   constructor(private readonly sessionService: SessionService) {}
 
-  @Mutation(() => Session)
-  async createSession(
+  @Mutation(() => SessionResponse)
+  async login(
     @Args('createSessionInput') createSessionInput: CreateSessionInput,
   ) {
-    return await this.sessionService.create(createSessionInput);
-  }
-
-  @Query(() => [Session], { name: 'sessions' })
-  async findAll() {
-    return await this.sessionService.findAll();
-  }
-
-  @Query(() => Session, { name: 'session' })
-  async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.sessionService.findOne(id);
-  }
-
-  @Mutation(() => Session)
-  async updateSession(
-    @Args('updateSessionInput') updateSessionInput: UpdateSessionInput,
-  ) {
-    return await this.sessionService.update(
-      updateSessionInput.id,
-      updateSessionInput,
+    return await this.sessionService.signIn(
+      createSessionInput.email,
+      createSessionInput.password,
     );
   }
 
-  @Mutation(() => Session)
-  async removeSession(@Args('id', { type: () => String }) id: string) {
-    return await this.sessionService.remove(id);
+  // @UseGuards(AuthGuard)
+  // @Get('profile')
+
+  @UseGuards(GqlAuthGuard)
+  @Query(() => SessionProfile)
+  getProfile(@Request() req) {
+    console.log(
+      req,
+      'req.header....................................................',
+      req.header,
+    );
+    return req.user;
   }
 }

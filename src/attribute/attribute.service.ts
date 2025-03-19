@@ -16,7 +16,7 @@ export class AttributeService {
   }
 
   async findAll(): Promise<Attribute[]> {
-    return await this.attributeRepository.findAll<Attribute>();
+    return await this.attributeRepository.findAll<Attribute>({ raw: true });
   }
 
   async findOne(id: string) {

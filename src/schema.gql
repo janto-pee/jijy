@@ -63,7 +63,7 @@ input CreateBrandInput {
 }
 
 input CreateCategoryInput {
-  code: String!
+  code: Float!
   description: String!
   name: String!
 }
@@ -131,12 +131,11 @@ type Mutation {
   createImage(createImageInput: CreateImageInput!): Image!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
-  createSession(createSessionInput: CreateSessionInput!): Session!
   createShop(createShopInput: CreateShopInput!): Shop!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   createVariant(createVariantInput: CreateVariantInput!): Variant!
-  pdateAttribute(updateAttributeInput: UpdateAttributeInput!): Attribute!
+  login(createSessionInput: CreateSessionInput!): SessionResponse!
   removeAddress(id: String!): Address!
   removeAttribute(id: String!): Attribute!
   removeBrand(id: String!): Brand!
@@ -144,18 +143,17 @@ type Mutation {
   removeImage(id: String!): Image!
   removeOrder(id: String!): Order!
   removeProduct(id: String!): Product!
-  removeSession(id: String!): Session!
   removeShop(id: String!): Shop!
   removeTag(id: String!): Tag!
   removeUser(id: String!): User!
   removeVariant(id: String!): Variant!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  updateAttribute(updateAttributeInput: UpdateAttributeInput!): Attribute!
   updateBrand(updateBrandInput: UpdateBrandInput!): Brand!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   updateImage(updateImageInput: UpdateImageInput!): Image!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
-  updateSession(updateSessionInput: UpdateSessionInput!): Session!
   updateShop(updateShopInput: UpdateShopInput!): Shop!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
   updateUser(updateUserInput: UpdateUserInput!): User!
@@ -201,13 +199,18 @@ type Query {
   Users: [User!]!
   Variant(id: String!): Variant!
   Variants: [Variant!]!
-  session(id: String!): Session!
-  sessions: [Session!]!
+  getProfile: SessionProfile!
 }
 
-type Session {
-  userAgent: String!
-  valid: Boolean!
+type SessionProfile {
+  email: String!
+  first_name: String!
+  last_name: String!
+  username: String!
+}
+
+type SessionResponse {
+  access_token: String!
 }
 
 type Shop {
@@ -251,7 +254,7 @@ input UpdateBrandInput {
 }
 
 input UpdateCategoryInput {
-  code: String
+  code: Float
   description: String
   id: String!
   name: String
@@ -272,12 +275,6 @@ input UpdateOrderInput {
 
 input UpdateProductInput {
   id: String!
-}
-
-input UpdateSessionInput {
-  email: String
-  id: String!
-  password: String
 }
 
 input UpdateShopInput {

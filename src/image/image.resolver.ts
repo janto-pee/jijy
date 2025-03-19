@@ -12,9 +12,8 @@ export class ImageResolver {
   async createImage(
     @Args('createImageInput') createImageInput: CreateImageInput,
   ) {
-    const image = await this.imageService.create(createImageInput);
-    console.log(image);
-    return image.dataValues;
+    const image = (await this.imageService.create(createImageInput)).dataValues;
+    return image;
   }
 
   @Query(() => [Image], { name: 'Images' })
@@ -26,21 +25,33 @@ export class ImageResolver {
 
   @Query(() => Image, { name: 'Image' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.imageService.findOne(id);
+    const data = await this.imageService.findOne(id);
+    if (!data) {
+      throw new Error('data not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Image)
   async updateImage(
     @Args('updateImageInput') updateImageInput: UpdateImageInput,
   ) {
-    return await this.imageService.update(
+    const data = await this.imageService.update(
       updateImageInput.id,
       updateImageInput,
     );
+    if (!data) {
+      throw new Error('address not found');
+    }
+    return data.dataValues;
   }
 
   @Mutation(() => Image)
   async removeImage(@Args('id', { type: () => String }) id: string) {
-    return await this.imageService.remove(id);
+    const data = await this.imageService.remove(id);
+    if (!data) {
+      throw new Error('address not found');
+    }
+    return data.dataValues;
   }
 }

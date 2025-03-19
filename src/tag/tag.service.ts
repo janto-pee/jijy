@@ -16,7 +16,7 @@ export class TagService {
   }
 
   async findAll(): Promise<Tag[]> {
-    return await this.TagsRepository.findAll<Tag>();
+    return await this.TagsRepository.findAll<Tag>({ raw: true });
   }
 
   async findOne(id: string): Promise<Tag> {

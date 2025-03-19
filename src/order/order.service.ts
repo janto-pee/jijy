@@ -16,7 +16,7 @@ export class OrderService {
   }
 
   async findAll(): Promise<Order[]> {
-    return await this.OrdersRepository.findAll<Order>();
+    return await this.OrdersRepository.findAll<Order>({ raw: true });
   }
 
   async findOne(id: string): Promise<Order> {

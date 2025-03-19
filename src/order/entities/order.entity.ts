@@ -11,6 +11,8 @@ import {
   Default,
   DataType,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
+import { Shop } from 'src/shop/entities/shop.entity';
 // import { Product } from 'src/product/entities/product.entity';
 // import { Shop } from 'src/shop/entities/shop.entity';
 
@@ -34,11 +36,11 @@ export class Order extends Model {
   @Field()
   comment: string;
 
-  // @HasOne(() => Shop, 'id')
-  // shop: Shop;
+  @HasOne(() => Shop, 'id')
+  shop: Shop;
 
-  // @HasOne(() => Product, 'id')
-  // product: Product;
+  @HasOne(() => Product, 'id')
+  product: Product;
 
   @CreatedAt
   declare createdAt: Date;

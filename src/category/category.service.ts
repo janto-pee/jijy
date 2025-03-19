@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   async findAll(): Promise<Category[]> {
-    return await this.categoryRepository.findAll<Category>();
+    return await this.categoryRepository.findAll<Category>({ raw: true });
   }
 
   async findOne(id: string): Promise<Category> {

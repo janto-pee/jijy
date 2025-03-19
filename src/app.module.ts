@@ -14,20 +14,23 @@ import { ShopModule } from './shop/shop.module';
 import { TagModule } from './tag/tag.module';
 import { VariantModule } from './variant/variant.module';
 import { join } from 'path';
-import { UserModule } from './user/user.module';
 import { SessionModule } from './session/session.module';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from 'config/configuration';
 
 @Module({
   imports: [
+    // ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context: ({ req, res }) => ({ req, res }),
       sortSchema: true,
     }),
 
-    AddressModule,
-    UserModule,
     SessionModule,
+    AddressModule,
     AttributeModule,
     BrandModule,
     CategoryModule,
@@ -37,6 +40,7 @@ import { SessionModule } from './session/session.module';
     ShopModule,
     TagModule,
     VariantModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,13 +10,18 @@ export class ProductService {
     private ProductsRepository: typeof Product,
   ) {}
   async create(createProductInput: CreateProductInput): Promise<Product> {
-    return await this.ProductsRepository.create({
-      ...createProductInput,
-    });
+    return await this.ProductsRepository.create(
+      {
+        ...createProductInput,
+      },
+      { raw: true },
+    );
   }
 
   async findAll(): Promise<Product[]> {
-    return await this.ProductsRepository.findAll<Product>();
+    return await this.ProductsRepository.findAll<Product>({
+      raw: true,
+    });
   }
 
   async findOne(id: string): Promise<Product> {

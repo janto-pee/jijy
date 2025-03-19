@@ -10,7 +10,7 @@ export class TagResolver {
 
   @Mutation(() => Tag)
   async createTag(@Args('createTagInput') createTagInput: CreateTagInput) {
-    return await this.TagService.create(createTagInput);
+    return (await this.TagService.create(createTagInput)).dataValues;
   }
 
   @Query(() => [Tag], { name: 'Tags' })
@@ -20,16 +20,17 @@ export class TagResolver {
 
   @Query(() => Tag, { name: 'Tag' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return await this.TagService.findOne(id);
+    return (await this.TagService.findOne(id)).dataValues;
   }
 
   @Mutation(() => Tag)
   async updateTag(@Args('updateTagInput') updateTagInput: UpdateTagInput) {
-    return await this.TagService.update(updateTagInput.id, updateTagInput);
+    return (await this.TagService.update(updateTagInput.id, updateTagInput))
+      .dataValues;
   }
 
   @Mutation(() => Tag)
   async removeTag(@Args('id', { type: () => String }) id: string) {
-    return await this.TagService.remove(id);
+    return (await this.TagService.remove(id)).dataValues;
   }
 }
