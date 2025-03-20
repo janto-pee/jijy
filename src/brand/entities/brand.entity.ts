@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { NonAttribute } from 'sequelize';
 import {
   Table,
   Column,
@@ -8,7 +9,11 @@ import {
   PrimaryKey,
   DataType,
   Default,
+  HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
+import { Shop } from 'src/shop/entities/shop.entity';
 
 @Table
 @ObjectType()
@@ -26,9 +31,18 @@ export class Brand extends Model {
   @Field()
   name: string;
 
+  @HasMany(() => Product, /* foreign key */ 'brandId')
+  declare products?: NonAttribute<Product[]>;
+
   @CreatedAt
   declare createdAt: Date;
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  /**
+   * RESOLVERS
+   */
+  @Field(() => [Product])
+  product: Product;
 }

@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { NonAttribute } from 'sequelize';
 import {
   Column,
   Model,
@@ -31,6 +32,6 @@ export class Category extends Model {
   @Field()
   description: string;
 
-  @HasMany(() => Product, /* foreign key */ 'id')
-  Products?: Product[];
+  @HasMany(() => Product, /* foreign key */ 'categoryId')
+  declare products?: NonAttribute<Product[]>;
 }

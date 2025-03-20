@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import {
+  AllowNull,
   AutoIncrement,
   BelongsTo,
   Column,
@@ -8,8 +9,10 @@ import {
   Default,
   ForeignKey,
   Model,
+  NotNull,
   PrimaryKey,
   Table,
+  Unique,
   UpdatedAt,
 } from 'sequelize-typescript';
 import { User } from 'src/user/entities/user.entity';
@@ -20,6 +23,7 @@ export class Address extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
+  // @Field(() => ID)
   declare id: string;
 
   @Column
@@ -58,16 +62,20 @@ export class Address extends Model {
   @Field()
   country: string;
 
+  // @NotNull
+  @Unique
+  @Column(DataType.UUID)
+  declare userId: string;
+
   @CreatedAt
   declare createdAt: Date;
 
   @UpdatedAt
   declare updatedAt: Date;
 
-  // @BelongsTo(() => User)
-  // user: User;
-
-  // @ForeignKey(() => User)
-  // @Column
-  // userId: string;
+  /**
+   * RESOLVERS
+   */
+  @Field(() => User)
+  user: User;
 }

@@ -12,12 +12,14 @@ type Address {
   state_province_name: String!
   street: String!
   street2: String!
+  user: User!
 }
 
 type Attribute {
   description: String!
   mandatory: String!
   name: String!
+  product: Product!
   translatable: String!
   type: String!
   value: String!
@@ -27,6 +29,7 @@ type Attribute {
 type Brand {
   code: Float!
   name: String!
+  product: [Product!]!
 }
 
 type Category {
@@ -45,12 +48,14 @@ input CreateAddressInput {
   state_province_name: String!
   street: String!
   street2: String!
+  userId: String!
 }
 
 input CreateAttributeInput {
   description: String!
   mandatory: String!
   name: String!
+  productId: String!
   translatable: String!
   type: String!
   value: String!
@@ -70,6 +75,8 @@ input CreateCategoryInput {
 
 input CreateImageInput {
   primary: Boolean!
+  product: String!
+  shopId: String!
   url: String!
 }
 
@@ -81,13 +88,17 @@ input CreateOrderInput {
 
 input CreateProductInput {
   barcode: String!
+  brandId: Float!
+  categoryId: Float!
   description: String!
+  image: Float!
   name: String!
   parentSku: String!
   price: String!
   sellerSku: String!
-  shop: String!
+  shopId: String!
   stock: String!
+  variantId: Float!
 }
 
 input CreateSessionInput {
@@ -103,6 +114,7 @@ input CreateShopInput {
 input CreateTagInput {
   icon: String!
   name: String!
+  productId: String!
 }
 
 input CreateUserInput {
@@ -167,13 +179,20 @@ type Order {
 }
 
 type Product {
+  Shops: Shop!
+  attributes: Attribute!
   barcode: String!
+  brands: Brand!
+  categorys: Category!
   description: String!
+  image: [Image!]!
   name: String!
   parentSku: String!
   price: String!
   sellerSku: String!
   stock: String!
+  tag: [Tag!]!
+  variants: Variant!
 }
 
 type Query {
@@ -216,6 +235,7 @@ type SessionResponse {
 type Shop {
   email: String!
   name: String!
+  order: [Order!]!
 }
 
 type Tag {
@@ -234,6 +254,7 @@ input UpdateAddressInput {
   state_province_name: String
   street: String
   street2: String
+  userId: String
 }
 
 input UpdateAttributeInput {
@@ -241,6 +262,7 @@ input UpdateAttributeInput {
   id: String!
   mandatory: String
   name: String
+  productId: String
   translatable: String
   type: String
   value: String
@@ -263,6 +285,8 @@ input UpdateCategoryInput {
 input UpdateImageInput {
   id: String!
   primary: Boolean
+  product: String
+  shopId: String
   url: String
 }
 
@@ -299,6 +323,7 @@ input UpdateVariantInput {
 }
 
 type User {
+  addresses: Address!
   email: String!
   first_name: String!
   last_name: String!

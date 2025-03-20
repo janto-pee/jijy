@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { NonAttribute } from 'sequelize';
 
 import {
   Table,
@@ -9,7 +10,12 @@ import {
   PrimaryKey,
   DataType,
   Default,
+  BelongsTo,
+  ForeignKey,
+  Unique,
+  HasMany,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 
 @Table
 @ObjectType()
@@ -27,6 +33,9 @@ export class Image extends Model {
   @Column
   @Field()
   primary: boolean;
+
+  @Column(DataType.UUID)
+  declare productId: string;
 
   @CreatedAt
   declare createdAt: Date;

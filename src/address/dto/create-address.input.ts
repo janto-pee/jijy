@@ -28,4 +28,7 @@ export class CreateAddressInput {
 
   @Field()
   country: string;
+
+  @Field()
+  userId: string;
 }

@@ -17,7 +17,7 @@ import { join } from 'path';
 import { SessionModule } from './session/session.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import configuration from 'config/configuration';
+// import configuration from 'config/configuration';
 
 @Module({
   imports: [

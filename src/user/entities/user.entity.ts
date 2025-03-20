@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 import {
   Column,
   CreatedAt,
@@ -9,8 +9,11 @@ import {
   Unique,
   UpdatedAt,
   Model,
+  HasOne,
 } from 'sequelize-typescript';
 import { customAlphabet } from 'nanoid';
+import { Address } from 'src/address/entities/address.entity';
+import { NonAttribute } from 'sequelize';
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
 
 @Table
@@ -30,9 +33,6 @@ export class User extends Model {
   @Column
   @Field()
   email: string;
-
-  @Column
-  AddressId: number;
 
   @Column
   @Field()
@@ -57,6 +57,12 @@ export class User extends Model {
   @Default(false)
   @Column
   is_email_verified: boolean;
+
+  @HasOne(() => Address, /* foreign key */ 'userId')
+  declare address?: NonAttribute<Address>;
+
+  @Field(() => Address)
+  addresses: Address;
 
   @CreatedAt
   declare createdAt: Date;

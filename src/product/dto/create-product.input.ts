@@ -12,7 +12,7 @@ export class CreateProductInput {
   parentSku: string;
 
   @Field()
-  shop: string;
+  shopId: string;
 
   @Field()
   sellerSku: string;
@@ -20,17 +20,17 @@ export class CreateProductInput {
   @Field()
   barcode: string;
 
-  // @Field()
-  // variant: number;
+  @Field()
+  variantId: number;
 
-  // @Field()
-  // brand: number;
+  @Field()
+  brandId: number;
 
-  // @Field()
-  // category: number;
+  @Field()
+  categoryId: number;
 
-  // @Field()
-  // image: number;
+  @Field()
+  image: number;
 
   @Field()
   price: string;

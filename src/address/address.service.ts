@@ -24,6 +24,11 @@ export class AddressService {
       where: { id: id },
     });
   }
+  async findBy(search: any) {
+    return await this.addresssRepository.findOne<Address>({
+      where: { userId: search },
+    });
+  }
 
   async findEmail(email: string) {
     return await this.addresssRepository.findOne<Address>({

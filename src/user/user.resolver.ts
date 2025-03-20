@@ -1,12 +1,24 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { AddressService } from 'src/address/address.service';
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly addressService: AddressService,
+  ) {}
 
   @Mutation(() => User)
   async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
@@ -33,5 +45,15 @@ export class UserResolver {
   @Mutation(() => User)
   async removeUser(@Args('id', { type: () => String }) id: string) {
     return (await this.userService.remove(id)).dataValues;
+  }
+
+  @ResolveField()
+  async addresses(@Parent() user: User) {
+    const { id } = user;
+    const address = await this.addressService.findBy(id);
+    if (!address) {
+      throw new Error();
+    }
+    return address.dataValues;
   }
 }

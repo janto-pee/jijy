@@ -26,6 +26,10 @@ export class Tag extends Model {
   @Field()
   icon: string;
 
+  // @NotNull
+  @Column(DataType.UUID)
+  declare productId: string;
+
   @CreatedAt
   declare createdAt: Date;
 

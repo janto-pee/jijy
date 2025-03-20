@@ -7,4 +7,7 @@ export class CreateTagInput {
 
   @Field()
   icon: string;
+
+  @Field()
+  productId: string;
 }

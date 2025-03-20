@@ -22,4 +22,7 @@ export class CreateAttributeInput {
 
   @Field()
   translatable: string;
+
+  @Field()
+  productId: string;
 }

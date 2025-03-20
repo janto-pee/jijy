@@ -3,10 +3,13 @@ import {
   Column,
   DataType,
   Default,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
+  Unique,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 
 @Table
 @ObjectType()
@@ -43,4 +46,15 @@ export class Attribute extends Model {
   @Column
   @Field()
   translatable: string;
+
+  // @NotNull;
+  @Unique
+  @Column(DataType.UUID)
+  declare productId: string;
+
+  /**
+   * RESOLVERS
+   */
+  @Field(() => Product)
+  product: Product;
 }
