@@ -9,7 +9,7 @@ export class CreateImageInput {
   primary: boolean;
 
   @Field()
-  product: string;
+  productId: string;
 
   @Field()
   shopId: string;

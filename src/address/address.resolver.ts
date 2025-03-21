@@ -62,7 +62,6 @@ export class AddressResolver {
   @ResolveField()
   async user(@Parent() address: Address) {
     const { userId } = address;
-    // return this.postsService.findAll({ authorId: id });
     return (await this.userService.findOne(userId)).dataValues;
   }
 }

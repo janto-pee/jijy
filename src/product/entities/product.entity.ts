@@ -115,7 +115,7 @@ export class Product extends Model {
   image: Image[];
 
   @Field(() => Shop)
-  Shops: Shop;
+  shop: Shop;
 
   @Field(() => Brand)
   brands: Brand;

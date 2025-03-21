@@ -20,14 +20,21 @@ export class ImageService {
     return images;
   }
 
-  async findOne(id: string): Promise<Image> {
+  async findOne(search: any): Promise<Image> {
     const image = await this.ImagesRepository.findOne<Image>({
-      where: { id: id },
+      where: search,
     });
     if (!image) {
       throw new Error();
     }
     return image;
+  }
+
+  async filterBy(search: any): Promise<Image[]> {
+    return await this.ImagesRepository.findAll({
+      where: search,
+      raw: true,
+    });
   }
 
   async findEmail(email: string): Promise<Image> {

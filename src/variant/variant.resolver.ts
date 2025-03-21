@@ -22,7 +22,7 @@ export class VariantResolver {
 
   @Query(() => Variant, { name: 'Variant' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return (await this.VariantService.findOne(id)).dataValues;
+    return (await this.VariantService.findOne({ id: id })).dataValues;
   }
 
   @Mutation(() => Variant)

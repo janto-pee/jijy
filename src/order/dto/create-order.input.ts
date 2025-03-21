@@ -6,6 +6,9 @@ export class CreateOrderInput {
   businessClientCode: string;
 
   @Field()
+  shopId: string;
+
+  @Field()
   shippingDate: string;
 
   @Field()

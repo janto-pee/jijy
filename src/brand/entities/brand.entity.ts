@@ -44,5 +44,5 @@ export class Brand extends Model {
    * RESOLVERS
    */
   @Field(() => [Product])
-  product: Product;
+  product: Product[];
 }

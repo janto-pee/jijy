@@ -21,19 +21,16 @@ export class CreateProductInput {
   barcode: string;
 
   @Field()
-  variantId: number;
+  variantId: string;
 
   @Field()
-  brandId: number;
+  brandId: string;
 
   @Field()
-  categoryId: number;
+  categoryId: string;
 
   @Field()
-  image: number;
-
-  @Field()
-  price: string;
+  price: number;
 
   @Field()
   stock: string;

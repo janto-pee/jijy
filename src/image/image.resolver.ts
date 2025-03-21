@@ -25,7 +25,7 @@ export class ImageResolver {
 
   @Query(() => Image, { name: 'Image' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    const data = await this.imageService.findOne(id);
+    const data = await this.imageService.findOne({ id: id });
     if (!data) {
       throw new Error('data not found');
     }

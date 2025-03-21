@@ -24,16 +24,31 @@ export class ProductService {
     });
   }
 
-  async findOne(id: string): Promise<Product> {
+  async filterBy(search: any): Promise<Product[]> {
+    return await this.ProductsRepository.findAll({
+      where: search,
+      raw: true,
+    });
+  }
+
+  // async findOne(id: string): Promise<Product> {
+  //   const product = await this.ProductsRepository.findOne<Product>({
+  //     where: { id: id },
+  //   });
+  //   if (!product) {
+  //     throw new Error();
+  //   }
+  //   return product;
+  // }
+  async findOne(search: any): Promise<Product> {
     const product = await this.ProductsRepository.findOne<Product>({
-      where: { id: id },
+      where: search,
     });
     if (!product) {
       throw new Error();
     }
     return product;
   }
-
   async findEmail(email: string): Promise<Product> {
     const product = await this.ProductsRepository.findOne<Product>({
       where: { email: email },

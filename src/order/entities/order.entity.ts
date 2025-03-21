@@ -49,4 +49,10 @@ export class Order extends Model {
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  /**
+   * RESOLVERS
+   */
+  @Field(() => Shop)
+  shop: Shop;
 }

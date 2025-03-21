@@ -19,9 +19,16 @@ export class TagService {
     return await this.TagsRepository.findAll<Tag>({ raw: true });
   }
 
-  async findOne(id: string): Promise<Tag> {
+  async filterBy(search: any): Promise<Tag[]> {
+    return await this.TagsRepository.findAll({
+      where: search,
+      raw: true,
+    });
+  }
+
+  async findOne(search: any): Promise<Tag> {
     const tag = await this.TagsRepository.findOne<Tag>({
-      where: { id: id },
+      where: { id: search },
     });
     if (!tag) {
       throw new Error('Tag not found');

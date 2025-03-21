@@ -19,16 +19,24 @@ export class ShopService {
     return await this.ShopsRepository.findAll<Shop>({ raw: true });
   }
 
-  async findOne(id: string): Promise<Shop> {
+  // async findOne(id: string): Promise<Shop> {
+  //   const shop = await this.ShopsRepository.findOne<Shop>({
+  //     where: { id: id },
+  //   });
+  //   if (!shop) {
+  //     throw new Error();
+  //   }
+  //   return shop;
+  // }
+  async findOne(search: any): Promise<Shop> {
     const shop = await this.ShopsRepository.findOne<Shop>({
-      where: { id: id },
+      where: search,
     });
     if (!shop) {
       throw new Error();
     }
     return shop;
   }
-
   async findEmail(email: string): Promise<Shop> {
     const shop = await this.ShopsRepository.findOne<Shop>({
       where: { email: email },

@@ -19,9 +19,9 @@ export class OrderService {
     return await this.OrdersRepository.findAll<Order>({ raw: true });
   }
 
-  async findOne(id: string): Promise<Order> {
+  async findOne(search: any): Promise<Order> {
     const order = await this.OrdersRepository.findOne<Order>({
-      where: { id: id },
+      where: search,
     });
     if (!order) {
       throw new Error();

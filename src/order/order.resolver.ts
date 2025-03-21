@@ -1,12 +1,24 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { Order } from './entities/order.entity';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { OrderService } from './order.service';
+import { ShopService } from 'src/shop/shop.service';
 
 @Resolver(() => Order)
 export class OrderResolver {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(
+    private readonly orderService: OrderService,
+    private readonly shopService: ShopService,
+  ) {}
 
   @Mutation(() => Order)
   async createOrder(
@@ -22,7 +34,7 @@ export class OrderResolver {
 
   @Query(() => Order, { name: 'Order' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    const data = await this.orderService.findOne(id);
+    const data = await this.orderService.findOne({ id: id });
     if (!data) {
       throw new Error('data not found');
     }
@@ -47,5 +59,15 @@ export class OrderResolver {
       throw new Error('address not found');
     }
     return data.dataValues;
+  }
+
+  /**
+   *
+   * RESOLVER
+   */
+  @ResolveField()
+  async shop(@Parent() order: Order) {
+    const { shopId } = order;
+    return (await this.shopService.findOne({ id: shopId })).dataValues;
   }
 }

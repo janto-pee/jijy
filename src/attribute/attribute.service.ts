@@ -19,10 +19,20 @@ export class AttributeService {
     return await this.attributeRepository.findAll<Attribute>({ raw: true });
   }
 
-  async findOne(id: string) {
-    return await this.attributeRepository.findOne<Attribute>({
-      where: { id: id },
+  // async findOne(id: string) {
+  //   return await this.attributeRepository.findOne<Attribute>({
+  //     where: { id: id },
+  //   });
+  // }
+
+  async findOne(search: any) {
+    const attribute = await this.attributeRepository.findOne<Attribute>({
+      where: search,
     });
+    if (!attribute) {
+      throw new Error();
+    }
+    return attribute;
   }
 
   async findEmail(email: string) {

@@ -20,9 +20,9 @@ export class CategoryService {
     return await this.categoryRepository.findAll<Category>({ raw: true });
   }
 
-  async findOne(id: string): Promise<Category> {
+  async findOne(search: any): Promise<Category> {
     const category = await this.categoryRepository.findOne<Category>({
-      where: { id: id },
+      where: search,
     });
     if (!category) {
       throw new Error();

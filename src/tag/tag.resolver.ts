@@ -20,7 +20,7 @@ export class TagResolver {
 
   @Query(() => Tag, { name: 'Tag' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return (await this.TagService.findOne(id)).dataValues;
+    return (await this.TagService.findOne({ id: id })).dataValues;
   }
 
   @Mutation(() => Tag)

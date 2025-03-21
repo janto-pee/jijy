@@ -150,3 +150,139 @@ query Addresses {
         name
     }
 }
+
+
+// Reformed
+mutation CreateBrand {
+    createBrand(createBrandInput: { code: 11233.0, name: "Nokia" }) {
+        code
+        name
+    }
+    createCategory(
+        createCategoryInput: { code: 1.0, description: "mobile phone", name: "phone" }
+    ) {
+        code
+        description
+        name
+    }
+    createShop(createShopInput: { email: "onile@gmail.com", name: "Onile" }) {
+        email
+        name
+    }
+    createVariant(createVariantInput: { icon: "http:flaticons", name: "Nokia3310" }) {
+        icon
+        name
+    }
+        createAttribute(
+        createAttributeInput: {
+            productId: "0ee61200-1159-41fd-adef-488c01cc3ed5"
+            description: "desriptn"
+            mandatory: "mndatory"
+            name: "screen"
+            translatable: "french"
+            type: "type"
+            value: "200"
+            variation: "3"
+        }
+    ) {
+        description
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+}
+
+// product
+mutation CreateProduct {
+    createProduct(
+        createProductInput: {
+            barcode: "xy1233"
+            brandId: "63404dfd-f684-48d3-84be-2cdb334b6b19"
+            categoryId: "76f4d414-8839-4ffb-9c92-256b6349d0de"
+            description: "small phone"
+            name: "Nokia3310"
+            parentSku: "Nokia"
+            price: 10.0
+            sellerSku: "202ng"
+            shopId: "51dcfbd6-3c84-4e67-b0a2-66adc4470f46"
+            stock: "20"
+            variantId: "8162ad41-a216-40ef-b9bc-f3b606396306"
+        }
+    ) {
+        barcode
+        description
+        name
+        parentSku
+        price
+        sellerSku
+        id
+        createdAt
+        updatedAt
+        stock
+    }
+  
+}
+
+// batch b
+mutation CreateTag {
+    createTag(
+        createTagInput: {
+            icon: "http://flaticon"
+            name: "phone"
+            productId: "0db14cb7-a964-428f-9399-5979139ce835"
+        }
+    ) {
+        icon
+        name
+    }
+    createImage(
+        createImageInput: {
+            primary: false
+            shopId: "4f50680e-8b44-4f65-8ff8-8423c0c3dec0"
+            url: "http://hello"
+            productId: "0db14cb7-a964-428f-9399-5979139ce835"
+        }
+    ) {
+        primary
+        url
+    }
+    createOrder(
+        createOrderInput: {
+            businessClientCode: "1234"
+            comment: "ready to be shipped"
+            shippingDate: "march-26-2025"
+            shopId: "4f50680e-8b44-4f65-8ff8-8423c0c3dec0"
+        }
+    ) {
+        businessClientCode
+        comment
+        shippingDate
+        shop {
+            email
+            name
+        }
+    }
+      createAttribute(
+        createAttributeInput: {
+            productId: "0ee61200-1159-41fd-adef-488c01cc3ed5"
+            description: "desriptn"
+            mandatory: "mndatory"
+            name: "screen"
+            translatable: "french"
+            type: "type"
+            value: "200"
+            variation: "3"
+        }
+    ) {
+        description
+        mandatory
+        name
+        translatable
+        type
+        value
+        variation
+    }
+}

@@ -36,6 +36,7 @@ type Category {
   code: Float!
   description: String!
   name: String!
+  product: [Product!]!
 }
 
 input CreateAddressInput {
@@ -75,7 +76,7 @@ input CreateCategoryInput {
 
 input CreateImageInput {
   primary: Boolean!
-  product: String!
+  productId: String!
   shopId: String!
   url: String!
 }
@@ -84,21 +85,21 @@ input CreateOrderInput {
   businessClientCode: String!
   comment: String!
   shippingDate: String!
+  shopId: String!
 }
 
 input CreateProductInput {
   barcode: String!
-  brandId: Float!
-  categoryId: Float!
+  brandId: String!
+  categoryId: String!
   description: String!
-  image: Float!
   name: String!
   parentSku: String!
-  price: String!
+  price: Float!
   sellerSku: String!
   shopId: String!
   stock: String!
-  variantId: Float!
+  variantId: String!
 }
 
 input CreateSessionInput {
@@ -130,6 +131,11 @@ input CreateVariantInput {
   name: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Image {
   primary: Boolean!
   url: String!
@@ -142,7 +148,7 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createImage(createImageInput: CreateImageInput!): Image!
   createOrder(createOrderInput: CreateOrderInput!): Order!
-  createProduct(createProductInput: CreateProductInput!): Product!
+  createProduct(createProductInput: CreateProductInput!): ProductRepone!
   createShop(createShopInput: CreateShopInput!): Shop!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
@@ -176,10 +182,10 @@ type Order {
   businessClientCode: String!
   comment: String!
   shippingDate: String!
+  shop: Shop!
 }
 
 type Product {
-  Shops: Shop!
   attributes: Attribute!
   barcode: String!
   brands: Brand!
@@ -190,9 +196,23 @@ type Product {
   parentSku: String!
   price: String!
   sellerSku: String!
+  shop: Shop!
   stock: String!
   tag: [Tag!]!
   variants: Variant!
+}
+
+type ProductRepone {
+  barcode: String!
+  createdAt: DateTime!
+  description: String!
+  id: String!
+  name: String!
+  parentSku: String!
+  price: String!
+  sellerSku: String!
+  stock: String!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -235,7 +255,6 @@ type SessionResponse {
 type Shop {
   email: String!
   name: String!
-  order: [Order!]!
 }
 
 type Tag {
@@ -285,7 +304,7 @@ input UpdateCategoryInput {
 input UpdateImageInput {
   id: String!
   primary: Boolean
-  product: String
+  productId: String
   shopId: String
   url: String
 }
@@ -295,6 +314,7 @@ input UpdateOrderInput {
   comment: String
   id: String!
   shippingDate: String
+  shopId: String
 }
 
 input UpdateProductInput {

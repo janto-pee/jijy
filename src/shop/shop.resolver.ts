@@ -20,7 +20,7 @@ export class ShopResolver {
 
   @Query(() => Shop, { name: 'Shop' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    return (await this.shopService.findOne(id)).dataValues;
+    return (await this.shopService.findOne({ id: id })).dataValues;
   }
 
   @Mutation(() => Shop)
@@ -34,33 +34,3 @@ export class ShopResolver {
     return (await this.shopService.remove(id)).dataValues;
   }
 }
-
-// @Resolver('Shop')
-// export class ShopResolver {
-//   constructor(private readonly ShopService: ShopService) {}
-
-//   @Mutation('createShop')
-//   async create(@Args('createShopInput') createShopInput: CreateShopInput) {
-//     return await this.ShopService.create(createShopInput);
-//   }
-
-//   @Query('shops')
-//   async findAll() {
-//     return await this.ShopService.findAll();
-//   }
-
-//   @Query('shop')
-//   async findOne(@Args('id') id: string) {
-//     return await this.ShopService.findOne(id);
-//   }
-
-//   @Mutation('updateShop')
-//   async update(@Args('updateShopInput') updateShopInput: UpdateShopInput) {
-//     return await this.ShopService.update(updateShopInput.id, updateShopInput);
-//   }
-
-//   @Mutation('removeShop')
-//   async remove(@Args('id') id: string) {
-//     return await this.ShopService.remove(id);
-//   }
-// }

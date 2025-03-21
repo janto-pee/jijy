@@ -19,10 +19,14 @@ export class BrandService {
     return await this.brandRepository.findAll<Brand>({ raw: true });
   }
 
-  async findOne(id: string) {
-    return await this.brandRepository.findOne<Brand>({
-      where: { id: id },
+  async findOne(search: any) {
+    const brand = await this.brandRepository.findOne<Brand>({
+      where: search,
     });
+    if (!brand) {
+      throw new Error('brand not found');
+    }
+    return brand;
   }
 
   async findEmail(email: string) {

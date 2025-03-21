@@ -1,12 +1,24 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import { ProductService } from 'src/product/product.service';
 
 @Resolver(() => Category)
 export class CategoryResolver {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(
+    private readonly categoryService: CategoryService,
+    private readonly productService: ProductService,
+  ) {}
 
   @Mutation(() => Category)
   async createCategory(
@@ -22,7 +34,7 @@ export class CategoryResolver {
 
   @Query(() => Category, { name: 'Category' })
   async findOne(@Args('id', { type: () => String }) id: string) {
-    const data = await this.categoryService.findOne(id);
+    const data = await this.categoryService.findOne({ id: id });
     if (!data) {
       throw new Error('data not found');
     }
@@ -47,5 +59,16 @@ export class CategoryResolver {
       throw new Error('address not found');
     }
     return data.dataValues;
+  }
+
+  /**
+   *
+   * RESOLVER
+   */
+
+  @ResolveField()
+  async product(@Parent() category: Category) {
+    const { id } = category;
+    return (await this.productService.findOne({ productId: id })).dataValues;
   }
 }

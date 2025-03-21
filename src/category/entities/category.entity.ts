@@ -9,6 +9,7 @@ import {
   Default,
   DataType,
   HasMany,
+  Unique,
 } from 'sequelize-typescript';
 import { Product } from 'src/product/entities/product.entity';
 
@@ -20,6 +21,7 @@ export class Category extends Model {
   @Column(DataType.UUID)
   declare id: string;
 
+  @Unique
   @Column
   @Field()
   code: number;
@@ -34,4 +36,10 @@ export class Category extends Model {
 
   @HasMany(() => Product, /* foreign key */ 'categoryId')
   declare products?: NonAttribute<Product[]>;
+
+  /**
+   * RESOLVERS
+   */
+  @Field(() => [Product])
+  product: Product[];
 }

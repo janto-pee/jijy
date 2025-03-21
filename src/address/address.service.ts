@@ -9,6 +9,7 @@ export class AddressService {
     @Inject('ADDRESS_REPOSITORY')
     private addresssRepository: typeof Address,
   ) {}
+
   async create(createAddressInput: CreateAddressInput): Promise<Address> {
     return await this.addresssRepository.create({
       ...createAddressInput,
@@ -19,20 +20,9 @@ export class AddressService {
     return await this.addresssRepository.findAll<Address>({ raw: true });
   }
 
-  async findOne(id: string) {
+  async findOne(search: any) {
     return await this.addresssRepository.findOne<Address>({
-      where: { id: id },
-    });
-  }
-  async findBy(search: any) {
-    return await this.addresssRepository.findOne<Address>({
-      where: { userId: search },
-    });
-  }
-
-  async findEmail(email: string) {
-    return await this.addresssRepository.findOne<Address>({
-      where: { email: email },
+      where: search,
     });
   }
 
@@ -40,7 +30,6 @@ export class AddressService {
     const Address = await this.addresssRepository.findOne({
       where: { id: id },
     });
-    console.log('id', id, 'address...', Address, 'data', data);
     if (!Address) {
       throw new Error('unable to find address');
     }

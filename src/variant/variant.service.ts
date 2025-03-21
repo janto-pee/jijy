@@ -19,9 +19,9 @@ export class VariantService {
     return await this.VariantsRepository.findAll<Variant>({ raw: true });
   }
 
-  async findOne(id: string): Promise<Variant> {
+  async findOne(search: any): Promise<Variant> {
     const variant = await this.VariantsRepository.findOne<Variant>({
-      where: { id: id },
+      where: search,
     });
     if (!variant) {
       throw new Error('variant not found');

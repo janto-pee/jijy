@@ -50,7 +50,7 @@ export class UserResolver {
   @ResolveField()
   async addresses(@Parent() user: User) {
     const { id } = user;
-    const address = await this.addressService.findBy(id);
+    const address = await this.addressService.findOne({ userId: id });
     if (!address) {
       throw new Error();
     }

@@ -38,14 +38,6 @@ export class Shop extends Model {
   @HasMany(() => Product, /* foreign key */ 'shopId')
   declare products?: NonAttribute<Product[]>;
 
-  // @BelongsToMany(() => Brand, {
-  //   through: 'ShopBrand',
-  // })
-  // declare shopBrands?: NonAttribute<Brand[]>;
-
-  @Field(() => [Order])
-  order: Order[];
-
   @CreatedAt
   declare createdAt: Date;
 
