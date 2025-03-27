@@ -4,7 +4,6 @@ import {
   Column,
   Model,
   PrimaryKey,
-  AutoIncrement,
   Table,
   Default,
   DataType,

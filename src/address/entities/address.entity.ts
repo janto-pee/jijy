@@ -1,15 +1,10 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import {
-  AllowNull,
-  AutoIncrement,
-  BelongsTo,
   Column,
   CreatedAt,
   DataType,
   Default,
-  ForeignKey,
   Model,
-  NotNull,
   PrimaryKey,
   Table,
   Unique,

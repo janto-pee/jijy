@@ -23,6 +23,7 @@ export const databaseProviders = [
         password: 'secret',
         database: 'nest',
       });
+
       sequelize.addModels([
         Address,
         Address,

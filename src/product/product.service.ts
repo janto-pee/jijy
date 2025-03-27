@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { Product } from './entities/product.entity';
+import { WhereOptions } from 'sequelize';
 
 @Injectable()
 export class ProductService {
@@ -24,7 +25,7 @@ export class ProductService {
     });
   }
 
-  async filterBy(search: any): Promise<Product[]> {
+  async filterBy(search: WhereOptions<any>): Promise<Product[]> {
     return await this.ProductsRepository.findAll({
       where: search,
       raw: true,
@@ -40,7 +41,7 @@ export class ProductService {
   //   }
   //   return product;
   // }
-  async findOne(search: any): Promise<Product> {
+  async findOne(search: WhereOptions<any>): Promise<Product> {
     const product = await this.ProductsRepository.findOne<Product>({
       where: search,
     });

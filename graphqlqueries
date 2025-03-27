@@ -173,26 +173,7 @@ mutation CreateBrand {
         icon
         name
     }
-        createAttribute(
-        createAttributeInput: {
-            productId: "0ee61200-1159-41fd-adef-488c01cc3ed5"
-            description: "desriptn"
-            mandatory: "mndatory"
-            name: "screen"
-            translatable: "french"
-            type: "type"
-            value: "200"
-            variation: "3"
-        }
-    ) {
-        description
-        mandatory
-        name
-        translatable
-        type
-        value
-        variation
-    }
+        
 }
 
 // product

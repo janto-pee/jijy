@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { join } from 'path';
-import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AddressModule } from './address/address.module';
@@ -15,6 +14,8 @@ import { TagModule } from './tag/tag.module';
 import { VariantModule } from './variant/variant.module';
 import { SessionModule } from './session/session.module';
 import { UserModule } from './user/user.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
