@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateVariantInput } from './dto/create-variant.input';
 import { UpdateVariantInput } from './dto/update-variant.input';
 import { Variant } from './entities/variant.entity';
+import { WhereOptions } from 'sequelize';
 
 @Injectable()
 export class VariantService {
@@ -19,7 +20,7 @@ export class VariantService {
     return await this.VariantsRepository.findAll<Variant>({ raw: true });
   }
 
-  async findOne(search: any): Promise<Variant> {
+  async findOne(search: WhereOptions<any>): Promise<Variant> {
     const variant = await this.VariantsRepository.findOne<Variant>({
       where: search,
     });
