@@ -1,4 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {
   Column,
   CreatedAt,
@@ -18,7 +18,7 @@ export class Address extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  // @Field(() => ID)
+  @Field(() => ID)
   declare id: string;
 
   @Column
@@ -63,6 +63,7 @@ export class Address extends Model {
   declare userId: string;
 
   @CreatedAt
+  @Field()
   declare createdAt: Date;
 
   @UpdatedAt

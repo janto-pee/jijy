@@ -1,9 +1,8 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {
   Column,
   DataType,
   Default,
-  HasMany,
   Model,
   PrimaryKey,
   Table,
@@ -17,6 +16,7 @@ export class Attribute extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
+  @Field(() => ID)
   declare id: string;
 
   @Column

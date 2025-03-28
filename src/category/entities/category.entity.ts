@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { NonAttribute } from 'sequelize';
 import {
   Column,
@@ -18,6 +18,7 @@ export class Category extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
+  @Field(() => ID)
   declare id: string;
 
   @Unique

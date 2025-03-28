@@ -29,13 +29,13 @@ RUN npm ci --only=production && npm cache clean --force
 FROM node:20-alpine As production
 RUN apk add --no-cache openssl
 COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/build ./dist
+COPY --from=build /app/dist ./dist
 
-ENV PORT=1337
+ENV PORT=3000
 EXPOSE $PORT
 CMD [ "node", "build/src/index.js" ]
 
 RUN apk --no-cache add curl
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://loalhost:1337/healthcheck || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://loalhost:${PORT} || exit 1
 
 # HU FLACARECE

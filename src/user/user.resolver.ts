@@ -21,8 +21,7 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    const user = (await this.userService.create(createUserInput)).dataValues;
-    return user;
+    return (await this.userService.create(createUserInput)).dataValues;
   }
 
   @Query(() => [User], { name: 'Users' })

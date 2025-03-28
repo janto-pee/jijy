@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {
   Table,
   Column,
@@ -23,6 +23,7 @@ export class Order extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
+  @Field(() => ID)
   declare id: string;
 
   @Column
@@ -45,6 +46,7 @@ export class Order extends Model {
   declare shopId: string;
 
   @CreatedAt
+  @Field()
   declare createdAt: Date;
 
   @UpdatedAt

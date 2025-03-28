@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
+import { hashPassword } from 'src/util/hashPassword';
 
 @Injectable()
 export class UserService {
@@ -10,15 +11,16 @@ export class UserService {
     private userRepository: typeof User,
   ) {}
   async create(createUserInput: CreateUserInput): Promise<User> {
+    const newPassword = await hashPassword(createUserInput.password);
+    console.log(newPassword, createUserInput.password);
     const user = await this.userRepository.create({
       ...createUserInput,
+      password: newPassword,
     });
-    // await user.save();
-    // delete user.dataValues.password;
-    console.log('create user', createUserInput, 'user', user);
     return user;
   }
 
+  // find
   async findAll(): Promise<User[]> {
     return await this.userRepository.findAll<User>({ raw: true });
   }

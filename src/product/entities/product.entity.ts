@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { NonAttribute } from 'sequelize';
 import {
   Table,
@@ -26,6 +26,7 @@ export class Product extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
+  @Field(() => ID)
   declare id: string;
 
   @Column
@@ -94,6 +95,7 @@ export class Product extends Model {
   declare tags?: NonAttribute<Product[]>;
 
   @CreatedAt
+  @Field()
   declare createdAt: Date;
 
   @UpdatedAt
