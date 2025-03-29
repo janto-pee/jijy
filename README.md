@@ -1,30 +1,53 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Cybership.io Clone 🚀
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+An end-to-end clone of **[cybership.io](https://cybership.io)** built from scratch. This project started as an assignment but turned into a passion project as I became deeply interested in warehouse management systems (WMS). The application is designed to optimize inventory management, streamline fulfillment, and scale operations efficiently.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🌟 Live Demo
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+🔗 **[Test API](<https://rapidapi.com/aayo/api/property-ng>)**
+
+<!-- 🎥 **Demo Video:** ![Demo Video](https://your-video-link.com) -->
+
+🖼️ **Screenshot:**
+![Alt text](https://github.com/janto-pee/jijy/jijy.png)
+
+---
+
+## 🔧 Quries & Mutation
+
+- 🚚 User account registration
+- 🏷️ Brand Creation
+- 📦 Catgeory List
+- 📊 Order Processing
+- 🌐 Shop creation
+- 🔐 Product Queriess
+- ☁️ Test on RapidAPI
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** Node.js, Express, Prisma
+- **Database:** Postgres
+- **Continerization:** Docker, Kubernetes, Helm
+- **CICD:** Github Actions
+- **Cloud:** AWS, Render
+- **IAC:** Terraform
+- **Monitoring:** Prometheus
+- **Config Management:** Ansible
+
+---
+
+## 🚀 Getting Started
+
+### 📁 Clone the Repository
+
+```bash
+git clone https://github.com/janto-pee/jijy.git
+cd jijy
+```
 
 ## Project setup
 
@@ -58,7 +81,25 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Deployment
+### ⚙️ Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+DATABASE_URL=your_database_url
+SALTWORKFACTOR=becrypt_swf
+LOGLEVEL=logger
+ACCESS_TOKEN_TTL=time
+REFRESH_TOKEN_TTL=time
+ACCESS_TOKEN_PRIVATE=private_key
+ACCESS_TOKEN_PUBLIC=private_key
+REFRESH_TOKEN_PRIVATE=private_key
+REFRESH_TOKEN_PUBLIC=private_key
+```
+
+---
+
+## Other Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
