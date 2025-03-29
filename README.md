@@ -1,6 +1,6 @@
-# Cybership.io Clone 🚀
+# Jijy Ecommerce 🚀
 
-An end-to-end clone of **[cybership.io](https://cybership.io)** built from scratch. This project started as an assignment but turned into a passion project as I became deeply interested in warehouse management systems (WMS). The application is designed to optimize inventory management, streamline fulfillment, and scale operations efficiently.
+An online ecommerce software solution that enables businesses to manage their online stores, encompassing shop registration, inventory management, order processing, and customer service. The product management allows uers to easily add, manage, and organize products with detailed descriptions, images, and variations. 
 
 ---
 
