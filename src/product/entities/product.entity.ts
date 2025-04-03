@@ -107,14 +107,11 @@ export class Product extends Model {
   @Column(DataType.UUID)
   declare brandId: string;
 
-  @BelongsTo(() => Brand)
-  declare brand: NonAttribute<Brand>;
-
   @HasMany(() => Tag, 'productId')
   declare tags?: NonAttribute<Tag[]>;
 
-  @Column(DataType.BOOLEAN)
   @Default(true)
+  @Column(DataType.BOOLEAN)
   @Field(() => Boolean)
   isActive: boolean;
 

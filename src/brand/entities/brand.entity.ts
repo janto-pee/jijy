@@ -54,4 +54,7 @@ export class Brand extends Model {
    */
   @Field(() => [Product])
   products: Product[];
+
+  @Field(() => [Shop])
+  shops: Shop[];
 }

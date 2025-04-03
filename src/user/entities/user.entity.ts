@@ -10,13 +10,10 @@ import {
   UpdatedAt,
   Model,
   HasOne,
-  HasMany,
 } from 'sequelize-typescript';
 import { customAlphabet } from 'nanoid';
 import { Address } from 'src/address/entities/address.entity';
 import { NonAttribute } from 'sequelize';
-import { Product } from 'src/product/entities/product.entity';
-import { Shop } from 'src/shop/entities/shop.entity';
 const nanoid = customAlphabet('0123456789abcdefghi', 6);
 
 export enum UserRole {
@@ -83,11 +80,6 @@ export class User extends Model {
   @Field(() => UserRole)
   role: UserRole;
 
-  @Default({ default: [] })
-  @Column
-  @Field(() => [String], { nullable: true })
-  roles: string[];
-
   @Default({ default: true })
   @Column
   @Field()
@@ -103,13 +95,15 @@ export class User extends Model {
   @Field({ nullable: true })
   bio: string;
 
-  @Default([])
-  @Column
-  @Field(() => [String], { nullable: true })
-  interests: string[];
+  // @Default({ default: [] })
+  // @Column
+  // @Field(() => [String], { nullable: true })
+  // roles: string[];
 
-  // @HasMany(() => Product, /* foreign key */ 'productId')
-  // declare products?: NonAttribute<Product[]>;
+  // @Default([])
+  // @Column
+  // @Field(() => [String], { nullable: true })
+  // interests: string[];
 
   @Default({ default: null })
   @Column

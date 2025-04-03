@@ -47,7 +47,6 @@ export class Attribute extends Model {
   @Field()
   translatable: string;
 
-  // @NotNull;
   @Unique
   @Column(DataType.UUID)
   declare productId: string;

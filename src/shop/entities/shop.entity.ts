@@ -10,8 +10,6 @@ import {
   DataType,
   Default,
   HasMany,
-  BelongsToMany,
-  HasOne,
 } from 'sequelize-typescript';
 import { Brand } from 'src/brand/entities/brand.entity';
 import { Order } from 'src/order/entities/order.entity';
@@ -41,8 +39,11 @@ export class Shop extends Model {
   @HasMany(() => Product, /* foreign key */ 'shopId')
   declare products?: NonAttribute<Product[]>;
 
-  @HasOne(() => User, /* foreign key */ 'userId')
-  declare user: NonAttribute<User>;
+  @HasMany(() => Brand, /* foreign key */ 'shopId')
+  declare Brands?: NonAttribute<Brand[]>;
+
+  @HasMany(() => User, /* foreign key */ 'shopId')
+  declare user: NonAttribute<User[]>;
 
   @CreatedAt
   @Field()
@@ -50,4 +51,18 @@ export class Shop extends Model {
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  // RESOLVER
+
+  @Field(() => [Product])
+  product: Product[];
+
+  @Field(() => [Order])
+  order: Order[];
+
+  @Field(() => [Brand])
+  Brand: Brand[];
+
+  @Field(() => [User])
+  users: User[];
 }

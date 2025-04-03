@@ -1,6 +1,7 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 import { IsInt, IsOptional, Min } from 'class-validator';
 
+@InputType()
 @ArgsType()
 export class PaginationArgs {
   @Field(() => Int, {

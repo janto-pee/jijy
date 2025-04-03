@@ -57,7 +57,6 @@ export class Address extends Model {
   @Field()
   country: string;
 
-  // @NotNull
   @Unique
   @Column(DataType.UUID)
   declare userId: string;

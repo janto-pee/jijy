@@ -4,16 +4,14 @@ import { UpdateBrandInput } from './dto/update-brand.input';
 import { Brand } from './entities/brand.entity';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
 import { PaginationArgs } from 'src/common/dto/pagination.dto';
-import { Tag } from 'src/tag/entities/tag.entity';
 
 @Injectable()
 export class BrandService {
   private readonly logger = new Logger(BrandService.name);
 
   constructor(
-    @Inject('PRODUCT_REPOSITORY')
+    @Inject('BRAND_REPOSITORY')
     private BrandsRepository: typeof Brand,
-    private TagsRepository: typeof Tag,
   ) {}
 
   async create(createBrandInput: CreateBrandInput): Promise<Brand> {

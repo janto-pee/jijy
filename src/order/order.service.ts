@@ -4,16 +4,14 @@ import { UpdateOrderInput } from './dto/update-order.input';
 import { Order } from './entities/order.entity';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
 import { PaginationArgs } from 'src/common/dto/pagination.dto';
-import { Tag } from 'src/tag/entities/tag.entity';
 
 @Injectable()
 export class OrderService {
   private readonly logger = new Logger(OrderService.name);
 
   constructor(
-    @Inject('PRODUCT_REPOSITORY')
+    @Inject('ORDER_REPOSITORY')
     private OrdersRepository: typeof Order,
-    private TagsRepository: typeof Tag,
   ) {}
 
   async create(createOrderInput: CreateOrderInput): Promise<Order> {

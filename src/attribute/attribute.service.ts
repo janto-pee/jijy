@@ -4,16 +4,14 @@ import { UpdateAttributeInput } from './dto/update-attribute.input';
 import { Attribute } from './entities/attribute.entity';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
 import { PaginationArgs } from 'src/common/dto/pagination.dto';
-import { Tag } from 'src/tag/entities/tag.entity';
 
 @Injectable()
 export class AttributeService {
   private readonly logger = new Logger(AttributeService.name);
 
   constructor(
-    @Inject('PRODUCT_REPOSITORY')
+    @Inject('ATTRIBUTE_REPOSITORY')
     private AttributesRepository: typeof Attribute,
-    private TagsRepository: typeof Tag,
   ) {}
 
   async create(CreateAttributeInput: CreateAttributeInput): Promise<Attribute> {

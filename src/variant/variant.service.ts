@@ -4,16 +4,14 @@ import { UpdateVariantInput } from './dto/update-variant.input';
 import { Variant } from './entities/variant.entity';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
 import { PaginationArgs } from 'src/common/dto/pagination.dto';
-import { Tag } from 'src/tag/entities/tag.entity';
 
 @Injectable()
 export class VariantService {
   private readonly logger = new Logger(VariantService.name);
 
   constructor(
-    @Inject('PRODUCT_REPOSITORY')
+    @Inject('VARIANT_REPOSITORY')
     private VariantsRepository: typeof Variant,
-    private TagsRepository: typeof Tag,
   ) {}
 
   async create(createVariantInput: CreateVariantInput): Promise<Variant> {

@@ -17,6 +17,15 @@ type Address {
   user: User!
 }
 
+type AddressResponse {
+  hasMore: Boolean!
+  items: [Address!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
+}
+
 type Attribute {
   description: String!
   id: ID!
@@ -29,12 +38,30 @@ type Attribute {
   variation: String!
 }
 
+type AuthResponse {
+  accessToken: String!
+  message: String!
+  refreshToken: String!
+  success: Boolean!
+  user: User!
+}
+
 type Brand {
   code: Float!
   createdAt: DateTime!
   id: ID!
   name: String!
-  product: [Product!]!
+  products: [Product!]!
+  shops: [Shop!]!
+}
+
+type BrandResponse {
+  hasMore: Boolean!
+  items: [Brand!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
 }
 
 type Category {
@@ -43,6 +70,20 @@ type Category {
   id: ID!
   name: String!
   product: [Product!]!
+}
+
+type CategoryResponse {
+  hasMore: Boolean!
+  items: [Category!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
+}
+
+input ChangePasswordInput {
+  newPassword: String!
+  oldPassword: String!
 }
 
 input CreateAddressInput {
@@ -72,6 +113,7 @@ input CreateAttributeInput {
 input CreateBrandInput {
   code: Float!
   name: String!
+  shopId: String!
 }
 
 input CreateCategoryInput {
@@ -108,11 +150,6 @@ input CreateProductInput {
   variantId: String!
 }
 
-input CreateSessionInput {
-  email: String!
-  password: String!
-}
-
 input CreateShopInput {
   email: String!
   name: String!
@@ -126,9 +163,10 @@ input CreateTagInput {
 
 input CreateUserInput {
   email: String!
-  first_name: String!
-  last_name: String!
+  firstName: String!
+  lastName: String!
   password: String!
+  role: UserRole!
   username: String!
 }
 
@@ -147,21 +185,45 @@ type Image {
   id: ID!
   primary: Boolean!
   url: String!
+  userId: String!
+}
+
+type ImageResponse {
+  hasMore: Boolean!
+  items: [Image!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LogoutResponse {
+  message: String!
+  success: Boolean!
 }
 
 type Mutation {
+  changePassword(changePasswordInput: ChangePasswordInput!): User!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   createAttribute(createAttributeInput: CreateAttributeInput!): Attribute!
   createBrand(createBrandInput: CreateBrandInput!): Brand!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
-  createImage(createImageInput: CreateImageInput!): Image!
-  createOrder(createOrderInput: CreateOrderInput!): Order!
-  createProduct(createProductInput: CreateProductInput!): ProductRepone!
-  createShop(createShopInput: CreateShopInput!): Shop!
-  createTag(createTagInput: CreateTagInput!): Tag!
+  createImage(createImageInput: CreateImageInput!): ImageResponse!
+  createOrder(createOrderInput: CreateOrderInput!): OrderResponse!
+  createProduct(createProductInput: CreateProductInput!): ProductsResponse!
+  createShop(createShopInput: CreateShopInput!): ShopResponse!
+  createTag(createTagInput: CreateTagInput!): TagResponse!
   createUser(createUserInput: CreateUserInput!): User!
   createVariant(createVariantInput: CreateVariantInput!): Variant!
-  login(createSessionInput: CreateSessionInput!): SessionResponse!
+  login(loginInput: LoginInput!): AuthResponse!
+  logout: LogoutResponse!
+  refreshToken(refreshTokenInput: RefreshTokenInput!): RefreshTokenResponse!
+  register(registerInput: RegisterInput!): AuthResponse!
   removeAddress(id: String!): Address!
   removeAttribute(id: String!): Attribute!
   removeBrand(id: String!): Brand!
@@ -191,84 +253,215 @@ type Order {
   comment: String!
   createdAt: DateTime!
   id: ID!
+  products: [Product!]!
   shippingDate: String!
   shop: Shop!
+  shopId: String!
+}
+
+type OrderResponse {
+  hasMore: Boolean!
+  items: [Order!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
+}
+
+input PaginationArgs {
+  """Number of items to return"""
+  limit: Int! = 10
+
+  """Number of items to skip"""
+  offset: Int! = 0
 }
 
 type Product {
   attributes: Attribute!
-  barcode: String!
+  barcode: String
   brands: Brand!
   categorys: Category!
   createdAt: DateTime!
+  deletedAt: DateTime
   description: String!
   id: ID!
   image: [Image!]!
+  isActive: Boolean!
   name: String!
   parentSku: String!
-  price: String!
+  price: Float!
   sellerSku: String!
   shop: Shop!
-  stock: String!
+  stock: Int!
   tag: [Tag!]!
+  updatedAt: DateTime!
   variants: Variant!
 }
 
-type ProductRepone {
-  barcode: String!
-  createdAt: DateTime!
-  description: String!
-  id: String!
-  name: String!
-  parentSku: String!
-  price: String!
-  sellerSku: String!
-  stock: String!
-  updatedAt: DateTime!
+type ProductsResponse {
+  hasMore: Boolean!
+  items: [Product!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
 }
 
 type Query {
   Address(id: String!): Address!
-  Addresses: [Address!]!
+  Addresss(pagination: PaginationArgs): AddressResponse!
   Attribute(id: String!): Attribute!
   Attributes: [Attribute!]!
   Brand(id: String!): Brand!
-  Brands: [Brand!]!
+  Brands(pagination: PaginationArgs): BrandResponse!
   Category(id: String!): Category!
-  Categorys: [Category!]!
+  Categorys(pagination: PaginationArgs): CategoryResponse!
+  FilterUsers(isActive: Boolean, pagination: PaginationArgs, role: String): UsersResponse!
   Image(id: String!): Image!
-  Images: [Image!]!
+  Images(pagination: PaginationArgs): ImageResponse!
+  Me: User!
+  MyShopAddresss(pagination: PaginationArgs): AddressResponse!
+  MyShopBrands(pagination: PaginationArgs): BrandResponse!
+  MyShopCategorys(pagination: PaginationArgs): CategoryResponse!
+  MyShopImages(pagination: PaginationArgs): ImageResponse!
+  MyShopOrders(pagination: PaginationArgs): OrderResponse!
+  MyShopProducts(pagination: PaginationArgs): ProductsResponse!
+  MyShopShops(pagination: PaginationArgs): ShopResponse!
+  MyShopTags(pagination: PaginationArgs): TagResponse!
   Order(id: String!): Order!
-  Orders: [Order!]!
+  Orders(pagination: PaginationArgs): OrderResponse!
   Product(id: String!): Product!
-  Products: [Product!]!
+  Products(pagination: PaginationArgs): ProductsResponse!
+  SearchAddresss(pagination: PaginationArgs, searchInput: SearchAddressInput!): AddressResponse!
+  SearchBrands(pagination: PaginationArgs, searchInput: SearchBrandInput!): BrandResponse!
+  SearchCategorys(pagination: PaginationArgs, searchInput: SearchCategoryInput!): CategoryResponse!
+  SearchImages(pagination: PaginationArgs, searchInput: SearchImageInput!): ImageResponse!
+  SearchOrders(pagination: PaginationArgs, searchInput: SearchOrderInput!): OrderResponse!
+  SearchProducts(pagination: PaginationArgs, searchInput: SearchProductInput!): ProductsResponse!
+  SearchShops(pagination: PaginationArgs, searchInput: SearchShopInput!): ShopResponse!
+  SearchTags(pagination: PaginationArgs, searchInput: SearchTagInput!): TagResponse!
   Shop(id: String!): Shop!
-  Shops: [Shop!]!
+  Shops(pagination: PaginationArgs): ShopResponse!
   Tag(id: String!): Tag!
-  Tags: [Tag!]!
+  Tags(pagination: PaginationArgs): TagResponse!
   User(id: String!): User!
-  Users: [User!]!
+  Users(pagination: PaginationArgs): UsersResponse!
   Variant(id: String!): Variant!
   Variants: [Variant!]!
-  getProfile: SessionProfile!
+  me: String!
 }
 
-type SessionProfile {
+input RefreshTokenInput {
+  token: String!
+}
+
+type RefreshTokenResponse {
+  accessToken: String!
+  message: String!
+  success: Boolean!
+}
+
+input RegisterInput {
   email: String!
-  first_name: String!
-  last_name: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  role: UserRole
   username: String!
 }
 
-type SessionResponse {
-  access_token: String!
+input SearchAddressInput {
+  city: String!
+  country: String!
+  country_code: String!
+  name: String
+  sortBy: String
+  sortOrder: String
+  state_province_code: String!
+  state_province_name: String!
+  street: String!
+}
+
+input SearchBrandInput {
+  name: String
+  sortBy: String
+  sortOrder: String
+}
+
+input SearchCategoryInput {
+  name: String
+  sortBy: String
+  sortOrder: String
+}
+
+input SearchImageInput {
+  primary: Boolean
+  productId: String
+  sortBy: String
+  sortOrder: String
+  term: String
+  url: String
+}
+
+input SearchOrderInput {
+  shippingDate: String
+  shopId: String
+  sortBy: String
+  sortOrder: String
+  term: String
+}
+
+input SearchProductInput {
+  brandId: String
+  categoryId: String
+  inStock: Boolean
+  maxPrice: Float
+  minPrice: Float
+  shopId: String
+  sortBy: String
+  sortOrder: String
+  tags: [String!]
+  term: String
+}
+
+input SearchShopInput {
+  email: String
+  name: String
+  sortBy: String
+  sortOrder: String
+}
+
+input SearchTagInput {
+  brandId: String
+  categoryId: String
+  inStock: Boolean
+  maxPrice: Float
+  minPrice: Float
+  shopId: String
+  sortBy: String
+  sortOrder: String
+  tags: [String!]
+  term: String
 }
 
 type Shop {
+  Brand: [Brand!]!
   createdAt: DateTime!
   email: String!
   id: ID!
   name: String!
+  order: [Order!]!
+  product: [Product!]!
+  users: [User!]!
+}
+
+type ShopResponse {
+  hasMore: Boolean!
+  items: [Shop!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
 }
 
 type Tag {
@@ -276,6 +469,15 @@ type Tag {
   icon: String!
   id: ID!
   name: String!
+}
+
+type TagResponse {
+  hasMore: Boolean!
+  items: [Tag!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
 }
 
 input UpdateAddressInput {
@@ -308,6 +510,7 @@ input UpdateBrandInput {
   code: Float
   id: String!
   name: String
+  shopId: String
 }
 
 input UpdateCategoryInput {
@@ -347,10 +550,11 @@ input UpdateTagInput {
 
 input UpdateUserInput {
   email: String
-  first_name: String
+  firstName: String
   id: String!
-  last_name: String
+  lastName: String
   password: String
+  role: UserRole
   username: String
 }
 
@@ -360,12 +564,35 @@ input UpdateVariantInput {
 
 type User {
   addresses: Address!
+  bio: String
   createdAt: DateTime!
   email: String!
-  first_name: String!
+  firstName: String!
+  fullName: String!
   id: ID!
-  last_name: String!
+  isActive: Boolean!
+  lastName: String!
+  last_login: DateTime
+  profile_picture: String
+  role: UserRole!
+  shopId: String
   username: String!
+}
+
+"""User role types"""
+enum UserRole {
+  ADMIN
+  SELLER
+  USER
+}
+
+type UsersResponse {
+  hasMore: Boolean!
+  items: [User!]!
+  limit: Int!
+  page: Int!
+  pages: Int!
+  totalCount: Int!
 }
 
 type Variant {
@@ -373,4 +600,5 @@ type Variant {
   icon: String!
   id: ID!
   name: String!
+  product: [Product!]!
 }

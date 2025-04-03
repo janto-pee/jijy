@@ -17,6 +17,8 @@ import { CategoryService } from 'src/category/category.service';
 import { categoryProviders } from 'src/category/category.provider';
 import { TagService } from 'src/tag/tag.service';
 import { tagProviders } from 'src/tag/tag.providers';
+import { UserService } from 'src/user/user.service';
+import { userProviders } from 'src/user/user.provider';
 
 @Module({
   imports: [DatabaseModule],
@@ -38,6 +40,8 @@ import { tagProviders } from 'src/tag/tag.providers';
     ...categoryProviders,
     TagService,
     ...tagProviders,
+    UserService,
+    ...userProviders,
   ],
 })
 export class ProductModule {}

@@ -4,16 +4,14 @@ import { UpdateImageInput } from './dto/update-image.input';
 import { Image } from './entities/image.entity';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
 import { PaginationArgs } from 'src/common/dto/pagination.dto';
-import { Tag } from 'src/tag/entities/tag.entity';
 
 @Injectable()
 export class ImageService {
   private readonly logger = new Logger(ImageService.name);
 
   constructor(
-    @Inject('PRODUCT_REPOSITORY')
+    @Inject('IMAGE_REPOSITORY')
     private ImagesRepository: typeof Image,
-    private TagsRepository: typeof Tag,
   ) {}
 
   async create(createImageInput: CreateImageInput): Promise<Image> {

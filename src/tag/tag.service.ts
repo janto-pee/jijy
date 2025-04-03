@@ -10,7 +10,7 @@ export class TagService {
   private readonly logger = new Logger(TagService.name);
 
   constructor(
-    @Inject('tag_REPOSITORY')
+    @Inject('TAG_REPOSITORY')
     private TagsRepository: typeof Tag,
   ) {}
 

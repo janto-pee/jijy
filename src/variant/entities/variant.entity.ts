@@ -39,4 +39,9 @@ export class Variant extends Model {
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  // RESOLVER
+
+  @Field(() => [Product])
+  product: Product[];
 }

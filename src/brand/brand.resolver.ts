@@ -290,7 +290,7 @@ export class BrandResolver {
   }
 
   @ResolveField()
-  async shop(@Parent() brand: Brand) {
+  async shops(@Parent() brand: Brand) {
     try {
       const { shopId } = brand;
       if (!shopId) return null;

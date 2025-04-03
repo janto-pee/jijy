@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { NonAttribute } from 'sequelize';
 import {
   Table,
   Column,
@@ -8,7 +9,10 @@ import {
   PrimaryKey,
   Default,
   DataType,
+  HasOne,
+  HasMany,
 } from 'sequelize-typescript';
+import { Product } from 'src/product/entities/product.entity';
 import { Shop } from 'src/shop/entities/shop.entity';
 
 @Table
@@ -32,16 +36,12 @@ export class Order extends Model {
   @Field()
   comment: string;
 
-  @Column
+  @Column(DataType.UUID)
   @Field()
   shopId: string;
 
-  // @HasOne(() => Product, 'id')
-  // product: Product;
-
-  // // @NotNull
-  // @Column(DataType.UUID)
-  // declare shopId: string;
+  @HasMany(() => Product, /* foreign key */ 'brandId')
+  declare product: NonAttribute<Product[]>;
 
   @CreatedAt
   @Field()
@@ -55,4 +55,7 @@ export class Order extends Model {
    */
   @Field(() => Shop)
   shop: Shop;
+
+  @Field(() => [Product])
+  products: Product[];
 }
