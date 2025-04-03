@@ -6,16 +6,10 @@ import {
   CreatedAt,
   UpdatedAt,
   PrimaryKey,
-  AutoIncrement,
-  HasOne,
   Default,
   DataType,
-  NotNull,
 } from 'sequelize-typescript';
-import { Product } from 'src/product/entities/product.entity';
 import { Shop } from 'src/shop/entities/shop.entity';
-// import { Product } from 'src/product/entities/product.entity';
-// import { Shop } from 'src/shop/entities/shop.entity';
 
 @Table
 @ObjectType()
@@ -38,12 +32,16 @@ export class Order extends Model {
   @Field()
   comment: string;
 
+  @Column
+  @Field()
+  shopId: string;
+
   // @HasOne(() => Product, 'id')
   // product: Product;
 
-  // @NotNull
-  @Column(DataType.UUID)
-  declare shopId: string;
+  // // @NotNull
+  // @Column(DataType.UUID)
+  // declare shopId: string;
 
   @CreatedAt
   @Field()

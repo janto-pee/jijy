@@ -11,6 +11,8 @@ import {
   Default,
   HasMany,
   BelongsToMany,
+  ForeignKey,
+  AllowNull,
 } from 'sequelize-typescript';
 import { Product } from 'src/product/entities/product.entity';
 import { Shop } from 'src/shop/entities/shop.entity';
@@ -33,7 +35,7 @@ export class Brand extends Model {
   name: string;
 
   @HasMany(() => Product, /* foreign key */ 'brandId')
-  declare products?: NonAttribute<Product[]>;
+  declare product?: NonAttribute<Product[]>;
 
   @CreatedAt
   @Field()
@@ -42,9 +44,14 @@ export class Brand extends Model {
   @UpdatedAt
   declare updatedAt: Date;
 
+  @ForeignKey(() => Shop)
+  @AllowNull(false)
+  @Column(DataType.UUID)
+  declare shopId: string;
+
   /**
    * RESOLVERS
    */
   @Field(() => [Product])
-  product: Product[];
+  products: Product[];
 }

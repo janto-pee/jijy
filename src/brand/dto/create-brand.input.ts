@@ -7,4 +7,7 @@ export class CreateBrandInput {
 
   @Field()
   name: string;
+
+  @Field()
+  shopId: string;
 }

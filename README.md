@@ -11,7 +11,7 @@ An online ecommerce software solution that enables businesses to manage their on
 <!-- 🎥 **Demo Video:** ![Demo Video](https://your-video-link.com) -->
 
 🖼️ **Screenshot:**
-![Jijy schema](https://github.com/janto-pee/jijy/blob/main/jijy.png)
+![Jijy](https://github.com/janto-pee/jijy/blob/main/jijy.png)
 
 ---
 

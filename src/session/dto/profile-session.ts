@@ -9,8 +9,8 @@ export class SessionProfile {
   email: string;
 
   @Field()
-  first_name: string;
+  firstName: string;
 
   @Field()
-  last_name: string;
+  lastName: string;
 }

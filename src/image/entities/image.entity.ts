@@ -35,6 +35,10 @@ export class Image extends Model {
   @Field()
   primary: boolean;
 
+  @Column
+  @Field()
+  userId: string;
+
   @Column(DataType.UUID)
   declare productId: string;
 

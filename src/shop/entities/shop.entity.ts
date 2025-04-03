@@ -11,10 +11,12 @@ import {
   Default,
   HasMany,
   BelongsToMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { Brand } from 'src/brand/entities/brand.entity';
 import { Order } from 'src/order/entities/order.entity';
 import { Product } from 'src/product/entities/product.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Table
 @ObjectType()
@@ -38,6 +40,9 @@ export class Shop extends Model {
 
   @HasMany(() => Product, /* foreign key */ 'shopId')
   declare products?: NonAttribute<Product[]>;
+
+  @HasOne(() => User, /* foreign key */ 'userId')
+  declare user: NonAttribute<User>;
 
   @CreatedAt
   @Field()
